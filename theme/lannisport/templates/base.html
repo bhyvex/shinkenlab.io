@@ -31,6 +31,41 @@
 
         <div class="container">
             <div class="row">
+
+                <div class="span4" id='content'>
+		  <nav>
+		  <ul>
+		    <li class="home">
+		        <a href="http://www.shinken-monitoring.org/">Shinken Home</a>
+			</li>
+		    <li class="download">
+		        <a href="http://www.shinken-monitoring.org/download/">Download</a>
+			</li>
+		    <li class="about">
+		        <a href="http://www.shinken-monitoring.org/about/">About</a>
+			</li>
+		    <li class="npm">
+		        <a href="/">Shinken.io</a>
+			</li>
+		    <li class="docs">
+		        <a href="http://www.shinken-monitoring.org/wiki/">Docs</a>
+			</li>
+		    <li class="blog current">
+		        <a href="http://www.shinken-monitoring.org/news/">Blog</a>
+			</li>
+		    <li class="community">
+		        <a href="http://www.shinken-monitoring.org/community/">Community</a>
+			</li>
+		    <li class="logos">
+		        <a href="http://www.shinken-monitoring.org/logos/">Logos</a>
+			</li>
+		  </ul>
+
+
+		    </nav>
+                </div> <!-- logo+navigation span -->
+
+
                 <div class="span8">
                     <header id="site-header">
                         <h1>
@@ -62,64 +97,6 @@
                     </footer>
                 </div> <!-- header+content+footer span -->
 
-                <div class="span4">
-                    <aside id="sidebar">
-                        <div id="social-icons">
-                            {% if GITHUB_URL %}
-                                <span class="social-icon">
-                                    <a href="{{GITHUB_URL}}" target="_blank" title="GitHub">
-                                        <img src="{{SITEURL}}/theme/img/GitHub.png" alt="GitHub"/>
-                                    </a>
-                                </span>
-                            {% endif %}
-                            {% if LINKEDIN_URL %}
-                                <span class="social-icon">
-                                    <a href="{{LINKEDIN_URL}}" target="_blank" title="LinkedIn">
-                                        <img src="{{SITEURL}}/theme/img/LinkedIn.png" alt="LinkedIn"/>
-                                    </a>
-                                </span>
-                            {% endif %}
-                            {% if TWITTER_URL %}
-                                <span class="social-icon">
-                                    <a href="{{TWITTER_URL}}" target="_blank" title="Twitter">
-                                        <img src="{{SITEURL}}/theme/img/Twitter.png" alt="Twitter"/>
-                                    </a>
-                                </span>
-                            {% endif %}
-                            {% if GOOGLE_URL %}
-                                <span class="social-icon">
-                                    <a href="{{GOOGLE_URL}}" target="_blank" title="Google">
-                                        <img src="{{SITEURL}}/theme/img/Google.png" alt="Google"/>
-                                    </a>
-                                </span>
-                            {% endif %}
-                            {% if FACEBOOK_URL %}
-                                <span class="social-icon">
-                                    <a href="{{FACEBOOK_URL}}" target="_blank" title="Facebook">
-                                        <img src="{{SITEURL}}/theme/img/Facebook.png" alt="Facebook"/>
-                                    </a>
-                                </span>
-                            {% endif %}
-                            {% if FLICKR_URL %}
-                                <span class="social-icon">
-                                    <a href="{{FLICKR_URL}}" target="_blank" title="Flickr">
-                                        <img src="{{SITEURL}}/theme/img/Flickr.png" alt="Flickr"/>
-                                    </a>
-                                </span>
-                            {% endif %}
-                        </div>
-
-                        <div id="site-logo">
-                            <a href="{{SITEURL}}">
-                                <img alt="{{SITENAME}}" src="/theme/img/mascot.png" />
-                            </a>
-                        </div>
-
-                        <div id="navigation">
-                            {% include 'navigation.html' %}
-                        </div>
-                    </aside>
-                </div> <!-- logo+navigation span -->
             </div> <!-- row -->
         </div> <!-- /container -->
 

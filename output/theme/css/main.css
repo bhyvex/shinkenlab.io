@@ -10,7 +10,7 @@ body {
     -webkit-box-shadow: inset 0px .5rem 2rem 0px rgba(0, 0, 0, 0.33);
     box-shadow: inset 0px .5rem 2rem 0px rgba(0, 0, 0, 0.33);
     */
-    background-image: url(../img/bg.png);
+    background-color: #f4f4f2; /*image: url(../img/bg.png);*/
     border-top: 6px solid #CC6600;
     color: #444;
     box-shadow: inset 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
@@ -18,12 +18,12 @@ body {
 
 a {
     color: #CC6600;
-    -o-transition:color .2s ease-out, background 1s ease-in;
+    /*-o-transition:color .2s ease-out, background 1s ease-in;
     -ms-transition:color .2s ease-out, background 1s ease-in;
     -moz-transition:color .2s ease-out, background 1s ease-in;
     -webkit-transition:color .2s ease-out, background 1s ease-in;
-    /* ...and now override with proper CSS property */
     transition:color .2s ease-out, background 1s ease-in;
+    */
 }
 
 a:hover, a:active {
@@ -34,6 +34,10 @@ a:hover, a:active {
 h1, h2 {
     -webkit-text-shadow: 0 1px 2px #aaa;
     text-shadow: 0 1px 2px #aaa;
+}
+
+.container{
+    padding: 49px 16px 72px;
 }
 
 .content > section,
@@ -342,4 +346,158 @@ blockquote p {
     font-size: .875rem;
     font-style: italic;
     color: #777;
+}
+
+
+
+
+
+
+
+
+
+
+#content nav{
+    font: 11px Lucida Grande, sans-serif!important;
+    text-transform: uppercase;
+    float: left;
+    margin: 0 5px 0 0;
+    width: 140px;
+    font-size: 11px;
+    text-transform: uppercase;
+    line-height: 23px;
+}
+
+
+#content nav,
+#content nav a {
+  color: #999;
+}
+#content nav ul {
+  margin: 0;
+  padding: 0;
+}
+#content nav ul li {
+  border-top: solid 1px #ccc;
+}
+#content nav ul li a {
+  display: block;
+  padding: 0 0 0 35px;
+  line-height: 23px;
+  background: url("../img/icons-interior.png") no-repeat -156px 3px;
+  font: 11px Lucida Grande, sans-serif!important;
+  text-transform: uppercase;
+  height: 23px;
+
+}
+#content nav ul li:first-child {
+  border-top: none;
+}
+#content nav ul li.home a {
+  background-position: -156px 3px;
+}
+#content nav ul li.home a:hover {
+  background-position: -331px 3px;
+  color: #000;
+}
+#content nav ul li.home.current a {
+  background-position: 2px 3px;
+  color: #CC6600;
+  font-weight: bold;
+}
+#content nav ul li.download a {
+  background-position: -156px -21px;
+}
+#content nav ul li.download a:hover {
+  background-position: -331px -21px;
+  color: #000;
+}
+#content nav ul li.download.current a {
+  background-position: 2px -21px;
+  color: #CC6600;
+  font-weight: bold;
+}
+#content nav ul li.about a {
+  background-position: -156px -45px;
+}
+#content nav ul li.about a:hover {
+  background-position: -331px -45px;
+  color: #000;
+}
+#content nav ul li.about.current a {
+  background-position: 2px -45px;
+  color: #CC6600;
+  font-weight: bold;
+}
+#content nav ul li.npm a {
+  background-position: -156px -69px;
+}
+#content nav ul li.npm a:hover {
+  background-position: -331px -69px;
+  color: #000;
+}
+#content nav ul li.npm.current a {
+  background-position: 2px -69px;
+  color: #CC6600;
+  font-weight: bold;
+}
+#content nav ul li.docs a {
+  background-position: -156px -93px;
+}
+#content nav ul li.docs a:hover {
+  background-position: -331px -93px;
+  color: #000;
+}
+#content nav ul li.docs.current a {
+  background-position: 2px -93px;
+  color: #CC6600;
+  font-weight: bold;
+}
+#content nav ul li.blog a {
+  background-position: -156px -117px;
+}
+#content nav ul li.blog a:hover {
+  background-position: -331px -117px;
+  color: #000;
+}
+#content nav ul li.blog.current a {
+  background-position: 2px -117px;
+  color: #CC6600;
+  font-weight: bold;
+}
+#content nav ul li.community a {
+  background-position: -156px -141px;
+}
+#content nav ul li.community a:hover {
+  background-position: -331px -141px;
+  color: #000;
+}
+#content nav ul li.community.current a {
+  background-position: 2px -141px;
+  color: #CC6600;
+  font-weight: bold;
+}
+#content nav ul li.logos a {
+  background-position: -156px -165px;
+}
+#content nav ul li.logos a:hover {
+  background-position: -331px -165px;
+  color: #000;
+}
+#content nav ul li.logos.current a {
+  background-position: 2px -165px;
+  color: #CC6600;
+  font-weight: bold;
+}
+#content nav ul li.jobs a {
+  background-position: -156px -189px;
+}
+#content nav ul li.jobs a:hover {
+  background-position: -331px -189px;
+  color: #000;
+}
+#content nav ul li.jobs.current a {
+  background-position: 2px -189px;
+  color: #CC6600;
+  font-weight: bold;
 }
