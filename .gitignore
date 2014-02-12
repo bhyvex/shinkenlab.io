@@ -1,5 +1,6 @@
 *.py[cod]
 *~
+*.pid
 
 # C extensions
 *.so
