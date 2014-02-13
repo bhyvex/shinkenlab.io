@@ -183,7 +183,6 @@ article header h2 {
 @media screen and (min-width: 768px) {
     article header h2:before {
         display: block;
-        /*content: "\00b6";*/
         font-size: 2rem;
         position: absolute;
         left: -1.75rem;
