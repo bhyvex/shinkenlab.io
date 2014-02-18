@@ -167,7 +167,7 @@ article h2 {
 }
 
 article h3 {
-    font-size: 1rem;
+    font-size: 0.8rem;
 }
 
 article header {
@@ -238,7 +238,6 @@ p,
 pre,
 ul {
     font:normal normal 400 1.125rem/1.5rem Georgia, serif;
-    list-style:none;
 }
 
 ol {
@@ -378,6 +377,7 @@ blockquote p {
 }
 #content nav ul li {
   border-top: solid 1px #ccc;
+  list-style:none;
 }
 #content nav ul li a {
   display: block;
