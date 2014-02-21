@@ -86,7 +86,10 @@
 
     <p>Hi,</p>
 <p>The 2.0 release is currently in RC Phase. You can get a look at it by launching :</p>
-<p><code>$ pip install shinken</code></p>
+<div class="highlight"><pre>$ <span class="n">pip</span> <span class="n">install</span> <span class="n">shinken</span>
+</pre></div>
+
+
 <p>You can get a full look at the changelog <a href="https://github.com/naparuba/shinken/blob/master/Changelog">there</a>. Aside some classical bug fixes, you will find some enhancements too :</p>
 <ul>
 <li>
@@ -96,18 +99,124 @@
 <p>(huge) business rules enhancement (parsing level, output and tag/group linking) thanks to Christophe Simon,</p>
 </li>
 <li>
-<p>we switch all modules and packs from the shinken repo, to the</p>
+<p>we switch all modules and packs from the shinken repo, to their owns,</p>
 </li>
 <li>
-<p>shinken command line interface (cli) to install packages (module and packs) and serve doc</p>
+<p>shinken command line interface (cli) to install packages (module and packs) from the <a href="http://shinken.io">shinken.io</a> website and serve doc</p>
 </li>
 </ul>
-<p>We want this blog to be a great place to exchange about the project, but also the whole monitoring or dev world, especially python and javascript. Everyone in the community is welcomed to send a post if you want, just send us a pull-request, and if your post is great, it will be published :)</p>
-<p>I hope this new file based post will encourage more core devs to posts news about the project or the incomming features, instead of one big thread each release. I talk also about myself here :)</p>
-<p>From my personnal part I'll also expose where we are in the incomming 2.0 release, where the project is going (like "is the Enterprise version will hurt the community project?" questions) and why not a global roadmap before start to work on the next 2.2 version.</p>
-<p>I'll also start new posts about tutorials. I think we should not limit the tutorials to the wiki but instead post them so everyone will easily find them. I'm working on a tutorial plan <a href="https://docs.google.com/document/d/1xP5I4oYFedZuBIHg8xApy-xqCQS76DO0n7t9OsXjx5Q/edit#">on google doc</a> and if you want some tutorials about specific topics, you can add your idea :)</p>
-<p>I'll try to do small videos for each tutorials, I'm looking at how to do this (if you know about good software about it I'm aware :) ).</p>
-<p>So let's start with what make a good blog, not a great theme nor lot of widgets: it's content :)</p>
+<h2>Focus on the 2.0 changes</h2>
+<h3>Switch to HTTP(S) for the daemons communications</h3>
+<p>One of the main change on this release is the drop the the pyro based communication to a more classic HTTP(S) one. Now, a simle curl command will enable you to check and query daemons :</p>
+<div class="highlight"><pre>$ <span class="n">curl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span>7770<span class="o">/</span>
+<span class="n">OK</span>
+</pre></div>
+
+
+<p>will check the arbiter daemon.</p>
+<p>Now it's very easy to setup the SSL encryption between daemons. If you do so, beware of installating the <a href="http://www.cherrypy.org/">cherrypy3</a> lib because the default wsgiref module from Python do not manage the http keep alive feature, and so it will ask far more CPU :)</p>
+<h3>The bp_rules boosting</h3>
+<p>Thanks to Christophe Simon that work on <a href="https://github.com/naparuba/shinken/pull/996">this code part</a> for the 2.0 release, the bp_rules are now more powerful and flexible.</p>
+<p>In the previous release, you have to explicitly call hosts or services by their names. Now you can ask them by :</p>
+<ul>
+<li>regexp</li>
+<li>host or service groups</li>
+<li>host tag</li>
+<li>service "labels" (new service parameter)</li>
+</ul>
+<p>Here are some examples how to use the new capabilities :
+<pre><code></p>
+<p>define host{
+  host_name                      test_host_01
+  use                linux
+  hostgroups                     hostgroup_01
+  labels           label_01
+  ...
+}</p>
+<p>define host{
+  host_name                      test_host_02
+  use                linux
+  hostgroups                     hostgroup_01
+  labels           label_01
+  ...
+}</p>
+<p>define service{
+  hostgroup_name                 hostgroup_01
+  service_description            srv1
+  servicegroups                  servicegroup_01
+  labels           label_02
+  ...
+}</p>
+<h2>theses bp_rules wil give the same result :</h2>
+<h1>Explicit naming</h1>
+<p>test_host_01,srv1 &amp; test_host_02,srv1</p>
+<h1>by hostgroup</h1>
+<p>g:hostgroup_01,srv1</p>
+<h1>Regexp</h1>
+<p>r:test_host_0[12],srv1</p>
+<h1>by service group</h1>
+<p>*,g:servicegroup_01</p>
+<h1>by regexp for the hosts, and label for the services</h1>
+<p>r:test_host_0[12],l:label_02</p>
+<h1>by hostgroup for the hosts, and regexp for the services</h1>
+<p>g:hostgroup_01,r:srv[1]</p>
+<h1>by label for the hosts, regexp for the service</h1>
+<p>l:label_01,r:srv[1]</p>
+<h1>by tag for the host</h1>
+<p>t:linux,l:label_02
+</code></pre></p>
+<p>You can get the documentation about the bp_rules <a href="https://shinken.readthedocs.org/en/latest/07_advancedtopics/advancedtopics-businessrules.html">there</a>.</p>
+<h3>Framework focus</h3>
+<p>We also moved all modules and packs into their own repositories (there where more than 99 of them!). You can find all the default provided one on the <a href="https://github.com/shinken-monitoring">project github organization</a>.</p>
+<p>Now the shinken installation will only provide the core framework with the daemons and all the monitoring capabilities. But if you need some modules, you will have to explicitly install them. We think it's a far better way than enable by default some and not others. It was really hard for new users to know what was enable and what was possible. Now it's will be far easier thanks to the modules and configuration packs new organizations.</p>
+<p>All modules and packs are available as <em>packages</em> on the new exchange website, <a href="http://shinken.io">shinken.io</a>. The goal of this new website is to be the place of modules and configuration packs publications. You can publish your own modules or packs into this website, it's designed for this :)</p>
+<p>You don't need to have a repository in the github organization for this, all you need is to have a public repository, like on github. </p>
+<p>Creating such a pack or a module is really easy. You can get the doc <a href="https://shinken.readthedocs.org/en/latest/14_how_to_contribute/create_a_package.html?highlight=packages">there</a>.</p>
+<p>One other thing that is possible now with the <em>not in the same repository</em> thing, is that now each modules/pack can have its own release cycle! You won't have to wait for a livestatus module enhancement that the other modules features are ready to got it! :)</p>
+<h3>The new <em>shinken</em> cli command</h3>
+<p>To make easy the modules/packs installation, we are adding the new "shinken" cli command. It is strongly linked with <a href="http://shinken.io">shinken.io</a> for the packages installation part of course.</p>
+<p>In order to use it, you will have to call the <code>--init</code> parameter so it will create the <code>~/shinken.ini</code> file with all the paths to the shinken directories:</p>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="o">--</span><span class="n">init</span>
+</pre></div>
+
+
+<p>Then you can start to search and install packages:</p>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="n">search</span> <span class="n">linux</span>
+<span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="p">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
+<span class="n">linux</span><span class="o">-</span><span class="n">snmp</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">snmp</span><span class="p">]</span> <span class="p">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SNMP</span>
+<span class="n">linux</span><span class="o">-</span><span class="n">ssh</span> <span class="p">(</span><span class="n">dessaiimrane</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">ssh</span><span class="p">]</span> <span class="p">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SSH</span> <span class="n">without</span> <span class="n">any</span> <span class="n">script</span> <span class="n">on</span> <span class="n">distant</span> <span class="n">server</span>
+<span class="n">pack</span><span class="o">-</span><span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="p">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
+</pre></div>
+
+
+<p>Then you can install it, for example the linux-ssh pack that will use the new <a href="https://github.com/naparuba/check-linux-by-ssh">agentless ssh checks for linux</a> :</p>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span>
+</pre></div>
+
+
+<p>You can also use the command to have a local access to the shinken documentation :</p>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="n">doc</span><span class="o">-</span><span class="n">serve</span>
+</pre></div>
+
+
+<p>will open an http server on the 8080 port with the documentation :)</p>
+<h2>The shinken enterprise edition</h2>
+<p>Like I already post on the <a href="https://lists.sourceforge.net/lists/listinfo/shinken-devel">devel mainling list</a>, I launched the Shinken Solutions company that will be the editor of the <a href="http://www.shinken-solutions.com">Shinken Enterprise</a> solution. It's a redhat package version with additional modules, like enhanced webui and a configuration system.</p>
+<p>All monitoring capabilities and distributed features will still be added into the <a href="https://github.com/naparuba/shinken">shinken framework</a> like before, and there is no risk that will change in the future :)</p>
+<p>The main goal of this version is to be "ready to run" with an already prepared configuration and things like this. The framework is done to be even more flexible, so you have the choice. Lot of enhancements on the webui will be backported to the <a href="https://github.com/shinken-monitoring/mod-webui">community one</a> in the 2.2 version, like the enhanced <em>/problems</em> page or the new <em>/impacts</em> one :)</p>
+<p>You can get a look at the <a href="http://demo.shinken-solutions.com/">demo server</a> if you want to have a look :)</p>
+<p>For the configuration part, I moved the old skonf beta into its <a href="https://github.com/shinken-monitoring/skonf">own repository</a>. I don't plan to work on it, but if someone want to finish it you are welcome to take the lead on this :)</p>
+<p>If you are wondering why we didn't publish this new version under an open source licence, it's just because being a pure open source editor with 100% open is just not possible on this quite technical part if the market. We can exchange more on the comments if you want, but before just ask your self why <em>puppet</em>, <em>cfengine</em>, <em>mongodb</em>, <em>centreon</em> and <em>nginx</em> are also launching enterprise edition after trying to be purely open source ;)</p>
+<h2>The roadmap</h2>
+<p>Like after each release, it's time to update our roadmap and see if we keep the future features. We are currently working on this, and you are welcomed on sharing your main priorities for the framework or its modules in the comments :)</p>
+<h3>WebUI and arbiters</h3>
+<p>I think one main part will be the enterprise views backport into the community edition, but I'm wondering if we can also work on a feature that I wish since long time ago to enhance the distributed capabilities: the arbiter relays :)</p>
+<h3>snapshots?</h3>
+<p>I am also working on another problematic that made us mad at least one time in our admin life: your boss came the morning and ask you why there was so much load at 3am. You can see the load as notification and in the perfdata, but you don't who which processes are faulty. You need a <em>top</em> or a <em>ps</em> launched during the problem.</p>
+<p>In order to solve this, I'm thinking about something called <em>snapshots</em>. They are services that will launched deeper state dump (like <code>ps -aux</code> or <code>top</code>). But launching such commands too much is not a good idea, especially since their output can be quite long. So why not enable theses services to be launched if some other <em>normal</em> services like <em>Load</em> are not going well during the night? Can be great :)</p>
+<h2>Now it's time to test the 2.0 RC</h2>
+<p>Now you can see what changed since the 1.4 version, now you can give a try to this 2.0 RC version. We are still working on the documentation about all theses changes, but should be ok for the final 2.0 relase :)</p>
+<p>Ready for testing? Go!</p>
 <p style='border: 2px solid rgba(0,39,59,.2);border-radius: 4px;'><img style='width: 48px;'  data-role="user-avatar" data-user="94550631" src="//a.disquscdn.com/uploads/users/9455/631/avatar92.jpg?1392209481"><a href='mailto:j.gabes@shinken-solutions.com'> written by jean gabès</a></p>
     <footer>
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
