@@ -202,13 +202,18 @@ article header time {
     color: #bbb;
     font-style: italic;
     margin-top: 0.5rem;
-    display: block;
+    /*display: block;*/
 }
 
 article header time:before {
     content: "\2014\A0";
 }
 
+article header .author {
+    color: #bbb;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
 article img {
     -webkit-border-radius: 4px;
     border-radius: 4px;

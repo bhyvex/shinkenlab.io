@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>The 2.0 RC version and the project / Some monitoring guys</title>
+        <title>Tutorial 1: installing shinken / Some monitoring guys</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -83,102 +83,64 @@
 <section>
     <article>
         <header>
-            <h2><a href="/2-0-and-the-project/" rel="bookmark">The 2.0 RC version and the project</a></h2>
-            <time datetime="2014-02-17T10:20:00">Feb 17, 2014</time>
-	    <span class='author'>, Gabès Jean</span>
-
+            <h2><a href="/tuto-1-installation/" rel="bookmark">Tutorial 1: installing shinken</a></h2>
+            <time datetime="2014-02-22T10:20:00">Feb 22, 2014</time>
         </header>
 
     <p>Hi,</p>
-<p>The 2.0 release is currently in RC Phase. You can get a look at it by launching :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">shinken</span>
+<p>This is our first tutorial, and of course we are starting for the very start: how to install shinken :D</p>
+<p>We want to have a running shinken installation on a simple linux box. We will take a debian 7, but I'll also give you the required packages names for redhat/centos6 64bits.</p>
+<p>Your shinken daemons will need a user/group to run. It's name is quite obvious, it's just <code>shinken</code>.</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">adduser</span> <span class="n">shinken</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">id</span> <span class="n">shinken</span>
+<span class="n">uid</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">shinken</span><span class="p">)</span> <span class="n">gid</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">shinken</span><span class="p">)</span>
 </pre></div>
 
 
-<p>You can get a full look at the changelog <a href="https://github.com/naparuba/shinken/blob/master/Changelog">there</a>. Aside some classical bug fixes, you will find some enhancements too :</p>
+<p>Now your user/group is ok, you need to install some dependencies for shinken installation :
+  * python-pycurl : (great and powerfull) lib for http connexions between the shinken daemons
+  * python-pip : installation tool for python lib or tools from <a href="http://pypi.org">pypi</a>.</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pycurl</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span>
+</pre></div>
+
+
+<p>As our dependencies are ok, we can now install our shinken daemons:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">shinken</span>
+</pre></div>
+
+
+<p>Let's have a look at the paths that are used by shinken:</p>
 <ul>
-<li>we switched the internal protocol between the daemons from <a href="https://pypi.python.org/pypi/Pyro4">Pyro</a> to a more classic HTTP(S) communication,</li>
-<li>(huge) business rules enhancement (parsing level, output and tag/group linking) thanks to Christophe Simon,</li>
-<li>we switch all modules and packs from the shinken repo, to their owns,</li>
-<li>shinken command line interface (cli) to install packages (module and packs) from the <a href="http://shinken.io">shinken.io</a> website and serve doc</li>
+<li><code>/etc/shinken</code>: all your configuration will be there</li>
+<li><code>/usr/bin/shinken-*</code>: the shinken daemons scripts</li>
+<li><code>/var/lib/shinken</code>: where you will find the shinken modules or your check plugins</li>
+<li><code>/var/log/shinken</code>: the logs (what did you expect? :) )</li>
 </ul>
-<h2>Focus on the 2.0 changes</h2>
-<h3>Switch to HTTP(S) for the daemons communications</h3>
-<p>One of the main change on this release is the drop the the pyro based communication to a more classic HTTP(S) one. Now, a simle curl command will enable you to check and query daemons :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">curl</span> <span class="n">http</span><span class="o">:</span><span class="c1">//localhost:7770/</span>
+<p>In order to start your new daemons, you just need to use the init.d script:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">start</span>
+</pre></div>
+
+
+<p>Your can look at your daemons by checking your shinken user, and even query a daemon:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">ps</span> <span class="o">-</span><span class="n">fu</span> <span class="n">shinken</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">curl</span> <span class="n">http</span><span class="o">:</span><span class="c1">//localhost:7770/</span>
 <span class="n">OK</span>
 </pre></div>
 
 
-<p>will check the arbiter daemon.</p>
-<p>Now it's very easy to setup the SSL encryption between daemons. If you do so, beware of installating the <a href="http://www.cherrypy.org/">cherrypy3</a> lib because the default wsgiref module from Python do not manage the http keep alive feature, and so it will ask far more CPU :)</p>
-<h3>The bp_rules boosting</h3>
-<p>Thanks to Christophe Simon that work on <a href="https://github.com/naparuba/shinken/pull/996">this code part</a> for the 2.0 release, the bp_rules are now more powerful and flexible.</p>
-<p>In the previous release, you have to explicitly call hosts or services by their names. Now you can ask them by :</p>
-<ul>
-<li>regexp</li>
-<li>host or service groups</li>
-<li>host tag</li>
-<li>service "labels" (new service parameter)</li>
-</ul>
-<p>Here are some examples how to use the new capabilities :
-<pre><code></p>
-<p>define host{
-  host_name                      test_host_01
-  use                linux
-  hostgroups                     hostgroup_01
-  labels           label_01
-  ...
-}</p>
-<p>define host{
-  host_name                      test_host_02
-  use                linux
-  hostgroups                     hostgroup_01
-  labels           label_01
-  ...
-}</p>
-<p>define service{
-  hostgroup_name                 hostgroup_01
-  service_description            srv1
-  servicegroups                  servicegroup_01
-  labels           label_02
-  ...
-}</p>
-<h2>theses bp_rules wil give the same result :</h2>
-<h1>Explicit naming</h1>
-<p>test_host_01,srv1 &amp; test_host_02,srv1</p>
-<h1>by hostgroup</h1>
-<p>g:hostgroup_01,srv1</p>
-<h1>Regexp</h1>
-<p>r:test_host_0[12],srv1</p>
-<h1>by service group</h1>
-<p>*,g:servicegroup_01</p>
-<h1>by regexp for the hosts, and label for the services</h1>
-<p>r:test_host_0[12],l:label_02</p>
-<h1>by hostgroup for the hosts, and regexp for the services</h1>
-<p>g:hostgroup_01,r:srv[1]</p>
-<h1>by label for the hosts, regexp for the service</h1>
-<p>l:label_01,r:srv[1]</p>
-<h1>by tag for the host</h1>
-<p>t:linux,l:label_02
-</code></pre></p>
-<p>You can get the documentation about the bp_rules <a href="https://shinken.readthedocs.org/en/latest/07_advancedtopics/advancedtopics-businessrules.html">there</a>.</p>
-<h3>Framework focus</h3>
-<p>We also moved all modules and packs into their own repositories (there where more than 99 of them!). You can find all the default provided one on the <a href="https://github.com/shinken-monitoring">project github organization</a>.</p>
-<p>Now the shinken installation will only provide the core framework with the daemons and all the monitoring capabilities. But if you need some modules, you will have to explicitly install them. We think it's a far better way than enable by default some and not others. It was really hard for new users to know what was enable and what was possible. Now it's will be far easier thanks to the modules and configuration packs new organizations.</p>
-<p>All modules and packs are available as <em>packages</em> on the new exchange website, <a href="http://shinken.io">shinken.io</a>. The goal of this new website is to be the place of modules and configuration packs publications. You can publish your own modules or packs into this website, it's designed for this :)</p>
-<p>You don't need to have a repository in the github organization for this, all you need is to have a public repository, like on github. </p>
-<p>Creating such a pack or a module is really easy. You can get the doc <a href="https://shinken.readthedocs.org/en/latest/14_how_to_contribute/create_a_package.html?highlight=packages">there</a>.</p>
-<p>One other thing that is possible now with the <em>not in the same repository</em> thing, is that now each modules/pack can have its own release cycle! You won't have to wait for a livestatus module enhancement that the other modules features are ready to got it! :)</p>
-<h3>The new <em>shinken</em> cli command</h3>
-<p>To make easy the modules/packs installation, we are adding the new "shinken" cli command. It is strongly linked with <a href="http://shinken.io">shinken.io</a> for the packages installation part of course.</p>
-<p>In order to use it, you will have to call the <code>--init</code> parameter so it will create the <code>~/shinken.ini</code> file with all the paths to the shinken directories:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="o">--</span><span class="n">init</span>
+<p>We can look at the only host that is checkd by default: the localhost :) Like all hosts, it's configuration is in a file in <code>/etc/shinken/hosts/</code>:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">hosts</span><span class="o">/</span><span class="n">localhost</span><span class="p">.</span><span class="n">cfg</span>
 </pre></div>
 
 
-<p>Then you can start to search and install packages:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="n">search</span> <span class="n">linux</span>
+<p>By default this host is a dummy one, with no real checks (<code>generic-host</code> is a default <code>template</code> that give default values for an host). We want some basic linux monitoring (disks, load, memory, I/O and stuff like that). That what monitoring <code>packs</code> are done for. Lof of them are available on the <a href="http://shinken.io">shinken.io</a> exchange site. Let's look what is available for our linux host, by using the <code>shinken</code> command that allow to query the <code>shinken.io</code> site. </p>
+<p>First we need to init it (to generate the <code>~/shinken.ini</code> file with all the paths to the shinken directories:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="o">--</span><span class="n">init</span>
+</pre></div>
+
+
+<p>Then you can start to search for linux pack:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="n">search</span> <span class="n">linux</span>
 <span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="o">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
 <span class="n">linux</span><span class="o">-</span><span class="n">snmp</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">snmp</span><span class="p">]</span> <span class="o">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SNMP</span>
 <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span> <span class="p">(</span><span class="n">dessaiimrane</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">ssh</span><span class="p">]</span> <span class="o">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SSH</span> <span class="n">without</span> <span class="n">any</span> <span class="n">script</span> <span class="n">on</span> <span class="n">distant</span> <span class="n">server</span>
@@ -186,13 +148,36 @@
 </pre></div>
 
 
-<p>Then you can install it, for example the linux-ssh pack that will use the new <a href="https://github.com/naparuba/check-linux-by-ssh">agentless ssh checks for linux</a> :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span>
+<p>We got some options for monitor our linux. I'm a big fan of agentless monitoring, so I'm choosing the linux-ssh one that allow us to check a linux with just a ssh key on it. We just need to install it:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span>
 </pre></div>
 
 
-<p>You can also use the command to have a local access to the shinken documentation :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="n">doc</span><span class="o">-</span><span class="n">serve</span>
+<p>In the current 2.0 version, it will download the configuration pack, but not the plugins. You can download them and install them like this :</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="p">;</span> <span class="n">wget</span> <span class="n">BLABLALBA</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">unzip</span> <span class="n">BLABLBLA</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="n">BLABLA</span><span class="o">/*</span><span class="n">py</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">chown</span> <span class="o">-</span><span class="n">R</span> <span class="n">shinken</span><span class="o">:</span><span class="n">shinken</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">chmod</span> <span class="n">a</span><span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">libexec</span><span class="o">/*</span><span class="n">py</span>
+</pre></div>
+
+
+<p>Theses plugins are launching commands by ssh, and so they need to login to the distant server. The good way to manage this is to authentify with a ssh key. One important note here: the shinken daemon run under the <code>shinken</code> user, so it must the the key of this user.</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">su</span> <span class="o">-</span> <span class="n">shinken</span>
+<span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">ssh</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">gen</span>
+</pre></div>
+
+
+<p>And we must deploy this key on the monitored host too, with the <code>shinken</code> user (by default, you can change it on the hosts configurations):</p>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">ssh</span><span class="o">-</span><span class="n">copy</span><span class="o">-</span><span class="n">id</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span> <span class="n">shinken</span><span class="err">@</span><span class="n">localhost</span>
+</pre></div>
+
+
+<p>Now we can give a try to this plugin to see if all is OK:</p>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">check_load_by_ssh</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">H</span> <span class="n">localhost</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span>
+<span class="n">BLABLA</span>
+
+<span class="err">$</span> <span class="n">shinken</span> <span class="n">doc</span><span class="o">-</span><span class="n">serve</span>
 </pre></div>
 
 
@@ -214,17 +199,10 @@
 <h2>Now it's time to test the 2.0 RC</h2>
 <p>Now you can see what changed since the 1.4 version, now you can give a try to this 2.0 RC version. We are still working on the documentation about all theses changes, but should be ok for the final 2.0 relase :)</p>
 <p>Ready for testing? Go!</p>
-
-
-
-<p style='border: 2px solid rgba(0,39,59,.2);border-radius: 4px;'><img style='width: 48px;'  data-role="user-avatar" data-user="94550631" src="//a.disquscdn.com/uploads/users/9455/631/avatar92.jpg?1392209481"><a href='#'> jean gabès </a>
-<a href='mailto:j.gabes@shinken-solutions.com'><img src="/theme/img/Mail.png" /></a>
-<a href='https://twitter.com/naparuba'><img src="/theme/img/Twitter.png" /></a>
-<a href='https://github.com/naparuba'><img src="/theme/img/GitHub.png" /></a>
-</p>
+<p style='border: 2px solid rgba(0,39,59,.2);border-radius: 4px;'><img style='width: 48px;'  data-role="user-avatar" data-user="94550631" src="//a.disquscdn.com/uploads/users/9455/631/avatar92.jpg?1392209481"><a href='mailto:j.gabes@shinken-solutions.com'> written by jean gabès</a></p>
     <footer>
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/tutorial.html">tutorial</a> / <a href="/tag/installation.html">installation</a></p>
         <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
     </footer>
 

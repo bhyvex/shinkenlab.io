@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block article_footer %}
+
+{% if article.authorlogin %}
+   {% include '_signature_'+article.authorlogin+'.html' %}
+{% endif %}
+
     <footer>
         <p>Posted in: <a href="{{SITEURL}}/{{article.category.url}}">{{article.category}}</a></p>
         <p>Tagged as: {% for tag in article.tags %}<a href="{{SITEURL}}/{{tag.url}}">{{tag}}</a>{% if not loop.last %} / {% endif %}{% endfor %}</p>
