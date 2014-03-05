@@ -45,16 +45,13 @@
 		        <a href="http://www.shinken-monitoring.org/about/">About</a>
 			</li>
 		    <li class="npm">
-		        <a href="/">Shinken.io</a>
-			</li>
+		      <a href="http://shinken.io">Shinken.io</a>
+		    </li>
 		    <li class="docs">
-		        <a href="http://www.shinken-monitoring.org/wiki/">Docs</a>
+		        <a href="https://shinken.readthedocs.org/">Docs</a>
 			</li>
 		    <li class="blog current">
-		        <a href="http://www.shinken-monitoring.org/news/">Blog</a>
-			</li>
-		    <li class="community">
-		        <a href="http://www.shinken-monitoring.org/community/">Community</a>
+		        <a href="http://shinkenlab.io">Blog</a>
 			</li>
 		    <li class="logos">
 		        <a href="http://www.shinken-monitoring.org/logos/">Logos</a>
@@ -91,7 +88,7 @@
 
     <p>Hi,</p>
 <p>The 2.0 release is currently in RC Phase. You can get a look at it by launching :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">shinken</span>
+<div class="highlight"><pre>$ <span class="n">pip</span> <span class="n">install</span> <span class="n">shinken</span>
 </pre></div>
 
 
@@ -105,7 +102,7 @@
 <h2>Focus on the 2.0 changes</h2>
 <h3>Switch to HTTP(S) for the daemons communications</h3>
 <p>One of the main change on this release is the drop the the pyro based communication to a more classic HTTP(S) one. Now, a simle curl command will enable you to check and query daemons :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">curl</span> <span class="n">http</span><span class="o">:</span><span class="c1">//localhost:7770/</span>
+<div class="highlight"><pre>$ <span class="n">curl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span>7770<span class="o">/</span>
 <span class="n">OK</span>
 </pre></div>
 
@@ -173,26 +170,26 @@
 <h3>The new <em>shinken</em> cli command</h3>
 <p>To make easy the modules/packs installation, we are adding the new "shinken" cli command. It is strongly linked with <a href="http://shinken.io">shinken.io</a> for the packages installation part of course.</p>
 <p>In order to use it, you will have to call the <code>--init</code> parameter so it will create the <code>~/shinken.ini</code> file with all the paths to the shinken directories:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="o">--</span><span class="n">init</span>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="o">--</span><span class="n">init</span>
 </pre></div>
 
 
 <p>Then you can start to search and install packages:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="n">search</span> <span class="n">linux</span>
-<span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="o">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
-<span class="n">linux</span><span class="o">-</span><span class="n">snmp</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">snmp</span><span class="p">]</span> <span class="o">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SNMP</span>
-<span class="n">linux</span><span class="o">-</span><span class="n">ssh</span> <span class="p">(</span><span class="n">dessaiimrane</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">ssh</span><span class="p">]</span> <span class="o">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SSH</span> <span class="n">without</span> <span class="n">any</span> <span class="n">script</span> <span class="n">on</span> <span class="n">distant</span> <span class="n">server</span>
-<span class="n">pack</span><span class="o">-</span><span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="o">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="n">search</span> <span class="n">linux</span>
+<span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="p">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
+<span class="n">linux</span><span class="o">-</span><span class="n">snmp</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">snmp</span><span class="p">]</span> <span class="p">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SNMP</span>
+<span class="n">linux</span><span class="o">-</span><span class="n">ssh</span> <span class="p">(</span><span class="n">dessaiimrane</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">ssh</span><span class="p">]</span> <span class="p">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SSH</span> <span class="n">without</span> <span class="n">any</span> <span class="n">script</span> <span class="n">on</span> <span class="n">distant</span> <span class="n">server</span>
+<span class="n">pack</span><span class="o">-</span><span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="p">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
 </pre></div>
 
 
 <p>Then you can install it, for example the linux-ssh pack that will use the new <a href="https://github.com/naparuba/check-linux-by-ssh">agentless ssh checks for linux</a> :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span>
 </pre></div>
 
 
 <p>You can also use the command to have a local access to the shinken documentation :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="n">doc</span><span class="o">-</span><span class="n">serve</span>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="n">doc</span><span class="o">-</span><span class="n">serve</span>
 </pre></div>
 
 
@@ -279,7 +276,7 @@
         <script src="/theme/js/main.js"></script>
 
         <script>
-            var _gaq=[['_setAccount',''],['_trackPageview']];
+            var _gaq=[['_setAccount','UA-48477803-1'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));

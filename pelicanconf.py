@@ -6,6 +6,8 @@ AUTHOR = u'Shinken framework team'
 SITENAME = u'Some monitoring guys'
 SITEURL = ''
 
+GOOGLE_ANALYTICS_CODE = 'UA-48477803-1'
+
 TIMEZONE = 'Europe/Paris'
 
 DEFAULT_LANG = u'en'
