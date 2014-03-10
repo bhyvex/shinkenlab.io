@@ -19,6 +19,8 @@ You can follow this tutorial with this video:
 
 <iframe width="800" height="600" src="//www.youtube.com/embed/jtUytVXtw14" frameborder="0" allowfullscreen></iframe>
 
+(You can also have a [FR version of the video](http://www.youtube.com/watch?v=3LxKCoX6D6s))
+
 Your shinken daemons will need a user/group to run. Its name is quite obvious, it's just `shinken`, and as a simple user.
 
     root@debian# adduser shinken
