@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Online course 3: 1.4 to 2.0 migration / Some monitoring guys</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="shortcut icon" href="/theme/favicon.ico" />
+        <link rel="apple-touch-icon" href="/theme/apple-touch-icon-iphone.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="/theme/apple-touch-icon-ipad.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="/theme/apple-touch-icon-iphone4.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="/theme/apple-touch-icon-ipad3.png" />
+
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/theme/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="/theme/css/colorbox.css">
+
+        <link rel="stylesheet" href="/theme/css/main.css">
+
+        <script src="/theme/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container">
+            <div class="row">
+
+                <div class="span2" id='content'>
+		  <nav>
+		  <ul>
+		    <li class="home">
+		        <a href="http://www.shinken-monitoring.org/">Shinken Home</a>
+			</li>
+		    <li class="download">
+		        <a href="http://www.shinken-monitoring.org/download/">Download</a>
+			</li>
+		    <li class="about">
+		        <a href="http://www.shinken-monitoring.org/about/">About</a>
+			</li>
+		    <li class="npm">
+		      <a href="http://shinken.io">Shinken.io</a>
+		    </li>
+		    <li class="docs">
+		        <a href="https://shinken.readthedocs.org/">Docs</a>
+			</li>
+		    <li class="blog current">
+		        <a href="http://shinkenlab.io">Blog</a>
+			</li>
+		    <li class="logos">
+		        <a href="http://www.shinken-monitoring.org/logos/">Logos</a>
+			</li>
+		  </ul>
+
+
+		    </nav>
+                </div> <!-- logo+navigation span -->
+
+
+                <div class="span10">
+                    <header id="site-header">
+                        <h1>
+                            <a href="">Some monitoring guys</a>
+                            <small>
+                                <span class="divider">/</span> 
+                            </small>
+                        </h1>
+                        <!--<p>
+                            
+                        </p>-->
+                    </header>
+
+                    <div class="content">
+<section>
+    <article>
+        <header>
+            <h2><a href="/online-course-3-migration-to-20/" rel="bookmark">Online course 3: 1.4 to 2.0 migration</a></h2>
+            <time datetime="2014-03-11T10:20:00">Mar 11, 2014</time>
+	    <span class='author'>, Gabès Jean</span>
+
+        </header>
+
+    <p>Hi,</p>
+<p>This is our third online course, we are now looking at the migration to the 2.0 from the 1.4 one :)</p>
+<p>We will install a 1.4.1 version and wewill migrate to a 2.0 one. So let's start :)</p>
+<p>( note: The recoding for this course is in progress :) )</p>
+<!--
+You can follow this tutorial with this video:
+
+<iframe width="800" height="600" src="//www.youtube.com/embed/fno4btMmtcQ" frameborder="0" allowfullscreen></iframe>
+
+(You can also have a [fr version of the video](http://www.youtube.com/watch?v=pHV9pah1MzI))
+-->
+
+<h3>Install the 1.4 version</h3>
+<p>In the 1.4 version, there was an install script. We already talk about why we deprecated it in the <a href="/2-0-and-the-project/">2.0 blog entry</a>. We will use it in order to install our 1.4 version on a debian box.</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">wget</span> <span class="n">http</span><span class="o">:</span><span class="c1">//www.shinken-monitoring.org/pub/shinken-1.4.1.tar.gz</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">tar</span> <span class="n">xvfz</span> <span class="n">shinken</span><span class="o">-</span><span class="mf">1.4.1</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">cd</span> <span class="n">shinken</span><span class="o">-</span><span class="mf">1.4.1</span><span class="o">/</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">install</span> <span class="o">-</span><span class="n">i</span>
+</pre></div>
+
+
+<p>And here we got a lot of magic. In fact it will do quite the same as you did in the <a href="/online-course-1-installation/">first course</a> but without you know it. Like we said on the blog post we prefer that you trully understand the install phase.</p>
+<p>After the installation, the <code>shinken</code>daemons are alive and all is working:</p>
+<p><img src='/images/course3/course3-14runwell.png'></p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">ps</span> <span class="o">-</span><span class="n">fu</span> <span class="n">shinken</span>
+<span class="n">UID</span>        <span class="n">PID</span>  <span class="n">PPID</span>  <span class="n">C</span> <span class="n">STIME</span> <span class="n">TTY</span>          <span class="n">TIME</span> <span class="n">CMD</span>
+<span class="n">shinken</span>  <span class="mi">19876</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">scheduler</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">schedulerd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">19882</span> <span class="mi">19876</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">scheduler</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">schedulerd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">19888</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">poller</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pollerd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">19895</span> <span class="mi">19888</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">poller</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pollerd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">19903</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">reactionner</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">reactionnerd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">19909</span> <span class="mi">19903</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">reactionner</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">reactionnerd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">19918</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">broker</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">brokerd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">19928</span> <span class="mi">19918</span>  <span class="mi">4</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">05</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">broker</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">brokerd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">19930</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">receiver</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">receiverd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">19937</span> <span class="mi">19930</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">receiver</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">receiverd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">19948</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">arbiter</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nagios</span><span class="p">.</span><span class="n">cfg</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shin</span>
+<span class="n">shinken</span>  <span class="mi">19952</span> <span class="mi">19948</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">arbiter</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nagios</span><span class="p">.</span><span class="n">cfg</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shin</span>
+<span class="n">shinken</span>  <span class="mi">19965</span> <span class="mi">19948</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">arbiter</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nagios</span><span class="p">.</span><span class="n">cfg</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shin</span>
+<span class="n">shinken</span>  <span class="mi">20008</span> <span class="mi">19918</span>  <span class="mi">2</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">02</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">broker</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">brokerd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">20017</span> <span class="mi">19918</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">broker</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">brokerd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">20055</span> <span class="mi">19888</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">poller</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pollerd</span><span class="p">.</span><span class="n">ini</span>
+<span class="n">shinken</span>  <span class="mi">20058</span> <span class="mi">19903</span>  <span class="mi">0</span> <span class="mi">15</span><span class="o">:</span><span class="mi">51</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">reactionner</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">reactionnerd</span><span class="p">.</span><span class="n">ini</span>
+</pre></div>
+
+
+<p>The important thing to search is the place of the 1.4 configuration files:</p>
+<ul>
+<li><code>/usr/local/shinken/etc/nagios.cfg</code>: main configuration file, for hosts, commands and such nagios objets</li>
+<li><code>/usr/local/shinken/etc/shinken-specific.cfg</code>: side configuration file, mainly about daemons (scehdulers, brokers, ...) and the modules</li>
+</ul>
+<p>In the 2.0 version, we only got the <code>/etc/shinken/shinken.cfg</code> that is loading configuration directories, so we got only one main file. But hopefully the <code>/etc/init.d/shinken</code> init.d script is still able to load two file, especially for this migration phase :)</p>
+<p>Please mind to stop the shinken daemons before install the 2.0 :</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">stop</span>
+</pre></div>
+
+
+<p>And then we will be able to install the 2.0 version :)</p>
+<h3>Install the 2.0 version</h3>
+<p>Here it's like the <a href="/online-course-1-installation/">first course</a> so please refer to this last one for the prereqs.</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span><span class="err">$</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">shinken</span>
+<span class="p">[...]</span>
+<span class="n">Successfully</span> <span class="n">installed</span> <span class="n">shinken</span>
+</pre></div>
+
+
+<p>We now got a ready to run 2.0 version, but currently with its own configuration files:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span><span class="err">$</span> <span class="n">ls</span> <span class="o">-</span><span class="n">thor</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">shinken</span> <span class="mf">8.4</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">time_templates</span><span class="p">.</span><span class="n">cfg</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">shinken</span>  <span class="mi">255</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">sample</span><span class="p">.</span><span class="n">cfg</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">shinken</span>   <span class="mi">84</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">dev</span><span class="p">.</span><span class="n">cfg</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">shinken</span> <span class="mf">3.6</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">shinken</span><span class="p">.</span><span class="n">cfg</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">5</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">sample</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">schedulers</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">3</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">certs</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">commands</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">services</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">servicegroups</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">reactionners</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">contactgroups</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">arbiters</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">receivers</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">notificationways</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">modules</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">pollers</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">packs</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">hosts</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">discovery</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">contacts</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">templates</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">realms</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">hostgroups</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">dependencies</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">resource</span><span class="p">.</span><span class="n">d</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">brokers</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">timeperiods</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">escalations</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">shinken</span> <span class="mf">4.0</span><span class="n">K</span> <span class="n">Mar</span> <span class="mi">10</span> <span class="mi">15</span><span class="o">:</span><span class="mi">59</span> <span class="n">daemons</span>
+</pre></div>
+
+
+<p>But we want to have our 1.4 configuration. So we will just link the init.d configuration to our old configration that run well since long. We just need to edit the <code>/etc/default/shinken</code> file to change the <code>SHINKENCFG</code> and the <code>SHINKENSPECIFICCFG</code> path to link to our previous <code>nagios.cfg</code> and <code>shinken-specific.cfg</code> files.</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="k">default</span><span class="o">/</span><span class="n">shinken</span>
+<span class="n">SHINKENCFG</span><span class="o">=</span><span class="s">&quot;/usr/local/shinken/etc/nagios.cfg&quot;</span>
+<span class="n">SHINKENSPECIFICCFG</span><span class="o">=</span><span class="s">&quot;/usr/local/shinken/etc/shinken-specific.cfg&quot;</span>
+</pre></div>
+
+
+<p>Warning: the <code>SHINKENSPECIFICCFG</code> is by default commented, remind to uncomment it ;)</p>
+<p>Then we can give a try to a check:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:~</span><span class="err">#</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">check</span>
+<span class="n">Doing</span> <span class="n">config</span> <span class="n">check</span>
+<span class="p">.</span> <span class="n">ok</span>
+</pre></div>
+
+
+<p>Looks great :)</p>
+<p>So we can restart it :</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">start</span>
+</pre></div>
+
+
+<p>If we look at the processes, the arbiter load the <code>nagios.cfg</code> and the <code>shinken-specific.cfg</code>:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">ps</span> <span class="o">-</span><span class="n">fu</span> <span class="n">shinken</span>
+<span class="n">UID</span>        <span class="n">PID</span>  <span class="n">PPID</span>  <span class="n">C</span> <span class="n">STIME</span> <span class="n">TTY</span>          <span class="n">TIME</span> <span class="n">CMD</span>
+<span class="n">shinken</span>  <span class="mi">22147</span>     <span class="mi">1</span>  <span class="mi">1</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-scheduler -d -c /etc/shinken/daemons/schedulerd.ini</span>
+<span class="n">shinken</span>  <span class="mi">22150</span> <span class="mi">22147</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-scheduler -d -c /etc/shinken/daemons/schedulerd.ini</span>
+<span class="n">shinken</span>  <span class="mi">22189</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-poller -d -c /etc/shinken/daemons/pollerd.ini</span>
+<span class="n">shinken</span>  <span class="mi">22192</span> <span class="mi">22189</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-poller -d -c /etc/shinken/daemons/pollerd.ini</span>
+<span class="n">shinken</span>  <span class="mi">22234</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-reactionner -d -c /etc/shinken/daemons/reactionnerd.ini</span>
+<span class="n">shinken</span>  <span class="mi">22237</span> <span class="mi">22234</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-reactionner -d -c /etc/shinken/daemons/reactionnerd.ini</span>
+<span class="n">shinken</span>  <span class="mi">22279</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-broker -d -c /etc/shinken/daemons/brokerd.ini</span>
+<span class="n">shinken</span>  <span class="mi">22282</span> <span class="mi">22279</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-broker -d -c /etc/shinken/daemons/brokerd.ini</span>
+<span class="n">shinken</span>  <span class="mi">22325</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-receiver -d -c /etc/shinken/daemons/receiverd.ini</span>
+<span class="n">shinken</span>  <span class="mi">22328</span> <span class="mi">22325</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-receiver -d -c /etc/shinken/daemons/receiverd.ini</span>
+<span class="n">shinken</span>  <span class="mi">22363</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-arbiter -d -c /usr/local/shinken/etc/nagios.cfg -c /usr/local/shinken/etc/shinken-specific.</span>
+<span class="n">shinken</span>  <span class="mi">22365</span> <span class="mi">22363</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-arbiter -d -c /usr/local/shinken/etc/nagios.cfg -c /usr/local/shinken/etc/shinken-specific.</span>
+<span class="n">shinken</span>  <span class="mi">22394</span> <span class="mi">22189</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-poller -d -c /etc/shinken/daemons/pollerd.ini</span>
+<span class="n">shinken</span>  <span class="mi">22402</span> <span class="mi">22234</span>  <span class="mi">0</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span> <span class="o">?</span>        <span class="mo">00</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="n">python</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="c1">//shinken-reactionner -d -c /etc/shinken/daemons/reactionnerd.ini</span>
+</pre></div>
+
+
+<p>But the WebUI page is in 404, why? Let's look at the broker daemon logs:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">less</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokerd</span><span class="p">.</span><span class="n">log</span>
+<span class="mi">2014</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">10</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">21</span><span class="p">,</span><span class="mi">211</span> <span class="p">[</span><span class="mi">1394464221</span><span class="p">]</span> <span class="n">Warning</span> <span class="o">:</span> <span class="p">[</span><span class="n">broker</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="n">The</span> <span class="n">module</span> <span class="n">type</span> <span class="n">livestatus</span> <span class="k">for</span> <span class="n">Livestatus</span> <span class="n">was</span> <span class="n">not</span> <span class="n">found</span> <span class="n">in</span> <span class="n">modules</span><span class="o">!</span>
+<span class="mi">2014</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">10</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">21</span><span class="p">,</span><span class="mi">212</span> <span class="p">[</span><span class="mi">1394464221</span><span class="p">]</span> <span class="n">Warning</span> <span class="o">:</span> <span class="p">[</span><span class="n">broker</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="n">The</span> <span class="n">module</span> <span class="n">type</span> <span class="n">simple</span><span class="o">-</span><span class="n">log</span> <span class="k">for</span> <span class="n">Simple</span><span class="o">-</span><span class="n">log</span> <span class="n">was</span> <span class="n">not</span> <span class="n">found</span> <span class="n">in</span> <span class="n">modules</span><span class="o">!</span>
+<span class="mi">2014</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">10</span> <span class="mi">16</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">21</span><span class="p">,</span><span class="mi">213</span> <span class="p">[</span><span class="mi">1394464221</span><span class="p">]</span> <span class="n">Warning</span> <span class="o">:</span> <span class="p">[</span><span class="n">broker</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="n">The</span> <span class="n">module</span> <span class="n">type</span> <span class="n">webui</span> <span class="k">for</span> <span class="n">WebUI</span> <span class="n">was</span> <span class="n">not</span> <span class="n">found</span> <span class="n">in</span> <span class="n">modules</span><span class="o">!</span>
+</pre></div>
+
+
+<p>Why? Becase like we said in the <a href="/2-0-and-the-project/">2.0 blog entry</a>, the 2.0 came with no modules, you need to install them manually. In fact all we need at the module codes (python) because we alrady got the configuration part in the <code>/usr/local/shinken/etc/shinken-specific.cfg</code> file :)</p>
+<p>All the modules you need are in the <a href="http://shinken.io">shinken.io</a> website. But first let's give a try to which modules are need by just greping the <code>shinken-specific.cfg</code> file:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">grep</span> <span class="n">modules</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">specific</span><span class="p">.</span><span class="n">cfg</span>
+<span class="n">modules</span> <span class="n">Apache_passwd</span><span class="p">,</span> <span class="n">ActiveDir_UI</span><span class="p">,</span> <span class="n">Cfg_password</span><span class="p">,</span> <span class="n">PNP_UI</span><span class="p">,</span> <span class="n">Mongodb</span><span class="p">,</span> <span class="n">Glances_UI</span>
+<span class="n">modules</span> <span class="n">logsqlite</span>
+<span class="n">modules</span>
+<span class="n">modules</span>
+<span class="n">modules</span> <span class="n">Livestatus</span><span class="p">,</span> <span class="n">Simple</span><span class="o">-</span><span class="n">log</span><span class="p">,</span> <span class="n">WebUI</span>
+<span class="n">modules</span> <span class="n">CommandFile</span>
+<span class="n">modules</span> <span class="n">PickleRetention</span>
+<span class="n">modules</span>
+</pre></div>
+
+
+<p>I only kept the modules loaded from the daemons configurations or the modules (like Livestatus or WebUI). In fact we got some groups :</p>
+<ul>
+<li><code>WebUI</code>: <code>Apache_passwd, ActiveDir_UI, Cfg_password, PNP_UI, Mongodb, Glances_UI</code> are modules about authentification, graphs and user preference.</li>
+<li><code>Livestatus</code>: <code>logsqlite</code> is about how to save and read logs into the livestatus module</li>
+<li><code>Broker</code> : <code>Livestatus, Simple-log, WebUI</code> are about loading the agregated log file, the livestatus api and launching WebUI by default</li>
+<li><code>Arbiter</code> : <code>CommandFile</code> is about open and read the <code>nagios.cmd</code> file for the external commands</li>
+<li><code>Scheduler</code>: <code>PickleRetention</code> is about the retention module. We will analyse them in another course :)</li>
+</ul>
+<p>All we need now is just to download and install theses modules. It will install the module code into the <code>/var/lib/shinken/modules</code> and the configuration into <code>/etc/shinken.modules</code>. But we don't mind about the last one, because <code>/etc/shinken</code> is no longer read for the configuration.</p>
+<p>Here is a mapping about the modules names and their packages names into <a href="http://shinken.io">shinken.io</a>:</p>
+<table>
+<thead>
+<th>Module name</th>
+<th></th>
+<th>Package name</th>
+</thead>
+<tbody>
+<tr><td>Apache_passwd</td><td>-></td><td>auth-htpasswd</td></tr>
+<tr><td>ActiveDir_UI</td><td>-></td><td>auth-active-directory</td></tr>
+<tr><td>Cfg_password</td><td>-></td><td>auth-cfg-password</td></tr>
+<tr><td>PNP_UI</td><td>-></td><td>ui-pnp</td></tr>
+<tr><td>Mongodb</td><td>-></td><td>mod-mongodb</td></tr>
+<tr><td>logsqlite</td><td>-></td><td>logstore-sqlite</td></tr>
+<tr><td>mongologs</td><td>-></td><td>logstore-mongodb</td></tr>
+<tr><td>nulllogs</td><td>-></td><td>logstore-null</td></tr>
+<tr><td>Livestatus</td><td>-></td><td>livestatus</td></tr>
+<tr><td>Simple-log</td><td>-></td><td>simple-log</td></tr>
+<tr><td>WebUI</td><td>-></td><td>webui</td></tr>
+<tr><td>CommandFile</td><td>-></td><td>named-pipe</td></tr>
+<tr><td>PickleRetention</td><td>-></td><td>pickle-retention-file-generic</td></tr>
+</tbody>
+</table>
+
+<p>Here we go, let's give a try to the modules installs :)</p>
+<p>Beware: this must be done under the <code>shinken</code> user, and don't forget to launch the <code>shinken --init</code> on your first launch of the shinkexn CLI</p>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> 
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">auth</span><span class="o">-</span><span class="n">htpasswd</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">auth</span><span class="o">-</span><span class="n">active</span><span class="o">-</span><span class="n">directory</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">auth</span><span class="o">-</span><span class="n">cfg</span><span class="o">-</span><span class="n">password</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">ui</span><span class="o">-</span><span class="n">pnp</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">mod</span><span class="o">-</span><span class="n">mongodb</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">logstore</span><span class="o">-</span><span class="n">sqlite</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">logstore</span><span class="o">-</span><span class="n">mongodb</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">logstore</span><span class="o">-</span><span class="n">null</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">livestatus</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">simple</span><span class="o">-</span><span class="n">log</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">webui</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">named</span><span class="o">-</span><span class="n">pipe</span>
+<span class="n">shinken</span> <span class="n">install</span> <span class="n">pickle</span><span class="o">-</span><span class="n">retention</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">generic</span>
+</pre></div>
+
+
+<p>Now we can restart our daemons. for this first launch launch it under the debug mode so you will see if there are still some errors:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">stop</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="o">-</span><span class="n">d</span> <span class="n">start</span>
+</pre></div>
+
+
+<p>And try to look if the modules are load for the daemons :</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">grep</span> <span class="n">correctly</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/*-</span><span class="n">debug</span><span class="p">.</span><span class="n">log</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">debug</span><span class="p">.</span><span class="n">log</span><span class="o">:</span><span class="p">[</span><span class="mi">1394465689</span><span class="p">]</span> <span class="n">Info</span> <span class="o">:</span>    <span class="p">[</span><span class="n">broker</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="n">I</span> <span class="n">correctly</span> <span class="n">loaded</span> <span class="n">the</span> <span class="n">modules</span><span class="o">:</span> <span class="p">[</span><span class="n">Livestatus</span><span class="p">,</span><span class="n">Simple</span><span class="o">-</span><span class="n">log</span><span class="p">,</span><span class="n">WebUI</span><span class="p">]</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">debug</span><span class="p">.</span><span class="n">log</span><span class="o">:</span><span class="p">[</span><span class="mi">1394465689</span><span class="p">]</span> <span class="n">Info</span> <span class="o">:</span>    <span class="n">I</span> <span class="n">correctly</span> <span class="n">loaded</span> <span class="n">the</span> <span class="n">modules</span><span class="o">:</span> <span class="p">[</span><span class="n">Apache_passwd</span><span class="p">,</span><span class="n">ActiveDir_UI</span><span class="p">,</span><span class="n">Mongodb</span><span class="p">,</span><span class="n">PNP_UI</span><span class="p">,</span><span class="n">Cfg_password</span><span class="p">]</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">debug</span><span class="p">.</span><span class="n">log</span><span class="o">:</span><span class="p">[</span><span class="mi">1394465690</span><span class="p">]</span> <span class="n">Info</span> <span class="o">:</span>    <span class="n">I</span> <span class="n">correctly</span> <span class="n">loaded</span> <span class="n">the</span> <span class="n">modules</span><span class="o">:</span> <span class="p">[</span><span class="n">logsqlite</span><span class="p">]</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">debug</span><span class="p">.</span><span class="n">log</span><span class="o">:</span><span class="p">[</span><span class="mi">1394465689</span><span class="p">]</span> <span class="n">Info</span> <span class="o">:</span>    <span class="n">I</span> <span class="n">correctly</span> <span class="n">loaded</span> <span class="n">the</span> <span class="n">modules</span><span class="o">:</span> <span class="p">[]</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">reactionner</span><span class="o">-</span><span class="n">debug</span><span class="p">.</span><span class="n">log</span><span class="o">:</span><span class="p">[</span><span class="mi">1394465689</span><span class="p">]</span> <span class="n">Info</span> <span class="o">:</span>    <span class="n">I</span> <span class="n">correctly</span> <span class="n">loaded</span> <span class="n">the</span> <span class="n">modules</span><span class="o">:</span> <span class="p">[]</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">receiver</span><span class="o">-</span><span class="n">debug</span><span class="p">.</span><span class="n">log</span><span class="o">:</span><span class="p">[</span><span class="mi">1394465689</span><span class="p">]</span> <span class="n">Info</span> <span class="o">:</span>    <span class="p">[</span><span class="n">receiver</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="n">I</span> <span class="n">correctly</span> <span class="n">loaded</span> <span class="n">the</span> <span class="n">modules</span><span class="o">:</span> <span class="p">[]</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">debug</span><span class="p">.</span><span class="n">log</span><span class="o">:</span><span class="p">[</span><span class="mi">1394465828</span><span class="p">]</span> <span class="n">Info</span> <span class="o">:</span>    <span class="n">I</span> <span class="n">correctly</span> <span class="n">loaded</span> <span class="n">the</span> <span class="n">modules</span><span class="o">:</span> <span class="p">[</span><span class="n">PickleRetention</span><span class="p">,</span><span class="n">PickleRetention</span><span class="p">]</span>
+</pre></div>
+
+
+<p>All the daemons with modules are now loading them, your migration is complete, you can enjoy your WebUI now :)</p>
+<p><img src='/images/course3/course3-migrationdone.png'></p>
+<h3>The next course</h3>
+<p>The next course will be about our first distributed setup: the high availability, with shinken spare daemons :)</p>
+
+
+
+<p style='border: 2px solid rgba(0,39,59,.2);border-radius: 4px;'><img style='width: 48px;'  data-role="user-avatar" data-user="94550631" src="//a.disquscdn.com/uploads/users/9455/631/avatar92.jpg?1392209481"><a href='#'> jean gabès </a>
+<a href='mailto:j.gabes@shinken-solutions.com'><img src="/theme/img/Mail.png" /></a>
+<a href='https://twitter.com/naparuba'><img src="/theme/img/Twitter.png" /></a>
+<a href='https://github.com/naparuba'><img src="/theme/img/GitHub.png" /></a>
+</p>
+    <footer>
+        <p>Posted in: <a href="/category/talk.html">Talk</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/online-course.html">online course</a> / <a href="/tag/migration.html">migration</a></p>
+        <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
+    </footer>
+
+<hr/>
+
+<div id="disqus_thread"></div>
+  <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'shinkenlabio'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+
+        </footer>
+    </article>
+</section>                    </div>
+
+                    <footer id="site-footer">
+                        <p>
+                            <a href="" target="_blank">
+                                
+                            </a> Shinken framework team /
+                            <a href="/">Archives</a>
+                            / Powered by
+                            <a href="https://github.com/getpelican/pelican" target="_blank">
+                                Pelican
+                            </a>
+                        </p>
+                    </footer>
+                </div> <!-- header+content+footer span -->
+
+            </div> <!-- row -->
+        </div> <!-- /container -->
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/theme/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
+        <script>$('body').popover || document.write('<script src="/theme/js/vendor/bootstrap.min.js"><\/script>')</script>
+
+        <script src="/theme/js/vendor/jquery.colorbox-min.js"></script>
+
+        <script src="/theme/js/main.js"></script>
+
+        <script>
+            var _gaq=[['_setAccount','UA-48477803-1'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

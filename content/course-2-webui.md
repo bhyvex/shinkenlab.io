@@ -44,7 +44,7 @@ We got numerous modules related to the webui one. First we install this last one
 	Grabbing : webui
 	OK webui
 	
-This will downland and untar some files:
+This will download and untar some files:
 
   * `/var/lib/shinken/modules/webui/` : the module code (in Python), the pages and http ressources
   * `/etc/shinken/modules/webui.cfg`: module configuration file
