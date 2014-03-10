@@ -20,6 +20,7 @@ You can follow this tutorial with this video:
 
 <iframe width="800" height="600" src="//www.youtube.com/embed/fno4btMmtcQ" frameborder="0" allowfullscreen></iframe>
 
+(You can also have a [fr version of the video](http://www.youtube.com/watch?v=pHV9pah1MzI))
 
 
 The WebUI interface is a broker daemon module. This daemon role is to grab and expose the monitoring data to the outside world with modules. One of this module is the WebUI interface.
