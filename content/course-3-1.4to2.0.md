@@ -15,15 +15,12 @@ This is our third online course, we are now looking at the migration to the 2.0 
 
 We will install a 1.4.1 version and wewill migrate to a 2.0 one. So let's start :)
 
-( note: The recoding for this course is in progress :) )
-
-<!--
 You can follow this tutorial with this video:
 
-<iframe width="800" height="600" src="//www.youtube.com/embed/fno4btMmtcQ" frameborder="0" allowfullscreen></iframe>
+<iframe width="800" height="600" src="//www.youtube.com/embed/Qywg19zRWKI" frameborder="0" allowfullscreen></iframe>
 
-(You can also have a [fr version of the video](http://www.youtube.com/watch?v=pHV9pah1MzI))
--->
+(You can also have a [fr version of the video](http://www.youtube.com/watch?v=XzZQp5upCFU))
+
 
 ### Install the 1.4 version
 
