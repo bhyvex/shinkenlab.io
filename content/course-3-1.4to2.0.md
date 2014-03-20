@@ -13,7 +13,7 @@ Hi,
 
 This is our third online course, we are now looking at the migration to the 2.0 from the 1.4 one :)
 
-We will install a 1.4.1 version and wewill migrate to a 2.0 one. So let's start :)
+We will install a 1.4.1 version and we will migrate to a 2.0 one. So let's start :)
 
 You can follow this tutorial with this video:
 
