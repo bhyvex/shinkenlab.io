@@ -23,9 +23,7 @@ You can follow this tutorial with this video:
 
 (I cut the video at 6:15 because I give a looooong look at the logs there)
 
-(FR version soon)
-
-<!--(You can also have a [fr version of the video](http://www.youtube.com/watch?v=XzZQp5upCFU)). (for this one, I cut at 11:30 because of a previous test rights problems for root/shinken and `shinken install` :p )-->
+(You can also have a [fr version of the video](https://www.youtube.com/watch?v=nGSwROwGfBs).
 
 
 ### Our setup with 2 linux boxes
