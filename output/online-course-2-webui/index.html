@@ -121,13 +121,13 @@
 </ul>
 <p>The WebUI configuration looks like:</p>
 <div class="highlight"><pre><span class="n">define</span> <span class="n">module</span> <span class="p">{</span>
-  <span class="n">module_name</span>     <span class="n">WebUI</span>
+  <span class="n">module_name</span>     <span class="n">webui</span>
   <span class="n">module_type</span>     <span class="n">webui</span>
   <span class="n">host</span>            <span class="mf">0.0.0.0</span>
   <span class="n">port</span>            <span class="mi">7767</span>
   <span class="n">auth_secret</span>     <span class="n">CHANGE_ME</span>
-  <span class="n">allow_html_output</span>   <span class="mi">0</span>
-  <span class="n">max_output_length</span>   <span class="mi">100</span>
+  <span class="n">allow_html_output</span>   <span class="mi">1</span>
+  <span class="n">max_output_length</span>   <span class="mi">1024</span>
   <span class="n">manage_acl</span>          <span class="mi">1</span>
   <span class="n">play_sound</span>          <span class="mi">0</span>
   <span class="n">login_text</span>          <span class="n">Welcome</span> <span class="n">on</span> <span class="n">Shinken</span> <span class="n">WebUI</span>
@@ -146,8 +146,8 @@
 <li><code>host</code> : the address to listen, 0.0.0.0 mans all interfaces</li>
 <li><code>port</code> : port to listen. As this is launched by the <code>shinken</code> user you can't put 0 there sorry</li>
 <li><code>auth_secret</code> : private key to build cookie. MUST be changed :)</li>
-<li><code>allow_html_output</code> : by default the webui strip all HTML from the outputs, if you want to put colors or things like this in your outputs, just enable it. But beware of the security risks! (javascript)</li>
-<li><code>max_output_length</code> : by default outputs are limited to 100 characters</li>
+<li><code>allow_html_output</code> : by default the webui allow HTML from the outputs, if you fear security risks from there, just disable it.</li>
+<li><code>max_output_length</code> : by default outputs are limited to 1024 characters</li>
 <li><code>manage_acl</code> : should user only see elements that they are contacts of? :)</li>
 <li><code>play_sound</code> : try to guess what it is :)</li>
 <li><code>login_text</code> : little text that is shown above the login prompt</li>
@@ -158,7 +158,7 @@
 <p>Let's just give a try if we add this <code>WebUI</code> module to the broker daemon. All we need to do is to is to add it into the <code>modules</code> of the broker configuration :</p>
 <div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span>
 <span class="p">[...]</span>
-<span class="n">modules</span>     <span class="n">WebUI</span>
+<span class="n">modules</span>     <span class="n">webui</span>
 <span class="p">[...]</span>
 </pre></div>
 
@@ -199,7 +199,7 @@
 
 <p>There is nothing to configure on the module (<code>/etc/shinken/modules/auth_cfg_password.cfg</code>) but we need to declare it on the WebUI configuration :</p>
 <div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">grep</span> <span class="n">modules</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">webui</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">modules</span>             <span class="n">Cfg_password</span>
+<span class="n">modules</span>             <span class="n">auth</span><span class="o">-</span><span class="n">cfg</span><span class="o">-</span><span class="n">password</span>
 </pre></div>
 
 
@@ -222,7 +222,7 @@
 <div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">sqlitedb</span>
 <span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">sqlitedb</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">module</span> <span class="p">{</span>
-    <span class="n">module_name</span>     <span class="n">SQLitedb</span>
+    <span class="n">module_name</span>     <span class="n">sqlitedb</span>
     <span class="n">module_type</span>     <span class="n">sqlitedb</span>
     <span class="n">uri</span>             <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">webui</span><span class="p">.</span><span class="n">db</span>
 <span class="p">}</span>
@@ -231,7 +231,7 @@
 
 <p>The default path should be ok, let's add this to the WebUI modules list:</p>
 <div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">grep</span> <span class="n">modules</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">webui</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">modules</span>             <span class="n">Cfg_password</span><span class="p">,</span><span class="n">SQLitedb</span>
+<span class="n">modules</span>         <span class="n">auth</span><span class="o">-</span><span class="n">cfg</span><span class="o">-</span><span class="n">password</span><span class="p">,</span><span class="n">sqlitedb</span>
 </pre></div>
 
 

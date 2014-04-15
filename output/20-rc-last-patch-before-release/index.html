@@ -138,12 +138,14 @@
 </ul>
 <p>I think this will solve this case (no more call on this part of the code, and even if it does, this won't lead to the same bug). So please give a test. The bug did happen something like once a day, so if in 3 days we got no more crash like this, we will be OK for 2.0 release! :D</p>
 <p>So please test it, I'l publish a <code>RC3</code> version on pypi (for the pip intall). All you will need to do is to launch:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span>  <span class="n">pip</span> <span class="n">install</span> <span class="n">shinken</span> <span class="o">--</span><span class="n">update</span>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">wget</span> <span class="n">https</span><span class="o">:</span><span class="c1">//pypi.python.org/packages/source/S/Shinken/Shinken-2.0-RC3.tar.gz</span>
+<span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">tar</span> <span class="n">vfxz</span> <span class="n">Shinken</span><span class="o">-</span><span class="mf">2.0</span><span class="o">-</span><span class="n">RC3</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">Shinken</span><span class="o">-</span><span class="mf">2.0</span><span class="o">-</span><span class="n">RC3</span>
+<span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">python</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span>
 </pre></div>
 
 
 <p>And check your version with :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span><span class="n">shinken</span> <span class="o">--</span><span class="n">version</span>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">shinken</span> <span class="o">--</span><span class="n">version</span>
 <span class="n">shinken</span> <span class="mf">2.0</span><span class="o">-</span><span class="n">RC3</span>
 </pre></div>
 

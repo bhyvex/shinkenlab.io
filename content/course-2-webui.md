@@ -52,13 +52,13 @@ This will download and untar some files:
 The WebUI configuration looks like:
     
 	define module {
-	  module_name     WebUI
+	  module_name     webui
 	  module_type     webui
 	  host            0.0.0.0
 	  port            7767
 	  auth_secret     CHANGE_ME
-	  allow_html_output   0
-	  max_output_length   100
+	  allow_html_output   1
+	  max_output_length   1024
 	  manage_acl          1
 	  play_sound          0
 	  login_text          Welcome on Shinken WebUI
@@ -75,8 +75,8 @@ Let's have a look at the parameters:
   * `host` : the address to listen, 0.0.0.0 mans all interfaces
   * `port` : port to listen. As this is launched by the `shinken` user you can't put 0 there sorry
   * `auth_secret` : private key to build cookie. MUST be changed :)
-  * `allow_html_output` : by default the webui strip all HTML from the outputs, if you want to put colors or things like this in your outputs, just enable it. But beware of the security risks! (javascript)
-  * `max_output_length` : by default outputs are limited to 100 characters
+  * `allow_html_output` : by default the webui allow HTML from the outputs, if you fear security risks from there, just disable it.
+  * `max_output_length` : by default outputs are limited to 1024 characters
   * `manage_acl` : should user only see elements that they are contacts of? :)
   * `play_sound` : try to guess what it is :)
   * `login_text` : little text that is shown above the login prompt
@@ -88,7 +88,7 @@ Let's just give a try if we add this `WebUI` module to the broker daemon. All we
 
     shinken@debian# cat /etc/shinken/brokers/broker-master.cfg
 	[...]
-	modules     WebUI
+	modules     webui
 	[...]
 
 We can restart shinken and connect to the WebUI that will be availalbe on the `7767` port.
@@ -128,7 +128,7 @@ One (`cfg-password`) is a simple auth by looking at the contact `password` value
 There is nothing to configure on the module (`/etc/shinken/modules/auth_cfg_password.cfg`) but we need to declare it on the WebUI configuration :
 
     shinken@debian# grep modules /etc/shinken/modules/webui.cfg
-    modules             Cfg_password
+    modules             auth-cfg-password
 	
 Now we can restart shinken so this module wil be load by webui:
 
@@ -155,7 +155,7 @@ The dasboard is specific to each user, and so WebUI must save your user preferen
     shinken@debian# shinken install sqlitedb
 	shinken@debian# cat /etc/shinken/modules/sqlitedb.cfg
 	define module {
-	    module_name     SQLitedb
+	    module_name     sqlitedb
 	    module_type     sqlitedb
         uri             /var/lib/shinken/webui.db
 	}
@@ -163,7 +163,7 @@ The dasboard is specific to each user, and so WebUI must save your user preferen
 The default path should be ok, let's add this to the WebUI modules list:
 
     shinken@debian# grep modules /etc/shinken/modules/webui.cfg
-	modules             Cfg_password,SQLitedb
+	modules         auth-cfg-password,sqlitedb
 	
 And restart shinken:
   

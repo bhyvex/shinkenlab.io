@@ -67,11 +67,13 @@ I think this will solve this case (no more call on this part of the code, and ev
 
 So please test it, I'l publish a `RC3` version on pypi (for the pip intall). All you will need to do is to launch:
 
-    $ root@debian:  pip install shinken --update
+    $ root@debian: wget https://pypi.python.org/packages/source/S/Shinken/Shinken-2.0-RC3.tar.gz
+	$ root@debian: tar vfxz Shinken-2.0-RC3.tar.gz && cd Shinken-2.0-RC3
+	$ root@debian: python setup.py install --upgrade
 
 And check your version with :
 
-    $ root@debian:shinken --version
+    $ root@debian: shinken --version
 	shinken 2.0-RC3
 
 Good test :D
