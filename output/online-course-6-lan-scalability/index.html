@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Online course 4: High Availability / Some monitoring guys</title>
+        <title>Online course 6: LAN scalability, adding pollers / Some monitoring guys</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -80,23 +80,19 @@
 <section>
     <article>
         <header>
-            <h2><a href="/online-course-4-high-availability/" rel="bookmark">Online course 4: High Availability</a></h2>
-            <time datetime="2014-03-19T10:20:00">Mar 19, 2014</time>
+            <h2><a href="/online-course-6-lan-scalability/" rel="bookmark">Online course 6: LAN scalability, adding pollers</a></h2>
+            <time datetime="2014-09-03T10:20:00">Sep 03, 2014</time>
 	    <span class='author'>, Gabès Jean</span>
 
         </header>
 
     <p>Hi,</p>
-<p>This is our 4th online course, we are using the shinken distributed capabilities to setup a truly high available setup :)</p>
-<p>We already saw the installation of the 2.0 version in a linux box, but now we want to try the huge shinken distributed capabilities with a simple one: a high avaiability one.</p>
-<p>In shinken this is managed like a disk RAID: you can define spare daemons that will take the job if a master one is down :)</p>
+<p>This is our 6th online course. After the 5th from <a href="https://twitter.com/Seb_Cvx">Seb</a> that was about creating checks, you got numerous ideas about what to check and make your IT even stronger. But more checks means more load, and maybe one poller is not enough now :)</p>
+<p>We will look in this course about one #shinken core feature that will help you there: adding pollers is just tooooo easy :)</p>
+<p>Let's start with two standard 2.0 installation in two linux box. We will disable all the daemons on the second box but not the poller.</p>
 <p>You can follow this tutorial with this video:</p>
-<iframe width="800" height="600" src="//www.youtube.com/embed/WmJbje_bdz4" frameborder="0" allowfullscreen></iframe>
-
-<p>(I cut the video at 6:15 because I give a looooong look at the logs there)</p>
-<p>(You can also have a <a href="https://www.youtube.com/watch?v=nGSwROwGfBs">fr version of the video</a>.</p>
 <h3>Our setup with 2 linux boxes</h3>
-<p>We will have 2 linux and we want a simple high availability setup, with box courses-a and courses-b. A will be the master one, and the B will be the spare one. We just installed shinken in the 2 boxes. Both got a valid dns entry :</p>
+<p>We will have 2 linux and we want the second to be just a poller available for the first box shinken. The box courses-a will be our primary one, and courses-b the extended poller one. We just installed shinken in the 2 boxes. Both got a valid dns entry :</p>
 <div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">hosts</span>
 <span class="p">[...]</span>
 <span class="mf">192.168.56.104</span>  <span class="n">courses</span><span class="o">-</span><span class="n">a</span>
@@ -108,53 +104,16 @@
 </pre></div>
 
 
-<p>First we will focus in the <code>courses-a</code> box. We will configure all daemons in the cfg of the master, and we will just copy all cfg files into the spare when we will be done.</p>
-<p>We have to copy all our daemon <code>master</code> configurations, give them a new name and the good address (we will keep the default ports).</p>
 <p>We want to have something like this :</p>
-<p><img src='/images/course4/courses-4-master.png'></p>
-<p>First let's look at the <code>arbiter</code> daemons, that is done to read and dispatch the configurations:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">define</span> <span class="n">arbiter</span> <span class="p">{</span>
-    <span class="n">arbiter_name</span>    <span class="n">arbiter</span><span class="o">-</span><span class="n">spare</span>
-    <span class="n">host_name</span>       <span class="n">courses</span><span class="o">-</span><span class="n">b</span>       <span class="p">;</span> <span class="n">CHANGE</span> <span class="n">THIS</span> <span class="k">if</span> <span class="n">you</span> <span class="n">have</span> <span class="n">several</span> <span class="n">Arbiters</span>
-    <span class="n">address</span>         <span class="n">courses</span><span class="o">-</span><span class="n">b</span>   <span class="p">;</span> <span class="n">DNS</span> <span class="n">name</span> <span class="n">or</span> <span class="n">IP</span>
-    <span class="n">port</span>            <span class="mi">7770</span>
-    <span class="n">spare</span>           <span class="mi">1</span>           <span class="p">;</span> <span class="mi">1</span> <span class="o">=</span> <span class="n">is</span> <span class="n">a</span> <span class="n">spare</span><span class="p">,</span> <span class="mi">0</span> <span class="o">=</span> <span class="n">is</span> <span class="n">not</span> <span class="n">a</span> <span class="n">spare</span>
-    <span class="n">modules</span>      <span class="n">CommandFile</span>
-    <span class="n">use_ssl</span>          <span class="mi">0</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>We changed <code>arbiter_name</code>, <code>host_name</code>, <code>address</code> and <code>spare</code> properties. If the name is obvious, the others parameters are not :</p>
-<ul>
-<li><code>host_name</code> : specific to the arbiter, is is used by the arbiter daemon to find the arbiter object that match its <code>hostname</code></li>
-<li><code>address</code> : where the arbiter master will have to connect to exchange data</li>
-<li><code>spare</code> : is this daemon a spare one or not? :)</li>
-</ul>
-<p>The <code>host_name</code> parameter is important because the arbiter process will launch a <code>hostname</code> command to find where its launched, and then find a matching arbiter object.</p>
-<p>We also need to edit the <code>arbiter-master</code> to be sure its <code>address</code> is the public ip and not <code>localhost</code> as by default.</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span>    
-<span class="n">define</span> <span class="n">arbiter</span> <span class="p">{</span>
-    <span class="n">arbiter_name</span>    <span class="n">arbiter</span><span class="o">-</span><span class="n">master</span>
-    <span class="n">host_name</span>       <span class="n">courses</span><span class="o">-</span><span class="n">a</span>       <span class="p">;</span> <span class="n">CHANGE</span> <span class="n">THIS</span> <span class="k">if</span> <span class="n">you</span> <span class="n">have</span> <span class="n">several</span> <span class="n">Arbiters</span>
-    <span class="n">address</span>         <span class="n">courses</span><span class="o">-</span><span class="n">a</span>   <span class="p">;</span> <span class="n">DNS</span> <span class="n">name</span> <span class="n">or</span> <span class="n">IP</span>
-    <span class="n">port</span>            <span class="mi">7770</span>
-    <span class="n">spare</span>           <span class="mi">0</span>           <span class="p">;</span> <span class="mi">1</span> <span class="o">=</span> <span class="n">is</span> <span class="n">a</span> <span class="n">spare</span><span class="p">,</span> <span class="mi">0</span> <span class="o">=</span> <span class="n">is</span> <span class="n">not</span> <span class="n">a</span> <span class="n">spare</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>Then we need to do the same for all the other daemons now :)</p>
-<p>The <code>schedulers</code> (scheduler the checks) :</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<p><img src='/images/course6/courses-6-master.png'></p>
+<p>Let's first focus on the <code>courses-a</code> box. This will be quite quick. The poller we want to enable on the <code>courses-b</code> box will have to connect to the <code>scheduler</code> on the <code>courses-a</code> to get its job. It will have the <code>scheduler</code> address and port from a configuration send by the <code>arbiter</code>. But the default address of the <code>scheduler-master</code> is with the good port (7768), but with the <code>localhost</code> address. This won't be a problem for the arbiter to reach it, but if the poller on the <code>courses-b</code> try, it won't have a change to reach the <code>courses-a's scheduler</code> :p</p>
+<p>So all we need to do is to setup the LAN address on the <code>scheduler</code> definition object:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">scheduler</span> <span class="p">{</span>
-    <span class="n">scheduler_name</span>      <span class="n">scheduler</span><span class="o">-</span><span class="n">spare</span> <span class="p">;</span> <span class="n">Just</span> <span class="n">the</span> <span class="n">name</span>
-    <span class="n">address</span>             <span class="n">courses</span><span class="o">-</span><span class="n">b</span>   <span class="p">;</span> <span class="n">IP</span> <span class="n">or</span> <span class="n">DNS</span> <span class="n">address</span> <span class="n">of</span> <span class="n">the</span> <span class="n">daemon</span>
+    <span class="n">scheduler_name</span>      <span class="n">scheduler</span><span class="o">-</span><span class="n">master</span> <span class="p">;</span> <span class="n">Just</span> <span class="n">the</span> <span class="n">name</span>
+    <span class="n">address</span>             <span class="n">courses</span><span class="o">-</span><span class="n">a</span>   <span class="p">;</span> <span class="n">IP</span> <span class="n">or</span> <span class="n">DNS</span> <span class="n">address</span> <span class="n">of</span> <span class="n">the</span> <span class="n">daemon</span>
     <span class="n">port</span>                <span class="mi">7768</span>        <span class="p">;</span> <span class="n">TCP</span> <span class="n">port</span> <span class="n">of</span> <span class="n">the</span> <span class="n">daemon</span>
-    <span class="n">spare</span>               <span class="mi">1</span>   <span class="p">;</span> <span class="mi">1</span> <span class="o">=</span> <span class="n">is</span> <span class="n">a</span> <span class="n">spare</span><span class="p">,</span> <span class="mi">0</span> <span class="o">=</span> <span class="n">is</span> <span class="n">not</span> <span class="n">a</span> <span class="n">spare</span>
+    <span class="n">spare</span>               <span class="mi">0</span>   <span class="p">;</span> <span class="mi">1</span> <span class="o">=</span> <span class="n">is</span> <span class="n">a</span> <span class="n">spare</span><span class="p">,</span> <span class="mi">0</span> <span class="o">=</span> <span class="n">is</span> <span class="n">not</span> <span class="n">a</span> <span class="n">spare</span>
 
     <span class="n">weight</span>              <span class="mi">1</span>   <span class="p">;</span> <span class="n">Some</span> <span class="n">schedulers</span> <span class="n">can</span> <span class="n">manage</span> <span class="n">more</span> <span class="n">hosts</span> <span class="n">than</span> <span class="n">others</span>
     <span class="n">timeout</span>             <span class="mi">3</span>   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
@@ -169,6 +128,7 @@
 </pre></div>
 
 
+<p>All we need now it to look at the <code>courses-b</code> box, and let's disable LOT of daemons ^^</p>
 <p>The <code>pollers</code> (launch the monitoring plugins).</p>
 <div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span> 
 <span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
@@ -364,7 +324,7 @@
 </p>
     <footer>
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/online-course.html">online course</a> / <a href="/tag/high-availability.html">high availability</a> / <a href="/tag/raid.html">raid</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/online-course.html">online course</a> / <a href="/tag/scalability.html">scalability</a></p>
         <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
     </footer>
 
