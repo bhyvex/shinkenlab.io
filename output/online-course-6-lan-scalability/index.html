@@ -81,7 +81,7 @@
     <article>
         <header>
             <h2><a href="/online-course-6-lan-scalability/" rel="bookmark">Online course 6: LAN scalability, adding pollers</a></h2>
-            <time datetime="2014-09-03T10:20:00">Sep 03, 2014</time>
+            <time datetime="2014-09-08T10:20:00">Sep 08, 2014</time>
 	    <span class='author'>, Gabès Jean</span>
 
         </header>
@@ -90,7 +90,7 @@
 <p>This is our 6th online course. After the 5th from <a href="https://twitter.com/Seb_Cvx">Seb</a> that was about creating checks, you got numerous ideas about what to check and make your IT even stronger. But more checks means more load, and maybe one poller is not enough now :)</p>
 <p>We will look in this course about one #shinken core feature that will help you there: adding pollers is just tooooo easy :)</p>
 <p>Let's start with two standard 2.0 installation in two linux box. We will disable all the daemons on the second box but not the poller.</p>
-<p>You can follow this tutorial with this video:</p>
+<p>You will be able to follow this tutorial on video soon.</p>
 <h3>Our setup with 2 linux boxes</h3>
 <p>We will have 2 linux and we want the second to be just a poller available for the first box shinken. The box courses-a will be our primary one, and courses-b the extended poller one. We just installed shinken in the 2 boxes. Both got a valid dns entry :</p>
 <div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">hosts</span>
@@ -105,8 +105,10 @@
 
 
 <p>We want to have something like this :</p>
-<p><img src='/images/course6/courses-6-master.png'></p>
-<p>Let's first focus on the <code>courses-a</code> box. This will be quite quick. The poller we want to enable on the <code>courses-b</code> box will have to connect to the <code>scheduler</code> on the <code>courses-a</code> to get its job. It will have the <code>scheduler</code> address and port from a configuration send by the <code>arbiter</code>. But the default address of the <code>scheduler-master</code> is with the good port (7768), but with the <code>localhost</code> address. This won't be a problem for the arbiter to reach it, but if the poller on the <code>courses-b</code> try, it won't have a change to reach the <code>courses-a's scheduler</code> :p</p>
+<p><img src='/images/course6/courses-6-global.png'></p>
+<h3>Preparing the first box (master)</h3>
+<p>Let's first focus on the <code>courses-a</code> box. This will be quite quick. The poller we want to enable on the <code>courses-b</code> box will have to connect to the <code>scheduler</code> on the <code>courses-a</code> to get its job. It will have the <code>scheduler</code> address and port from a configuration send by the <code>arbiter</code>.</p>
+<p>But the default address of the <code>scheduler-master</code> is with the good port (7768), but with the <code>localhost</code> address. This won't be a problem for the arbiter to reach it, but if the poller on the <code>courses-b</code> try, it won't have a change to reach the <code>courses-a scheduler</code> :p</p>
 <p>So all we need to do is to setup the LAN address on the <code>scheduler</code> definition object:</p>
 <div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">scheduler</span> <span class="p">{</span>
@@ -128,15 +130,57 @@
 </pre></div>
 
 
+<h3>Now the second box :)</h3>
 <p>All we need now it to look at the <code>courses-b</code> box, and let's disable LOT of daemons ^^</p>
-<p>The <code>pollers</code> (launch the monitoring plugins).</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span> 
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<p>You must set <code>daemon_enabled=0</code>to the following files:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">grep</span> <span class="n">daemon_enabled</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">daemons</span><span class="o">/*</span><span class="n">ini</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">daemons</span><span class="o">/</span><span class="n">brokerd</span><span class="p">.</span><span class="n">ini</span><span class="o">:</span><span class="n">daemon_enabled</span><span class="o">=</span><span class="mi">0</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">daemons</span><span class="o">/</span><span class="n">pollerd</span><span class="p">.</span><span class="n">ini</span><span class="o">:</span><span class="n">daemon_enabled</span><span class="o">=</span><span class="mi">1</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">daemons</span><span class="o">/</span><span class="n">reactionnerd</span><span class="p">.</span><span class="n">ini</span><span class="o">:</span><span class="n">daemon_enabled</span><span class="o">=</span><span class="mi">0</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">daemons</span><span class="o">/</span><span class="n">receiverd</span><span class="p">.</span><span class="n">ini</span><span class="o">:</span><span class="n">daemon_enabled</span><span class="o">=</span><span class="mi">0</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">daemons</span><span class="o">/</span><span class="n">schedulerd</span><span class="p">.</span><span class="n">ini</span><span class="o">:</span><span class="n">daemon_enabled</span><span class="o">=</span><span class="mi">0</span>
+</pre></div>
+
+
+<p>And also on the arbiter that is installed by default on the <code>courses-b</code>:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">grep</span> <span class="n">daemon_enabled</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">shinken</span><span class="p">.</span><span class="n">cfg</span>
+<span class="n">daemon_enabled</span><span class="o">=</span><span class="mi">0</span>
+</pre></div>
+
+
+<p>Now you can restart your shinken daemons on the <code>courses-b</code> and look if only the poller is really started:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="o">-</span><span class="n">d</span> <span class="n">restart</span>
+<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">status</span>
+<span class="n">Checking</span> <span class="n">status</span> <span class="n">of</span> <span class="n">scheduler</span>
+<span class="n">scheduler</span> <span class="n">NOT</span> <span class="n">RUNNING</span>
+     <span class="n">failed</span><span class="o">!</span>
+<span class="n">Checking</span> <span class="n">status</span> <span class="n">of</span> <span class="n">poller</span>
+<span class="n">poller</span> <span class="n">RUNNING</span> <span class="p">(</span><span class="n">pid</span> <span class="mi">25504</span><span class="p">)</span>
+<span class="p">.</span> <span class="n">ok</span>
+<span class="n">Checking</span> <span class="n">status</span> <span class="n">of</span> <span class="n">reactionner</span>
+<span class="n">reactionner</span> <span class="n">NOT</span> <span class="n">RUNNING</span>
+     <span class="n">failed</span><span class="o">!</span>
+<span class="n">Checking</span> <span class="n">status</span> <span class="n">of</span> <span class="n">broker</span>
+<span class="n">broker</span> <span class="n">NOT</span> <span class="n">RUNNING</span>
+ <span class="n">failed</span><span class="o">!</span>
+ <span class="n">Checking</span> <span class="n">status</span> <span class="n">of</span> <span class="n">receiver</span>
+ <span class="n">receiver</span> <span class="n">NOT</span> <span class="n">RUNNING</span>
+     <span class="n">failed</span><span class="o">!</span>
+ <span class="n">Checking</span> <span class="n">status</span> <span class="n">of</span> <span class="n">arbiter</span>
+ <span class="n">arbiter</span> <span class="n">NOT</span> 
+     <span class="n">failed</span><span class="o">!</span>
+</pre></div>
+
+
+<p>We temporary put the poller in debug mode so we will have all it's logs available to see the good connexions and internal data.</p>
+<p>So now that our <code>courses-b</code> poller is ok and no other daemons will annoy it, we can declare it to the arbiter side on the <code>courses-a</code> server:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="p">.</span><span class="n">cfg</span> 
+<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">poller</span> <span class="p">{</span>
-    <span class="n">poller_name</span>     <span class="n">poller</span><span class="o">-</span><span class="n">master</span>
+    <span class="n">poller_name</span>     <span class="n">poller</span><span class="o">-</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span>
     <span class="n">address</span>         <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
     <span class="n">port</span>            <span class="mi">7771</span>
-    <span class="n">spare</span>           <span class="mi">1</span>
+    <span class="n">spare</span>           <span class="mi">0</span>
 
     <span class="n">manage_sub_realms</span>   <span class="mi">0</span>   <span class="p">;</span> <span class="n">Does</span> <span class="n">it</span> <span class="n">take</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">of</span> <span class="n">sub</span><span class="o">-</span><span class="n">Realms</span><span class="o">?</span>
     <span class="n">min_workers</span>         <span class="mi">0</span>   <span class="p">;</span> <span class="n">Starts</span> <span class="n">with</span> <span class="n">N</span> <span class="n">processes</span> <span class="p">(</span><span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">per</span> <span class="n">CPU</span><span class="p">)</span>
@@ -154,172 +198,56 @@
 </pre></div>
 
 
-<p>Same for the <code>reactionners</code> (launch the notifications and the event handlers):</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">reactionners</span><span class="o">/</span><span class="n">reactionner</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">reactionners</span><span class="o">/</span><span class="n">reactionner</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">reactionners</span><span class="o">/</span><span class="n">reactionner</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">define</span> <span class="n">reactionner</span> <span class="p">{</span>
-    <span class="n">reactionner_name</span>    <span class="n">reactionner</span><span class="o">-</span><span class="n">master</span>
-    <span class="n">address</span>             <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
-    <span class="n">port</span>                <span class="mi">7769</span>
-    <span class="n">spare</span>               <span class="mi">1</span>
-
-    <span class="n">manage_sub_realms</span>   <span class="mi">0</span>   <span class="p">;</span> <span class="n">Does</span> <span class="n">it</span> <span class="n">take</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">of</span> <span class="n">sub</span><span class="o">-</span><span class="n">Realms</span><span class="o">?</span>
-    <span class="n">min_workers</span>         <span class="mi">1</span>   <span class="p">;</span> <span class="n">Starts</span> <span class="n">with</span> <span class="n">N</span> <span class="n">processes</span> <span class="p">(</span><span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">per</span> <span class="n">CPU</span><span class="p">)</span>
-    <span class="n">max_workers</span>         <span class="mi">15</span>  <span class="p">;</span> <span class="n">No</span> <span class="n">more</span> <span class="n">than</span> <span class="n">N</span> <span class="n">processes</span> <span class="p">(</span><span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">per</span> <span class="n">CPU</span><span class="p">)</span>
-    <span class="n">polling_interval</span>    <span class="mi">1</span>   <span class="p">;</span> <span class="n">Get</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">each</span> <span class="mi">1</span> <span class="n">second</span>
-    <span class="n">timeout</span>             <span class="mi">3</span>   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
-    <span class="n">data_timeout</span>        <span class="mi">120</span> <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
-    <span class="n">max_check_attempts</span>  <span class="mi">3</span>   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
-    <span class="n">check_interval</span>      <span class="mi">60</span>  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
-    <span class="n">modules</span>
-    <span class="n">use_ssl</span>          <span class="mi">0</span>
-    <span class="n">realm</span>   <span class="n">All</span>
-<span class="p">}</span>
+<p>So the only modification you need are the <code>poller_name</code> and <code>address</code> parameters. You can keep the others by default.</p>
+<h3>Restart and look at your success :)</h3>
+<p>Then restart the arbiter <code>shinken</code> on the <code>ourses-a</code> server:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">arbiter</span> <span class="n">restart</span>
 </pre></div>
 
 
-<p>Now for the <code>brokers</code> (grab events and data from the other daemons and export them):</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">define</span> <span class="n">broker</span> <span class="p">{</span>
-    <span class="n">broker_name</span>     <span class="n">broker</span><span class="o">-</span><span class="n">master</span>
-    <span class="n">address</span>         <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
-    <span class="n">port</span>            <span class="mi">7772</span>
-    <span class="n">spare</span>           <span class="mi">1</span>
-
-    <span class="n">manage_arbiters</span>     <span class="mi">1</span>   <span class="p">;</span> <span class="n">Take</span> <span class="n">data</span> <span class="n">from</span> <span class="n">Arbiter</span><span class="p">.</span> <span class="n">There</span> <span class="n">should</span> <span class="n">be</span> <span class="n">only</span> <span class="n">one</span>
-    <span class="n">manage_sub_realms</span>   <span class="mi">1</span>   <span class="p">;</span> <span class="n">Does</span> <span class="n">it</span> <span class="n">take</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">of</span> <span class="n">sub</span><span class="o">-</span><span class="n">Realms</span><span class="o">?</span>
-    <span class="n">timeout</span>             <span class="mi">3</span>   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
-    <span class="n">data_timeout</span>        <span class="mi">120</span> <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
-    <span class="n">max_check_attempts</span>  <span class="mi">3</span>   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
-    <span class="n">check_interval</span>      <span class="mi">60</span>  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
-
-    <span class="n">modules</span>           <span class="n">WebUI</span>
-    <span class="n">use_ssl</span>          <span class="mi">0</span>
-    <span class="n">realm</span>   <span class="n">All</span>
-<span class="p">}</span>
+<p>The <code>arbiter-master</code> will load the new poller and will give it some new job, like taking checks from the <code>courses-a's scheduler</code> :)</p>
+<p>If we look at the <code>courses-b</code> logs, we can see the connexion:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">grep</span> <span class="err">&#39;</span><span class="n">scheduler</span><span class="o">-</span><span class="n">master</span><span class="err">&#39;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollerd</span><span class="p">.</span><span class="n">log</span>
+<span class="p">[</span><span class="mi">1410170010</span><span class="p">]</span> <span class="n">INFO</span><span class="o">:</span> <span class="p">[</span><span class="n">Shinken</span><span class="p">]</span> <span class="p">[</span><span class="n">poller</span><span class="o">-</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="p">]</span> <span class="n">Init</span> <span class="n">connection</span> <span class="n">with</span> <span class="n">scheduler</span><span class="o">-</span><span class="n">master</span> <span class="n">at</span> <span class="n">http</span><span class="o">:</span><span class="c1">//courses-b:7768/ (3s,120s)</span>
+<span class="p">[</span><span class="mi">1410170010</span><span class="p">]</span> <span class="n">WARNING</span><span class="o">:</span> <span class="p">[</span><span class="n">Shinken</span><span class="p">]</span> <span class="p">[</span><span class="n">poller</span><span class="o">-</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="p">]</span> <span class="n">Scheduler</span> <span class="n">scheduler</span><span class="o">-</span><span class="n">master</span> <span class="n">is</span> <span class="n">not</span> <span class="n">initialized</span> <span class="n">or</span> <span class="n">has</span> <span class="n">network</span> <span class="n">problem</span><span class="o">:</span> <span class="n">Connexion</span> <span class="n">error</span> <span class="n">to</span> <span class="n">http</span><span class="o">:</span><span class="c1">//courses-a:7768/ : couldn&#39;t connect to host</span>
+<span class="p">[</span><span class="mi">1410170012</span><span class="p">]</span> <span class="n">INFO</span><span class="o">:</span> <span class="p">[</span><span class="n">Shinken</span><span class="p">]</span> <span class="p">[</span><span class="n">poller</span><span class="o">-</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="p">]</span> <span class="n">Connection</span> <span class="n">OK</span> <span class="n">with</span> <span class="n">scheduler</span> <span class="n">scheduler</span><span class="o">-</span><span class="n">master</span>
+<span class="p">[</span><span class="mi">1410170012</span><span class="p">]</span> <span class="n">INFO</span><span class="o">:</span> <span class="p">[</span><span class="n">Shinken</span><span class="p">]</span> <span class="p">[</span><span class="n">poller</span><span class="o">-</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="p">]</span> <span class="n">Init</span> <span class="n">connection</span> <span class="n">with</span> <span class="n">scheduler</span><span class="o">-</span><span class="n">master</span> <span class="n">at</span> <span class="n">http</span><span class="o">:</span><span class="c1">//courses-a:7768/ (3s,120s)</span>
+<span class="p">[</span><span class="mi">1410170012</span><span class="p">]</span> <span class="n">INFO</span><span class="o">:</span> <span class="p">[</span><span class="n">Shinken</span><span class="p">]</span> <span class="p">[</span><span class="n">poller</span><span class="o">-</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="p">]</span> <span class="n">Connection</span> <span class="n">OK</span> <span class="n">with</span> <span class="n">scheduler</span> <span class="n">scheduler</span><span class="o">-</span><span class="n">master</span>
 </pre></div>
 
 
-<p>And finaly the <code>receivers</code> (listen to external commands):</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">receivers</span><span class="o">/</span><span class="n">receiver</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">receivers</span><span class="o">/</span><span class="n">receiver</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">receivers</span><span class="o">/</span><span class="n">receiver</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">define</span> <span class="n">receiver</span> <span class="p">{</span>
-    <span class="n">receiver_name</span>   <span class="n">receiver</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">address</span>         <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
-    <span class="n">port</span>            <span class="mi">7773</span>
-    <span class="n">spare</span>           <span class="mi">1</span>
-
-    <span class="n">timeout</span>             <span class="mi">3</span>   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
-    <span class="n">data_timeout</span>        <span class="mi">120</span> <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
-    <span class="n">max_check_attempts</span>  <span class="mi">3</span>   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
-    <span class="n">check_interval</span>      <span class="mi">60</span>  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
-    <span class="n">modules</span>
-    <span class="n">use_ssl</span>          <span class="mi">0</span>
-    <span class="n">direct_routing</span>      <span class="mi">0</span>   <span class="p">;</span> <span class="n">If</span> <span class="n">enabled</span><span class="p">,</span> <span class="n">it</span> <span class="n">will</span> <span class="n">directly</span> <span class="n">send</span> <span class="n">commands</span> <span class="n">to</span> <span class="n">the</span>
-                            <span class="p">;</span> <span class="n">schedulers</span> <span class="k">if</span> <span class="n">it</span> <span class="n">know</span> <span class="n">about</span> <span class="n">the</span> <span class="n">hostname</span> <span class="n">in</span> <span class="n">the</span>                                                                              <span class="p">;</span> <span class="n">command</span><span class="p">.</span>
-    <span class="n">realm</span>   <span class="n">All</span>
-<span class="p">}</span>
+<p>Don't worry about the WARNING here. It's just the poller is too fast for the scheduler to be fully running with a configuration. If you got some few seconds after a <code>Connection OK</code> it means you are ok :)</p>
+<p>So now you can look at this poller and look if it really get new checks from the scheduler:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">tail</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollerd</span><span class="p">.</span><span class="n">log</span>
+<span class="p">...</span>
+<span class="p">[</span><span class="mi">1410170033</span><span class="p">]</span> <span class="n">DEBUG</span><span class="o">:</span> <span class="p">[</span><span class="n">Shinken</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">scheduler</span><span class="o">-</span><span class="n">master</span><span class="p">][</span><span class="n">fork</span><span class="p">]</span> <span class="n">Stats</span><span class="o">:</span> <span class="n">Workers</span><span class="o">:</span><span class="mi">1</span> <span class="p">(</span><span class="n">Queued</span><span class="o">:</span><span class="mi">1</span> <span class="n">TotalReturnWait</span><span class="o">:</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">...</span>
 </pre></div>
 
 
-<p>Remember to also change the <code>address</code> entry of all master daemons, because the spare <code>arbiter</code> will need the LAN IP if it takes the lead and need to dispatch the configuration :)</p>
-<p>Then you can copy the <code>courses-a</code> server configuration over the <code>courses-b</code> one. They must be the same.</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/*</span> <span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="o">:/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span>
+<p>Here the poller ask the scheduler and get one check and one other result to return to this scheduler. You will have one line by worker and by scheduler. So this poller is working great :)</p>
+<h3>Did we forgot something?</h3>
+<p>But we forgot some things: pollers are launching check plugins, located in the <code>/var/lib/shinken/libexec/</code> directory or in the <code>/usr/lib/nagios/plugins/</code> directory for standard nagios plugins ones. And here you poller got none of them :)</p>
+<p>So for each pollers you need to add the same plugins, so for example here you can just :</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">nagios</span><span class="o">-</span><span class="n">plugins</span>
 </pre></div>
 
 
-<p>Then restart <code>shinken</code> on both servers:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">start</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">start</span>
+<p>for the nagios plugins, and:</p>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">scp</span> <span class="o">-</span><span class="n">rp</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">libexec</span><span class="o">/*</span> <span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="o">:/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span>
 </pre></div>
 
 
-<p>The <code>arbiter-master</code> will talk each second to the <code>arbiter-spare</code> to say it is still alive, and so the <code>spare</code> must keep calm :)</p>
-<p>If we look at the spare logs, all is clean :</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiterd</span><span class="p">.</span><span class="n">log</span>
-</pre></div>
-
-
-<p>When we stop the <code>courses-a</code> daemons the <code>arbiter-spare</code> will take the configuration lead after <code>max_check_attempts*check_interval</code> seconds (from the <code>arbiter-master configuration</code> and will dispatch to the only available daemons, the <code>spare</code> ones.</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">stop</span>
-<span class="p">[</span><span class="n">wait</span> <span class="mi">3</span> <span class="n">min</span><span class="p">]</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">grep</span> <span class="err">&#39;</span><span class="n">Dispatch</span> <span class="n">OK</span><span class="err">&#39;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiterd</span><span class="p">.</span><span class="n">log</span>
-</pre></div>
-
-
-<p>We got something like this:</p>
-<p><img src='/images/course4/courses-4-spare.png'></p>
-<h2>Issue with the PENDING states</h2>
-<p>But one problem we got when we switch to the spare daemons are that all checks are restarting from the <code>PENDING</code> state, but we don't wantto loose all our previous states. If we are using a flat file retention module for the <code>schedulers</code> like the <code>pickle-retention-file-scheduler</code> one the courses-b server won't be able to read the courses-a flat file of course. We must use a distributed retention module :)</p>
-<p>Just look at what is available :</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">shinken</span> <span class="n">search</span> <span class="n">retention</span>
-<span class="n">pickle</span><span class="o">-</span><span class="n">retention</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">generic</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">arbiter</span><span class="p">,</span><span class="n">broker</span><span class="p">,</span><span class="n">retention</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">flat</span> <span class="n">file</span> <span class="p">(</span><span class="k">for</span> <span class="n">arbiter</span> <span class="o">&amp;</span> <span class="n">broker</span><span class="p">)</span>
-<span class="n">pickle</span><span class="o">-</span><span class="n">retention</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">scheduler</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">flat</span> <span class="n">file</span> <span class="p">(</span><span class="k">for</span> <span class="n">scheduler</span><span class="p">)</span>
-<span class="n">retention</span><span class="o">-</span><span class="n">memcache</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">memcache</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">memcache</span> <span class="n">server</span>
-<span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">nagios</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">mongodb</span> <span class="n">cluster</span>
-<span class="n">retention</span><span class="o">-</span><span class="n">nagios</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">nagios</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">nagios</span> <span class="n">flat</span> <span class="n">file</span><span class="p">.</span> <span class="n">Useful</span> <span class="k">for</span> <span class="n">migration</span> <span class="n">to</span> <span class="n">Shinken</span> <span class="n">from</span> <span class="n">Nagios</span>
-<span class="n">retention</span><span class="o">-</span><span class="n">redis</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">redis</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">redis</span> <span class="n">cluster</span>
-</pre></div>
-
-
-<p>The one that is interesting us is the retention-mongodb one. Let's install it:</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span>
-</pre></div>
-
-
-<p>But beware, we also need to install it on the <code>courses-b</code> server !</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span>
-</pre></div>
-
-
-<p>This module will need some additionals python lib, on both servers of course :</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pymongo</span> <span class="n">python</span><span class="o">-</span><span class="n">gridfs</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pymongo</span> <span class="n">python</span><span class="o">-</span><span class="n">gridfs</span>
-</pre></div>
-
-
-<p>We will have such architecture:</p>
-<p><img src='/images/course4/courses-4-retention.png'></p>
-<p>We will need a mongodb server. I'll install it on another server. You can easily setup it by folowing the <a href="http://docs.mongodb.org/manual/administration/install-on-linux/">documentation</a>. It will be on te <code>192.168.56.103</code> server for me.</p>
-<p>The module configuration is <code>/etc/shinken/modules/retention-mongodb.cfg</code>:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">define</span> <span class="n">module</span> <span class="p">{</span>
-    <span class="n">module_name</span>     <span class="n">MongodbRetention</span>
-    <span class="n">module_type</span>     <span class="n">mongodb_retention</span>
-    <span class="n">uri</span>             <span class="n">mongodb</span><span class="o">:</span><span class="c1">//192.168.56.103/?safe=false</span>
-    <span class="n">database</span>        <span class="n">shinken</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>Note that you need to edit the uri with your server address :)</p>
-<p>Then we can just enable the module on <code>both</code> schedulers:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span>
-<span class="p">[..]</span>
-<span class="n">modules</span>    <span class="n">MongodbRetention</span>
-<span class="p">[...]</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="p">[..]</span>
-<span class="n">modules</span>    <span class="n">MongodbRetention</span>
-<span class="p">[...]</span>
-</pre></div>
-
-
-<p>Then copy your configuration from <code>courses-a</code> to <code>courses-b</code> with the previous <code>scp</code> command.</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/*</span> <span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="o">:/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span>
-</pre></div>
-
-
-<p>Then you can restart boths servers and try to stop the <code>master</code> daemons one time again. This time the retention data will be ok :)</p>
+<p>And you will have all you need on the <code>courses-b</code> poller.</p>
 <h3>The next course</h3>
-<p>The next course will be about a focus on the enterprise edition, the next one will be about the shinken daemons and what they are done for :)</p>
+<p>The next course will be an extension of this one. Here all checks are distributed in all our pollers, in a round robin way. But maybe we want to dedicate one box for a specific checks or hosts? We will see this in the next course, about the poller tags, and one classic usage for this: pollers in DMZ :)</p>
 
 
 
 <p style='border: 2px solid rgba(0,39,59,.2);border-radius: 4px;'><img style='width: 48px;'  data-role="user-avatar" data-user="94550631" src="//a.disquscdn.com/uploads/users/9455/631/avatar92.jpg?1392209481"><a href='#'> jean gabès </a>
 <a href='mailto:j.gabes@shinken-solutions.com'><img src="/theme/img/Mail.png" /></a>
 <a href='https://twitter.com/naparuba'><img src="/theme/img/Twitter.png" /></a>
+<a href='http://www.twitch.tv/naparuba'><img src="/theme/img/Twitch.png" /></a>
 <a href='https://github.com/naparuba'><img src="/theme/img/GitHub.png" /></a>
 </p>
     <footer>

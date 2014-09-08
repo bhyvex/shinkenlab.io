@@ -1,5 +1,5 @@
 Title: Online course 6: LAN scalability, adding pollers
-Date: 2014-09-03 10:20
+Date: 2014-09-08 10:20
 Category: Talk
 Tags: shinken, online course, scalability
 Slug: online-course-6-lan-scalability
@@ -17,8 +17,7 @@ We will look in this course about one #shinken core feature that will help you t
 
 Let's start with two standard 2.0 installation in two linux box. We will disable all the daemons on the second box but not the poller.
 
-You can follow this tutorial with this video:
-
+You will be able to follow this tutorial on video soon.
 
 
 ### Our setup with 2 linux boxes
@@ -37,10 +36,14 @@ We will have 2 linux and we want the second to be just a poller available for th
 
 We want to have something like this :
 
-<img src='/images/course6/courses-6-master.png'>
+<img src='/images/course6/courses-6-global.png'>
 
 
-Let's first focus on the `courses-a` box. This will be quite quick. The poller we want to enable on the `courses-b` box will have to connect to the `scheduler` on the `courses-a` to get its job. It will have the `scheduler` address and port from a configuration send by the `arbiter`. But the default address of the `scheduler-master` is with the good port (7768), but with the `localhost` address. This won't be a problem for the arbiter to reach it, but if the poller on the `courses-b` try, it won't have a change to reach the `courses-a's scheduler` :p
+### Preparing the first box (master)
+
+Let's first focus on the `courses-a` box. This will be quite quick. The poller we want to enable on the `courses-b` box will have to connect to the `scheduler` on the `courses-a` to get its job. It will have the `scheduler` address and port from a configuration send by the `arbiter`.
+
+But the default address of the `scheduler-master` is with the good port (7768), but with the `localhost` address. This won't be a problem for the arbiter to reach it, but if the poller on the `courses-b` try, it won't have a change to reach the `courses-a scheduler` :p
 
 So all we need to do is to setup the LAN address on the `scheduler` definition object:
 
@@ -63,17 +66,58 @@ So all we need to do is to setup the LAN address on the `scheduler` definition o
 	}
 
 
+### Now the second box :)
+
 All we need now it to look at the `courses-b` box, and let's disable LOT of daemons ^^
 
-The `pollers` (launch the monitoring plugins).
+You must set `daemon_enabled=0`to the following files:
 
-	root@courses-a$ cp /etc/shinken/pollers/poller-master.cfg /etc/shinken/pollers/poller-spare.cfg	
-	root@courses-a$ vi /etc/shinken/pollers/poller-spare.cfg
+    root@courses-b$ grep daemon_enabled /etc/shinken/daemons/*ini
+	/etc/shinken/daemons/brokerd.ini:daemon_enabled=0
+	/etc/shinken/daemons/pollerd.ini:daemon_enabled=1
+	/etc/shinken/daemons/reactionnerd.ini:daemon_enabled=0
+	/etc/shinken/daemons/receiverd.ini:daemon_enabled=0
+	/etc/shinken/daemons/schedulerd.ini:daemon_enabled=0
+
+And also on the arbiter that is installed by default on the `courses-b`:
+
+    root@courses-b$ grep daemon_enabled /etc/shinken/shinken.cfg
+    daemon_enabled=0
+
+Now you can restart your shinken daemons on the `courses-b` and look if only the poller is really started:
+
+    root@courses-b$ /etc/init.d/shinken -d restart
+    root@courses-b$ /etc/init.d/shinken status
+	Checking status of scheduler
+	scheduler NOT RUNNING
+	     failed!
+	Checking status of poller
+	poller RUNNING (pid 25504)
+	. ok
+	Checking status of reactionner
+	reactionner NOT RUNNING
+	     failed!
+	Checking status of broker
+	broker NOT RUNNING
+	 failed!
+	 Checking status of receiver
+	 receiver NOT RUNNING
+	     failed!
+	 Checking status of arbiter
+	 arbiter NOT 
+	     failed!
+
+We temporary put the poller in debug mode so we will have all it's logs available to see the good connexions and internal data.
+
+So now that our `courses-b` poller is ok and no other daemons will annoy it, we can declare it to the arbiter side on the `courses-a` server:
+
+	root@courses-a$ cp /etc/shinken/pollers/poller-master.cfg /etc/shinken/pollers/poller-courses-b.cfg	
+	root@courses-a$ vi /etc/shinken/pollers/poller-courses-b.cfg
 	define poller {
-	    poller_name     poller-master
+	    poller_name     poller-courses-b
 	    address         courses-b
 	    port            7771
-		spare           1
+		spare           0
 				
 		manage_sub_realms   0   ; Does it take jobs from schedulers of sub-Realms?
 		min_workers         0   ; Starts with N processes (0 = 1 per CPU)
@@ -88,167 +132,56 @@ The `pollers` (launch the monitoring plugins).
 		use_ssl          0
 		realm   All
 	}
-																												 
 
-Same for the `reactionners` (launch the notifications and the event handlers):
+So the only modification you need are the `poller_name` and `address` parameters. You can keep the others by default.
 
-	root@courses-a$ cp /etc/shinken/reactionners/reactionner-master.cfg /etc/shinken/reactionners/reactionner-spare.cfg
-	root@courses-a$ vi /etc/shinken/reactionners/reactionner-spare.cfg
-	define reactionner {
-	    reactionner_name    reactionner-master
-	    address             courses-b
-	    port                7769
-        spare               1
-					
-		manage_sub_realms   0   ; Does it take jobs from schedulers of sub-Realms?
-		min_workers         1   ; Starts with N processes (0 = 1 per CPU)
-		max_workers         15  ; No more than N processes (0 = 1 per CPU)
-		polling_interval    1   ; Get jobs from schedulers each 1 second
-		timeout             3   ; Ping timeout
-		data_timeout        120 ; Data send timeout
-		max_check_attempts  3   ; If ping fails N or more, then the node is dead
-		check_interval      60  ; Ping node every N seconds
-		modules
-		use_ssl          0
-		realm   All
-	}
+### Restart and look at your success :)
 
-Now for the `brokers` (grab events and data from the other daemons and export them):
+Then restart the arbiter `shinken` on the `ourses-a` server:
 
-    root@courses-a$ cp /etc/shinken/brokers/broker-master.cfg /etc/shinken/brokers/broker-spare.cfg
-	root@courses-a$ vi /etc/shinken/brokers/broker-spare.cfg
-	define broker {
-	    broker_name     broker-master
-	    address         courses-b
-	    port            7772
-        spare           1
-					
-		manage_arbiters     1   ; Take data from Arbiter. There should be only one
-		manage_sub_realms   1   ; Does it take jobs from schedulers of sub-Realms?
-		timeout             3   ; Ping timeout
-		data_timeout        120 ; Data send timeout
-		max_check_attempts  3   ; If ping fails N or more, then the node is dead
-		check_interval      60  ; Ping node every N seconds
-																			
-		modules           WebUI
-		use_ssl          0
-		realm   All
-	}
+	root@courses-a$ /etc/init.d/shinken-arbiter restart
 
-And finaly the `receivers` (listen to external commands):
-
-	root@courses-a$ cp /etc/shinken/receivers/receiver-master.cfg /etc/shinken/receivers/receiver-spare.cfg
-	root@courses-a$ vi /etc/shinken/receivers/receiver-spare.cfg
-	define receiver {
-	    receiver_name   receiver-1
-		address         courses-b
-		port            7773
-		spare           1
-		
-		timeout             3   ; Ping timeout
-		data_timeout        120 ; Data send timeout
-		max_check_attempts  3   ; If ping fails N or more, then the node is dead
-		check_interval      60  ; Ping node every N seconds
-	    modules
-		use_ssl          0
-		direct_routing      0   ; If enabled, it will directly send commands to the
-     	                        ; schedulers if it know about the hostname in the													                           ; command.
-	    realm   All
-	}
 	
-Remember to also change the `address` entry of all master daemons, because the spare `arbiter` will need the LAN IP if it takes the lead and need to dispatch the configuration :)
+The `arbiter-master` will load the new poller and will give it some new job, like taking checks from the `courses-a's scheduler` :)
 
-Then you can copy the `courses-a` server configuration over the `courses-b` one. They must be the same.
+If we look at the `courses-b` logs, we can see the connexion:
 
-    shinken@courses-a$ scp -r /etc/shinken/* courses-b:/etc/shinken/
+	root@courses-b$ grep 'scheduler-master' /var/log/shinken/pollerd.log
+	[1410170010] INFO: [Shinken] [poller-courses-b] Init connection with scheduler-master at http://courses-b:7768/ (3s,120s)
+	[1410170010] WARNING: [Shinken] [poller-courses-b] Scheduler scheduler-master is not initialized or has network problem: Connexion error to http://courses-a:7768/ : couldn't connect to host
+	[1410170012] INFO: [Shinken] [poller-courses-b] Connection OK with scheduler scheduler-master
+	[1410170012] INFO: [Shinken] [poller-courses-b] Init connection with scheduler-master at http://courses-a:7768/ (3s,120s)
+	[1410170012] INFO: [Shinken] [poller-courses-b] Connection OK with scheduler scheduler-master
 
-Then restart `shinken` on both servers:
+Don't worry about the WARNING here. It's just the poller is too fast for the scheduler to be fully running with a configuration. If you got some few seconds after a `Connection OK` it means you are ok :)
 
-	root@courses-a$ /etc/init.d/shinken start
-	root@courses-b$ /etc/init.d/shinken start	
-	
-The `arbiter-master` will talk each second to the `arbiter-spare` to say it is still alive, and so the `spare` must keep calm :)
+So now you can look at this poller and look if it really get new checks from the scheduler:
 
-If we look at the spare logs, all is clean :
-
-	root@courses-b$ cat /var/log/shinken/arbiterd.log
-
-When we stop the `courses-a` daemons the `arbiter-spare` will take the configuration lead after `max_check_attempts*check_interval` seconds (from the `arbiter-master configuration` and will dispatch to the only available daemons, the `spare` ones.
-
-    root@courses-a$ /etc/init.d/shinken stop
-	[wait 3 min]
-	root@courses-b$ grep 'Dispatch OK' /var/log/shinken/arbiterd.log
+    root@courses-b$ tail -f /var/log/shinken/pollerd.log
+	...
+    [1410170033] DEBUG: [Shinken] [0][scheduler-master][fork] Stats: Workers:1 (Queued:1 TotalReturnWait:1)
+	...
 
 
-We got something like this:
+Here the poller ask the scheduler and get one check and one other result to return to this scheduler. You will have one line by worker and by scheduler. So this poller is working great :)
 
-<img src='/images/course4/courses-4-spare.png'>
+### Did we forgot something?
 
-## Issue with the PENDING states
-But one problem we got when we switch to the spare daemons are that all checks are restarting from the `PENDING` state, but we don't wantto loose all our previous states. If we are using a flat file retention module for the `schedulers` like the `pickle-retention-file-scheduler` one the courses-b server won't be able to read the courses-a flat file of course. We must use a distributed retention module :)
+But we forgot some things: pollers are launching check plugins, located in the `/var/lib/shinken/libexec/` directory or in the `/usr/lib/nagios/plugins/` directory for standard nagios plugins ones. And here you poller got none of them :)
 
-Just look at what is available :
-
-    shinken@courses-a$ shinken search retention
-	pickle-retention-file-generic (naparuba) [module,arbiter,broker,retention] : Module for loading/saving retention data from a flat file (for arbiter & broker)
-	pickle-retention-file-scheduler (naparuba) [module,scheduler,retention] : Module for loading/saving retention data from a flat file (for scheduler)
-	retention-memcache (naparuba) [module,scheduler,retention,memcache] : Module for loading/saving retention data from a memcache server
-	retention-mongodb (naparuba) [module,scheduler,retention,nagios] : Module for loading/saving retention data from a mongodb cluster
-	retention-nagios (naparuba) [module,scheduler,retention,nagios] : Module for loading retention data from a nagios flat file. Useful for migration to Shinken from Nagios
-	retention-redis (naparuba) [module,scheduler,retention,redis] : Module for loading/saving retention data from a redis cluster
-
-
-The one that is interesting us is the retention-mongodb one. Let's install it:
-
-    shinken@courses-a$ shinken install retention-mongodb
+So for each pollers you need to add the same plugins, so for example here you can just :
     
-But beware, we also need to install it on the `courses-b` server !
-
-    shinken@courses-b$ shinken install retention-mongodb
+	root@courses-b$ apt-get install nagios-plugins
 	
-This module will need some additionals python lib, on both servers of course :
-
-    root@courses-a$ apt-get install python-pymongo python-gridfs
-    root@courses-b$ apt-get install python-pymongo python-gridfs
-
-We will have such architecture:
-
-<img src='/images/course4/courses-4-retention.png'>
-
-We will need a mongodb server. I'll install it on another server. You can easily setup it by folowing the [documentation](http://docs.mongodb.org/manual/administration/install-on-linux/). It will be on te `192.168.56.103` server for me.
-
-The module configuration is `/etc/shinken/modules/retention-mongodb.cfg`:
-
-    root@courses-a$ cat /etc/shinken/modules/retention-mongodb.cfg
-	define module {
-	    module_name     MongodbRetention
-	    module_type     mongodb_retention
-        uri             mongodb://192.168.56.103/?safe=false
-	    database        shinken
-	}
-
-Note that you need to edit the uri with your server address :)
-
-Then we can just enable the module on `both` schedulers:
-
-    root@courses-a$ /etc/shinken/schedulers/scheduler-master.cfg
-	[..]
-    modules    MongodbRetention
-	[...]
-	root@courses-a$ /etc/shinken/schedulers/scheduler-spare.cfg
-    [..]
-    modules    MongodbRetention
-    [...]
+for the nagios plugins, and:
+    
+	root@courses-a$ scp -rp /var/lib/shinken/libexec/* root@courses-b:/var/lib/shinken/libexec/
 	
-Then copy your configuration from `courses-a` to `courses-b` with the previous `scp` command.
+And you will have all you need on the `courses-b` poller.
 
-    shinken@courses-a$ scp -r /etc/shinken/* courses-b:/etc/shinken/
-
-Then you can restart boths servers and try to stop the `master` daemons one time again. This time the retention data will be ok :)
-  
 
 
 ### The next course
-The next course will be about a focus on the enterprise edition, the next one will be about the shinken daemons and what they are done for :)
+The next course will be an extension of this one. Here all checks are distributed in all our pollers, in a round robin way. But maybe we want to dedicate one box for a specific checks or hosts? We will see this in the next course, about the poller tags, and one classic usage for this: pollers in DMZ :)
 
 
