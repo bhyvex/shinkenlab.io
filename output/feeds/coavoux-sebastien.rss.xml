@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Some monitoring guys</title><link>/</link><description></description><atom:link href="/feeds/coavoux-sebastien.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 07 Aug 2014 00:00:00 +0200</lastBuildDate><item><title>Online course 5: Monitoring Plugins</title><link>/online-course-5-monitoring-plugins/</link><description>&lt;p&gt;Hi guys!&lt;/p&gt;
+&lt;p&gt;This is another online course. I say another because I have no idea about the number it will get ;). This time it's about monitoring plugins! &lt;/p&gt;
+&lt;p&gt;First of all, I have to say that I will stick to the generic word &lt;code&gt;monitoring&lt;/code&gt; during this course because the plugins can be used with other software than Shinken. But I cannot guarantee that I'll manage to do it the whole video :)&lt;/p&gt;
+&lt;p&gt;The video is a lightening talk about the subject, I suggest you to watch the video with the course. I always talk a LOT (well maybe that's not a good point):&lt;/p&gt;
+&lt;iframe width="800" height="600" src="//www.youtube.com/embed/uuZB3ONF5ZE" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;h3&gt;What do you mean by plugin?&lt;/h3&gt;
+&lt;p&gt;Well, from a very technical point of view a plugin is only a small (or not) piece of code. The most common one is &lt;code&gt;ping&lt;/code&gt;. A simple ping can give you informations about a device (unless ICMP response is turned off)&lt;/p&gt;
+&lt;p&gt;I have carefully chosen the words "piece of code". There is no specific programming language involved in it. This means that a plugin can be written in the language you want. This, is a really cool thing :)&lt;/p&gt;
+&lt;h3&gt;Plugin API&lt;/h3&gt;
+&lt;p&gt;The main function of a plugin is to do the "dirty" job. It collects the wanted data, in a specfic way (ssh, http, snmp) and returns it to Shinken. Why dirty? Because this is usually the tricky part in monitoring. It always involves credentials, firewall configuration, computation... which is a huge source of trouble. &lt;/p&gt;
+&lt;p&gt;This leads to the following question : How can I give the data I have about my server to my monitoring software?
+The software does not need to know specifically why I did not gather data. But the software needs to know what does it mean! &lt;/p&gt;
+&lt;p&gt;That's why a &lt;code&gt;common Api&lt;/code&gt; for all monitoring plugin was created. Every plugin is talking the same language and all the specific code (for checking status) is separated from the sofware code!&lt;/p&gt;
+&lt;p&gt;This is the main reason why Shinken's developers may not be familiar with your super old printer plugins. They don't care about how you get the data. &lt;/p&gt;
+&lt;p&gt;So, what is this specific language plugins are using?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Return&lt;/span&gt; &lt;span class="n"&gt;Code&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="n"&gt;State&lt;/span&gt;   &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Meaning&lt;/span&gt;                                               &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;------------|-----------|&lt;/span&gt; &lt;span class="o"&gt;------------------------------------------------------|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; 0           &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;OK&lt;/span&gt;        &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;expected&lt;/span&gt; &lt;span class="n"&gt;state&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Everything&lt;/span&gt; &lt;span class="n"&gt;looks&lt;/span&gt; &lt;span class="n"&gt;fine&lt;/span&gt;     &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; 1           &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;WARNING&lt;/span&gt;   &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Something&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;correct&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;but&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt;&lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;very&lt;/span&gt; &lt;span class="n"&gt;important&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; 2           &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;CRITICAL&lt;/span&gt;  &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;There&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;problem&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;serious&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;               &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="o"&gt;|&lt;/span&gt; 3           &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;UNKNOWN&lt;/span&gt;   &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;The&lt;/span&gt; &lt;span class="n"&gt;plugin&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;unable&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;tell&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;what&lt;/span&gt;&lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;going&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt;      &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Shinken will use this to know the state of a service or an host. &lt;/p&gt;
+&lt;p&gt;This is the basic part of the API. &lt;/p&gt;
+&lt;p&gt;But what if you also want to return some metrics? How output the data so that Shinken will understand it ?&lt;/p&gt;
+&lt;p&gt;Well, that a part of the Api, you also have a standard defined for the output. &lt;/p&gt;
+&lt;p&gt;Basically an ouput looks like this :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;STATUS&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Output&lt;/span&gt; &lt;span class="n"&gt;fisrt&lt;/span&gt; &lt;span class="n"&gt;part&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;UOM&lt;/span&gt;&lt;span class="p"&gt;];[&lt;/span&gt;&lt;span class="n"&gt;warn&lt;/span&gt;&lt;span class="p"&gt;];[&lt;/span&gt;&lt;span class="n"&gt;crit&lt;/span&gt;&lt;span class="p"&gt;];[&lt;/span&gt;&lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;];[&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The second part is called : perfdata output, it's used to give metrics. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;STATUS is one of the above state&lt;/li&gt;
+&lt;li&gt;label is the name of the metric&lt;/li&gt;
+&lt;li&gt;UOM refers to the metric's unit&lt;/li&gt;
+&lt;li&gt;warn, crit are threshold to trigger WARNING or CRITICAL State (can be None)&lt;/li&gt;
+&lt;li&gt;min, max are the minimum / maximum the value can get (can be None)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With this, you can send all you need to Shinken. If you need more details please visit the &lt;a href="https://www.monitoring-plugins.org/doc/"&gt;monitoring-plugins website&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;Let's code!&lt;/h3&gt;
+&lt;p&gt;We have now, a API and a programming language (our favorite one of course). You may think the next step is coding, but IT IS NOT. (Un)Fortunately, we are not alone, a lot of monitoring plugins exist. Some of them are already packaged in almost every Linux distribution! &lt;/p&gt;
+&lt;p&gt;So, if you have just bough a new router/server or you are about to do it, just check for existing plugins! That's the first step before thinking to create a new one. &lt;/p&gt;
+&lt;h3&gt;Let's code for real now!&lt;/h3&gt;
+&lt;p&gt;Ok, let's assume you've found nothing for your device. There is no other option : you have to create it. But keep in mind something before starting : is my plugin will be used passevily or actively? In a case you you to use passive checking you have two choices :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implement passive result submimission&lt;/li&gt;
+&lt;li&gt;Use existing tools to submit passive result from monitored host&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Passively submitting result by it's own have advantages : &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Shinken Arbiter accepts http passive results : http post are easy to implement. &lt;/li&gt;
+&lt;li&gt;Nothing else to setup on the host site (such as nrpe/nsca client)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But it has also drawbacks :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What if you have several passive plugins? Code duplicity is bad&lt;/li&gt;
+&lt;li&gt;What if data get lost? Add some cache file? You are now implementing a daemon, not a plugin.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Well, I think you know more or less everything you should know about monitoring plugins. Time for example&lt;/p&gt;
+&lt;h3&gt;Python example&lt;/h3&gt;
+&lt;p&gt;This example is very basic, but tries to be real. Because returning random does not really make sense :)&lt;/p&gt;
+&lt;p&gt;I don't want to handle options an such thing in this example to keep it easy to understand.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/python&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+
+&lt;span class="c"&gt;# Constants&lt;/span&gt;
+&lt;span class="n"&gt;OK&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;WARNING&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;CRITICAL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;UNKNOWN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+
+
+&lt;span class="c"&gt;# Should be options&lt;/span&gt;
+&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://www.google.com&amp;quot;&lt;/span&gt;
+
+
+&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;except&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;UNKNOWN : Cannot open url&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;UNKNOWN&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# HTTP code not in this range is not good for me&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;OK : code returned withing range&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;OK&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="mi"&gt;400&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;CRITICAL : bad code returned. Client error&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CRITICAL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;WARNING : bad code returned. Redirection spotted or server error&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;WARNING&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Here is the sample. This opens the url and only check the output code. This is basically what we need to check a website.&lt;/p&gt;
+&lt;p&gt;Launch it with :
+  python check_url.py&lt;/p&gt;
+&lt;p&gt;See the output :
+   OK : code returned withing range&lt;/p&gt;
+&lt;p&gt;Of course we can improve this a lot : perfdata, check content, add warning and critical threashold (on response time), add option to follow redirect, etc...&lt;/p&gt;
+&lt;h3&gt;Next course&lt;/h3&gt;
+&lt;p&gt;Well, maybe object presentation. &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Coavoux Sébastien</dc:creator><pubDate>Thu, 07 Aug 2014 00:00:00 +0200</pubDate><guid>tag:,2014-08-07:online-course-5-monitoring-plugins/</guid><category>shinken</category><category>online course</category><category>monitoring-plugins</category><category>development</category></item></channel></rss>

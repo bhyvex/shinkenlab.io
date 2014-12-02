@@ -3,89 +3,153 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Online course 4: High Availability / Some monitoring guys</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Online course 4: High Availability / Some monitoring guys</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 
-        <link rel="shortcut icon" href="/theme/favicon.ico" />
-        <link rel="apple-touch-icon" href="/theme/apple-touch-icon-iphone.png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="/theme/apple-touch-icon-ipad.png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="/theme/apple-touch-icon-iphone4.png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="/theme/apple-touch-icon-ipad3.png" />
+    <link rel="shortcut icon" href="/theme/favicon16.png" />
+    <link rel="apple-touch-icon" href="/theme/favicon32.png.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/favicon48.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/favicon64.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/theme/favicon64.png" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,300italic,300' rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/theme/css/bootstrap-responsive.min.css">
-        <link rel="stylesheet" href="/theme/css/colorbox.css">
+    <!--        <link rel="stylesheet" href="/theme/css/bootstrap.min.css">-->
+    
+    <script>window.jQuery || document.write('<script src="/theme/js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+      <script src="/theme/js/vendor/modernizr-latest.js"></script>
+      <link rel="stylesheet" href="/theme/css/bootstrap.css">
+      <!--    <link rel="stylesheet" href="/theme/css/bootstrap-responsive.min.css">-->
+      <link rel="stylesheet" href="/theme/css/colorbox.css">
+      <link rel="stylesheet" href="/theme/css/main.css">
+      <!--        <script src="/theme/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
+      <script src="/theme/js/vendor/jquery.lavalamp.js"></script>
 
-        <link rel="stylesheet" href="/theme/css/main.css">
-
-        <script src="/theme/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+      <script src="/theme/js/vendor/respond.min.js"></script> 
+      
+  </head>
+  <body>
+    <div id="Web_Map">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinken-solutions.com" target="_blank"> 
+                <img alt="Logo Ninja Solutions Shinken Monitoring" class="Logo" src="/theme/img/ninjagrey.png">
+                <p class="Title_Map">shinken-solutions.com</p>
+                <p>Business-centric monitoring</p>
+              </a>    
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 ">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinken-monitoring.org" target="_blank">
+                <img alt="Logo Ninja Framework Shinken" class="Logo" src="/theme/img/ninjagreen.png">
+                <p class="Title_Map">shinken-monitoring.org</p>
+                <p>Shinken framework project</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinken.io" target="_blank">
+                <img alt="Logo Ninja Framework Shinken" class="Logo" src="/theme/img/ninjagreen.png">
+                <p class="Title_Map">shinken.io</p>
+                <p>Shinken packages platform</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinkenlab.io" target="_blank">
+                <img alt="Logo Ninja Framework Shinken" class="Logo" src="/theme/img/ninjagreen.png">
+                <p class="Title_Map">shinkenlab.io</p>
+                <p>Let's discuss about monitoring</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://shinkenlab.io">
+            <img alt="Logo Solutions Shinken" class="Logo" src="/theme/img/Logoframeworkblack.png">
+          </a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav" id="Lavalamp">
+            <li>
+              <a href="http://shinkenlab.io">Home</a>
+            </li>
+            <li>
+              <a href="http://www.shinken-monitoring.org/">Download</a>
+            </li>
+            <li>
+              <a href="https://shinken.readthedocs.org/en/latest/">Docs</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown" id="MainDropDown">
+              <img alt="Corners Shinken Solutions Dropdown" src="/theme/img/corners.png" id="CornerL">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <img alt="Logo Shinken" src="/theme/img/logomonogrammewhite.png" class="Dropdown_Logo">
+              </a>
+              <img alt="Corners Shinken Solutions Dropdown" src="/theme/img/corners.png"  id="CornerR">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="container col-md-8">
+        <div class="row">
+          <div class="span2" id='content'>
+          </div> <!-- logo+navigation span -->
+          <div class="span10">
+            <header id="site-header">
+              <h1>
+                <a href="">Some monitoring guys</a>
+                <small>
+                  <span class="divider">/</span> 
+                </small>
+              </h1>
+              <!--<p>
+                  
+                  </p>-->
+            </header>
 
-        <div class="container">
-            <div class="row">
+            <div class="content">
+<time datetime="2014-03-19T10:20:00"><div class="DateDay">19</div><span class="DateMounth"> Mar 2014 </span><span class="triangle"></span></time>
 
-                <div class="span2" id='content'>
-		  <nav>
-		  <ul>
-		    <li class="home">
-		        <a href="http://www.shinken-monitoring.org/">Shinken Home</a>
-			</li>
-		    <li class="download">
-		        <a href="http://www.shinken-monitoring.org/download/">Download</a>
-			</li>
-		    <li class="about">
-		        <a href="/about/">About</a>
-			</li>
-		    <li class="npm">
-		      <a href="http://shinken.io">Shinken.io</a>
-		    </li>
-		    <li class="docs">
-		        <a href="https://shinken.readthedocs.org/">Docs</a>
-			</li>
-		    <li class="blog current">
-		        <a href="http://shinkenlab.io">Blog</a>
-			</li>
-		    <li class="logos">
-		        <a href="http://www.shinken-monitoring.org/logos/">Logos</a>
-			</li>
-		  </ul>
-
-
-		    </nav>
-                </div> <!-- logo+navigation span -->
-
-
-                <div class="span10">
-                    <header id="site-header">
-                        <h1>
-                            <a href="">Some monitoring guys</a>
-                            <small>
-                                <span class="divider">/</span> 
-                            </small>
-                        </h1>
-                        <!--<p>
-                            
-                        </p>-->
-                    </header>
-
-                    <div class="content">
 <section>
     <article>
         <header>
             <h2><a href="/online-course-4-high-availability/" rel="bookmark">Online course 4: High Availability</a></h2>
-            <time datetime="2014-03-19T10:20:00">Mar 19, 2014</time>
-	    <span class='author'>, Gabès Jean</span>
-
+	    <span class='author'>Gabès Jean</span>
         </header>
-
+        
     <p>Hi,</p>
 <p>This is our 4th online course, we are using the shinken distributed capabilities to setup a truly high available setup :)</p>
 <p>We already saw the installation of the 2.0 version in a linux box, but now we want to try the huge shinken distributed capabilities with a simple one: a high avaiability one.</p>
@@ -97,14 +161,14 @@
 <p>(You can also have a <a href="https://www.youtube.com/watch?v=nGSwROwGfBs">fr version of the video</a>.</p>
 <h3>Our setup with 2 linux boxes</h3>
 <p>We will have 2 linux and we want a simple high availability setup, with box courses-a and courses-b. A will be the master one, and the B will be the spare one. We just installed shinken in the 2 boxes. Both got a valid dns entry :</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">hosts</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="nb">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">hosts</span>
 <span class="p">[...]</span>
-<span class="mf">192.168.56.104</span>  <span class="n">courses</span><span class="o">-</span><span class="n">a</span>
-<span class="mf">192.168.56.105</span>  <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">hosts</span>
+192<span class="p">.</span>168<span class="p">.</span>56<span class="p">.</span>104  <span class="n">courses</span><span class="o">-</span><span class="n">a</span>
+192<span class="p">.</span>168<span class="p">.</span>56<span class="p">.</span>105  <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
+<span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span>$ <span class="nb">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">hosts</span>
 <span class="p">[...]</span>
-<span class="mf">192.168.56.104</span>  <span class="n">courses</span><span class="o">-</span><span class="n">a</span>
-<span class="mf">192.168.56.105</span>  <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
+192<span class="p">.</span>168<span class="p">.</span>56<span class="p">.</span>104  <span class="n">courses</span><span class="o">-</span><span class="n">a</span>
+192<span class="p">.</span>168<span class="p">.</span>56<span class="p">.</span>105  <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
 </pre></div>
 
 
@@ -113,16 +177,16 @@
 <p>We want to have something like this :</p>
 <p><img src='/images/course4/courses-4-master.png'></p>
 <p>First let's look at the <code>arbiter</code> daemons, that is done to read and dispatch the configurations:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="nb">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">arbiter</span> <span class="p">{</span>
     <span class="n">arbiter_name</span>    <span class="n">arbiter</span><span class="o">-</span><span class="n">spare</span>
     <span class="n">host_name</span>       <span class="n">courses</span><span class="o">-</span><span class="n">b</span>       <span class="p">;</span> <span class="n">CHANGE</span> <span class="n">THIS</span> <span class="k">if</span> <span class="n">you</span> <span class="n">have</span> <span class="n">several</span> <span class="n">Arbiters</span>
     <span class="n">address</span>         <span class="n">courses</span><span class="o">-</span><span class="n">b</span>   <span class="p">;</span> <span class="n">DNS</span> <span class="n">name</span> <span class="n">or</span> <span class="n">IP</span>
-    <span class="n">port</span>            <span class="mi">7770</span>
-    <span class="n">spare</span>           <span class="mi">1</span>           <span class="p">;</span> <span class="mi">1</span> <span class="o">=</span> <span class="n">is</span> <span class="n">a</span> <span class="n">spare</span><span class="p">,</span> <span class="mi">0</span> <span class="o">=</span> <span class="n">is</span> <span class="n">not</span> <span class="n">a</span> <span class="n">spare</span>
+    <span class="n">port</span>            7770
+    <span class="n">spare</span>           1           <span class="p">;</span> 1 <span class="p">=</span> <span class="n">is</span> <span class="n">a</span> <span class="n">spare</span><span class="p">,</span> 0 <span class="p">=</span> <span class="n">is</span> <span class="n">not</span> <span class="n">a</span> <span class="n">spare</span>
     <span class="n">modules</span>      <span class="n">CommandFile</span>
-    <span class="n">use_ssl</span>          <span class="mi">0</span>
+    <span class="n">use_ssl</span>          0
 <span class="p">}</span>
 </pre></div>
 
@@ -135,128 +199,128 @@
 </ul>
 <p>The <code>host_name</code> parameter is important because the arbiter process will launch a <code>hostname</code> command to find where its launched, and then find a matching arbiter object.</p>
 <p>We also need to edit the <code>arbiter-master</code> to be sure its <code>address</code> is the public ip and not <code>localhost</code> as by default.</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span>    
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="nb">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiters</span><span class="o">/</span><span class="n">arbiter</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span>    
 <span class="n">define</span> <span class="n">arbiter</span> <span class="p">{</span>
     <span class="n">arbiter_name</span>    <span class="n">arbiter</span><span class="o">-</span><span class="n">master</span>
     <span class="n">host_name</span>       <span class="n">courses</span><span class="o">-</span><span class="n">a</span>       <span class="p">;</span> <span class="n">CHANGE</span> <span class="n">THIS</span> <span class="k">if</span> <span class="n">you</span> <span class="n">have</span> <span class="n">several</span> <span class="n">Arbiters</span>
     <span class="n">address</span>         <span class="n">courses</span><span class="o">-</span><span class="n">a</span>   <span class="p">;</span> <span class="n">DNS</span> <span class="n">name</span> <span class="n">or</span> <span class="n">IP</span>
-    <span class="n">port</span>            <span class="mi">7770</span>
-    <span class="n">spare</span>           <span class="mi">0</span>           <span class="p">;</span> <span class="mi">1</span> <span class="o">=</span> <span class="n">is</span> <span class="n">a</span> <span class="n">spare</span><span class="p">,</span> <span class="mi">0</span> <span class="o">=</span> <span class="n">is</span> <span class="n">not</span> <span class="n">a</span> <span class="n">spare</span>
+    <span class="n">port</span>            7770
+    <span class="n">spare</span>           0           <span class="p">;</span> 1 <span class="p">=</span> <span class="n">is</span> <span class="n">a</span> <span class="n">spare</span><span class="p">,</span> 0 <span class="p">=</span> <span class="n">is</span> <span class="n">not</span> <span class="n">a</span> <span class="n">spare</span>
 <span class="p">}</span>
 </pre></div>
 
 
 <p>Then we need to do the same for all the other daemons now :)</p>
 <p>The <code>schedulers</code> (scheduler the checks) :</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">scheduler</span> <span class="p">{</span>
     <span class="n">scheduler_name</span>      <span class="n">scheduler</span><span class="o">-</span><span class="n">spare</span> <span class="p">;</span> <span class="n">Just</span> <span class="n">the</span> <span class="n">name</span>
     <span class="n">address</span>             <span class="n">courses</span><span class="o">-</span><span class="n">b</span>   <span class="p">;</span> <span class="n">IP</span> <span class="n">or</span> <span class="n">DNS</span> <span class="n">address</span> <span class="n">of</span> <span class="n">the</span> <span class="n">daemon</span>
-    <span class="n">port</span>                <span class="mi">7768</span>        <span class="p">;</span> <span class="n">TCP</span> <span class="n">port</span> <span class="n">of</span> <span class="n">the</span> <span class="n">daemon</span>
-    <span class="n">spare</span>               <span class="mi">1</span>   <span class="p">;</span> <span class="mi">1</span> <span class="o">=</span> <span class="n">is</span> <span class="n">a</span> <span class="n">spare</span><span class="p">,</span> <span class="mi">0</span> <span class="o">=</span> <span class="n">is</span> <span class="n">not</span> <span class="n">a</span> <span class="n">spare</span>
+    <span class="n">port</span>                7768        <span class="p">;</span> <span class="n">TCP</span> <span class="n">port</span> <span class="n">of</span> <span class="n">the</span> <span class="n">daemon</span>
+    <span class="n">spare</span>               1   <span class="p">;</span> 1 <span class="p">=</span> <span class="n">is</span> <span class="n">a</span> <span class="n">spare</span><span class="p">,</span> 0 <span class="p">=</span> <span class="n">is</span> <span class="n">not</span> <span class="n">a</span> <span class="n">spare</span>
 
-    <span class="n">weight</span>              <span class="mi">1</span>   <span class="p">;</span> <span class="n">Some</span> <span class="n">schedulers</span> <span class="n">can</span> <span class="n">manage</span> <span class="n">more</span> <span class="n">hosts</span> <span class="n">than</span> <span class="n">others</span>
-    <span class="n">timeout</span>             <span class="mi">3</span>   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
-    <span class="n">data_timeout</span>        <span class="mi">120</span> <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
-    <span class="n">max_check_attempts</span>  <span class="mi">3</span>   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
-    <span class="n">check_interval</span>      <span class="mi">60</span>  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
+    <span class="n">weight</span>              1   <span class="p">;</span> <span class="n">Some</span> <span class="n">schedulers</span> <span class="n">can</span> <span class="n">manage</span> <span class="n">more</span> <span class="n">hosts</span> <span class="n">than</span> <span class="n">others</span>
+    <span class="n">timeout</span>             3   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
+    <span class="n">data_timeout</span>        120 <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
+    <span class="n">max_check_attempts</span>  3   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
+    <span class="n">check_interval</span>      60  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
     <span class="n">modules</span>
     <span class="n">realm</span>   <span class="n">All</span>
-    <span class="n">skip_initial_broks</span>  <span class="mi">0</span>
-    <span class="n">use_ssl</span>          <span class="mi">0</span>
+    <span class="n">skip_initial_broks</span>  0
+    <span class="n">use_ssl</span>          0
 <span class="p">}</span>
 </pre></div>
 
 
 <p>The <code>pollers</code> (launch the monitoring plugins).</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span> 
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span> 
+<span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">pollers</span><span class="o">/</span><span class="n">poller</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">poller</span> <span class="p">{</span>
     <span class="n">poller_name</span>     <span class="n">poller</span><span class="o">-</span><span class="n">master</span>
     <span class="n">address</span>         <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
-    <span class="n">port</span>            <span class="mi">7771</span>
-    <span class="n">spare</span>           <span class="mi">1</span>
+    <span class="n">port</span>            7771
+    <span class="n">spare</span>           1
 
-    <span class="n">manage_sub_realms</span>   <span class="mi">0</span>   <span class="p">;</span> <span class="n">Does</span> <span class="n">it</span> <span class="n">take</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">of</span> <span class="n">sub</span><span class="o">-</span><span class="n">Realms</span><span class="o">?</span>
-    <span class="n">min_workers</span>         <span class="mi">0</span>   <span class="p">;</span> <span class="n">Starts</span> <span class="n">with</span> <span class="n">N</span> <span class="n">processes</span> <span class="p">(</span><span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">per</span> <span class="n">CPU</span><span class="p">)</span>
-    <span class="n">max_workers</span>         <span class="mi">0</span>   <span class="p">;</span> <span class="n">No</span> <span class="n">more</span> <span class="n">than</span> <span class="n">N</span> <span class="n">processes</span> <span class="p">(</span><span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">per</span> <span class="n">CPU</span><span class="p">)</span>
-    <span class="n">processes_by_worker</span> <span class="mi">256</span> <span class="p">;</span> <span class="n">Each</span> <span class="n">worker</span> <span class="n">manages</span> <span class="n">N</span> <span class="n">checks</span>
-    <span class="n">polling_interval</span>    <span class="mi">1</span>   <span class="p">;</span> <span class="n">Get</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">each</span> <span class="n">N</span> <span class="n">minutes</span>
-    <span class="n">timeout</span>             <span class="mi">3</span>   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
-    <span class="n">data_timeout</span>        <span class="mi">120</span> <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
-    <span class="n">max_check_attempts</span>  <span class="mi">3</span>   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
-    <span class="n">check_interval</span>      <span class="mi">60</span>  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
+    <span class="n">manage_sub_realms</span>   0   <span class="p">;</span> <span class="n">Does</span> <span class="n">it</span> <span class="n">take</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">of</span> <span class="n">sub</span><span class="o">-</span><span class="n">Realms</span>?
+    <span class="n">min_workers</span>         0   <span class="p">;</span> <span class="n">Starts</span> <span class="n">with</span> <span class="n">N</span> <span class="n">processes</span> <span class="p">(</span>0 <span class="p">=</span> 1 <span class="n">per</span> <span class="n">CPU</span><span class="p">)</span>
+    <span class="n">max_workers</span>         0   <span class="p">;</span> <span class="n">No</span> <span class="n">more</span> <span class="n">than</span> <span class="n">N</span> <span class="n">processes</span> <span class="p">(</span>0 <span class="p">=</span> 1 <span class="n">per</span> <span class="n">CPU</span><span class="p">)</span>
+    <span class="n">processes_by_worker</span> 256 <span class="p">;</span> <span class="n">Each</span> <span class="n">worker</span> <span class="n">manages</span> <span class="n">N</span> <span class="n">checks</span>
+    <span class="n">polling_interval</span>    1   <span class="p">;</span> <span class="n">Get</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">each</span> <span class="n">N</span> <span class="n">minutes</span>
+    <span class="n">timeout</span>             3   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
+    <span class="n">data_timeout</span>        120 <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
+    <span class="n">max_check_attempts</span>  3   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
+    <span class="n">check_interval</span>      60  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
     <span class="n">modules</span>
-    <span class="n">use_ssl</span>          <span class="mi">0</span>
+    <span class="n">use_ssl</span>          0
     <span class="n">realm</span>   <span class="n">All</span>
 <span class="p">}</span>
 </pre></div>
 
 
 <p>Same for the <code>reactionners</code> (launch the notifications and the event handlers):</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">reactionners</span><span class="o">/</span><span class="n">reactionner</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">reactionners</span><span class="o">/</span><span class="n">reactionner</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">reactionners</span><span class="o">/</span><span class="n">reactionner</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">reactionners</span><span class="o">/</span><span class="n">reactionner</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">reactionners</span><span class="o">/</span><span class="n">reactionner</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">reactionners</span><span class="o">/</span><span class="n">reactionner</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">reactionner</span> <span class="p">{</span>
     <span class="n">reactionner_name</span>    <span class="n">reactionner</span><span class="o">-</span><span class="n">master</span>
     <span class="n">address</span>             <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
-    <span class="n">port</span>                <span class="mi">7769</span>
-    <span class="n">spare</span>               <span class="mi">1</span>
+    <span class="n">port</span>                7769
+    <span class="n">spare</span>               1
 
-    <span class="n">manage_sub_realms</span>   <span class="mi">0</span>   <span class="p">;</span> <span class="n">Does</span> <span class="n">it</span> <span class="n">take</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">of</span> <span class="n">sub</span><span class="o">-</span><span class="n">Realms</span><span class="o">?</span>
-    <span class="n">min_workers</span>         <span class="mi">1</span>   <span class="p">;</span> <span class="n">Starts</span> <span class="n">with</span> <span class="n">N</span> <span class="n">processes</span> <span class="p">(</span><span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">per</span> <span class="n">CPU</span><span class="p">)</span>
-    <span class="n">max_workers</span>         <span class="mi">15</span>  <span class="p">;</span> <span class="n">No</span> <span class="n">more</span> <span class="n">than</span> <span class="n">N</span> <span class="n">processes</span> <span class="p">(</span><span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">per</span> <span class="n">CPU</span><span class="p">)</span>
-    <span class="n">polling_interval</span>    <span class="mi">1</span>   <span class="p">;</span> <span class="n">Get</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">each</span> <span class="mi">1</span> <span class="n">second</span>
-    <span class="n">timeout</span>             <span class="mi">3</span>   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
-    <span class="n">data_timeout</span>        <span class="mi">120</span> <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
-    <span class="n">max_check_attempts</span>  <span class="mi">3</span>   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
-    <span class="n">check_interval</span>      <span class="mi">60</span>  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
+    <span class="n">manage_sub_realms</span>   0   <span class="p">;</span> <span class="n">Does</span> <span class="n">it</span> <span class="n">take</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">of</span> <span class="n">sub</span><span class="o">-</span><span class="n">Realms</span>?
+    <span class="n">min_workers</span>         1   <span class="p">;</span> <span class="n">Starts</span> <span class="n">with</span> <span class="n">N</span> <span class="n">processes</span> <span class="p">(</span>0 <span class="p">=</span> 1 <span class="n">per</span> <span class="n">CPU</span><span class="p">)</span>
+    <span class="n">max_workers</span>         15  <span class="p">;</span> <span class="n">No</span> <span class="n">more</span> <span class="n">than</span> <span class="n">N</span> <span class="n">processes</span> <span class="p">(</span>0 <span class="p">=</span> 1 <span class="n">per</span> <span class="n">CPU</span><span class="p">)</span>
+    <span class="n">polling_interval</span>    1   <span class="p">;</span> <span class="n">Get</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">each</span> 1 <span class="n">second</span>
+    <span class="n">timeout</span>             3   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
+    <span class="n">data_timeout</span>        120 <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
+    <span class="n">max_check_attempts</span>  3   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
+    <span class="n">check_interval</span>      60  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
     <span class="n">modules</span>
-    <span class="n">use_ssl</span>          <span class="mi">0</span>
+    <span class="n">use_ssl</span>          0
     <span class="n">realm</span>   <span class="n">All</span>
 <span class="p">}</span>
 </pre></div>
 
 
 <p>Now for the <code>brokers</code> (grab events and data from the other daemons and export them):</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">broker</span> <span class="p">{</span>
     <span class="n">broker_name</span>     <span class="n">broker</span><span class="o">-</span><span class="n">master</span>
     <span class="n">address</span>         <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
-    <span class="n">port</span>            <span class="mi">7772</span>
-    <span class="n">spare</span>           <span class="mi">1</span>
+    <span class="n">port</span>            7772
+    <span class="n">spare</span>           1
 
-    <span class="n">manage_arbiters</span>     <span class="mi">1</span>   <span class="p">;</span> <span class="n">Take</span> <span class="n">data</span> <span class="n">from</span> <span class="n">Arbiter</span><span class="p">.</span> <span class="n">There</span> <span class="n">should</span> <span class="n">be</span> <span class="n">only</span> <span class="n">one</span>
-    <span class="n">manage_sub_realms</span>   <span class="mi">1</span>   <span class="p">;</span> <span class="n">Does</span> <span class="n">it</span> <span class="n">take</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">of</span> <span class="n">sub</span><span class="o">-</span><span class="n">Realms</span><span class="o">?</span>
-    <span class="n">timeout</span>             <span class="mi">3</span>   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
-    <span class="n">data_timeout</span>        <span class="mi">120</span> <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
-    <span class="n">max_check_attempts</span>  <span class="mi">3</span>   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
-    <span class="n">check_interval</span>      <span class="mi">60</span>  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
+    <span class="n">manage_arbiters</span>     1   <span class="p">;</span> <span class="n">Take</span> <span class="n">data</span> <span class="n">from</span> <span class="n">Arbiter</span><span class="p">.</span> <span class="n">There</span> <span class="n">should</span> <span class="n">be</span> <span class="n">only</span> <span class="n">one</span>
+    <span class="n">manage_sub_realms</span>   1   <span class="p">;</span> <span class="n">Does</span> <span class="n">it</span> <span class="n">take</span> <span class="n">jobs</span> <span class="n">from</span> <span class="n">schedulers</span> <span class="n">of</span> <span class="n">sub</span><span class="o">-</span><span class="n">Realms</span>?
+    <span class="n">timeout</span>             3   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
+    <span class="n">data_timeout</span>        120 <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
+    <span class="n">max_check_attempts</span>  3   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
+    <span class="n">check_interval</span>      60  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
 
     <span class="n">modules</span>           <span class="n">WebUI</span>
-    <span class="n">use_ssl</span>          <span class="mi">0</span>
+    <span class="n">use_ssl</span>          0
     <span class="n">realm</span>   <span class="n">All</span>
 <span class="p">}</span>
 </pre></div>
 
 
 <p>And finaly the <code>receivers</code> (listen to external commands):</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">receivers</span><span class="o">/</span><span class="n">receiver</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">receivers</span><span class="o">/</span><span class="n">receiver</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">receivers</span><span class="o">/</span><span class="n">receiver</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">receivers</span><span class="o">/</span><span class="n">receiver</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">receivers</span><span class="o">/</span><span class="n">receiver</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">receivers</span><span class="o">/</span><span class="n">receiver</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">receiver</span> <span class="p">{</span>
-    <span class="n">receiver_name</span>   <span class="n">receiver</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">receiver_name</span>   <span class="n">receiver</span><span class="o">-</span>1
     <span class="n">address</span>         <span class="n">courses</span><span class="o">-</span><span class="n">b</span>
-    <span class="n">port</span>            <span class="mi">7773</span>
-    <span class="n">spare</span>           <span class="mi">1</span>
+    <span class="n">port</span>            7773
+    <span class="n">spare</span>           1
 
-    <span class="n">timeout</span>             <span class="mi">3</span>   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
-    <span class="n">data_timeout</span>        <span class="mi">120</span> <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
-    <span class="n">max_check_attempts</span>  <span class="mi">3</span>   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
-    <span class="n">check_interval</span>      <span class="mi">60</span>  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
+    <span class="n">timeout</span>             3   <span class="p">;</span> <span class="n">Ping</span> <span class="n">timeout</span>
+    <span class="n">data_timeout</span>        120 <span class="p">;</span> <span class="n">Data</span> <span class="n">send</span> <span class="n">timeout</span>
+    <span class="n">max_check_attempts</span>  3   <span class="p">;</span> <span class="n">If</span> <span class="n">ping</span> <span class="n">fails</span> <span class="n">N</span> <span class="n">or</span> <span class="n">more</span><span class="p">,</span> <span class="n">then</span> <span class="n">the</span> <span class="n">node</span> <span class="n">is</span> <span class="n">dead</span>
+    <span class="n">check_interval</span>      60  <span class="p">;</span> <span class="n">Ping</span> <span class="n">node</span> <span class="n">every</span> <span class="n">N</span> <span class="n">seconds</span>
     <span class="n">modules</span>
-    <span class="n">use_ssl</span>          <span class="mi">0</span>
-    <span class="n">direct_routing</span>      <span class="mi">0</span>   <span class="p">;</span> <span class="n">If</span> <span class="n">enabled</span><span class="p">,</span> <span class="n">it</span> <span class="n">will</span> <span class="n">directly</span> <span class="n">send</span> <span class="n">commands</span> <span class="n">to</span> <span class="n">the</span>
+    <span class="n">use_ssl</span>          0
+    <span class="n">direct_routing</span>      0   <span class="p">;</span> <span class="n">If</span> <span class="n">enabled</span><span class="p">,</span> <span class="n">it</span> <span class="n">will</span> <span class="n">directly</span> <span class="n">send</span> <span class="n">commands</span> <span class="n">to</span> <span class="n">the</span>
                             <span class="p">;</span> <span class="n">schedulers</span> <span class="k">if</span> <span class="n">it</span> <span class="n">know</span> <span class="n">about</span> <span class="n">the</span> <span class="n">hostname</span> <span class="n">in</span> <span class="n">the</span>                                                                              <span class="p">;</span> <span class="n">command</span><span class="p">.</span>
     <span class="n">realm</span>   <span class="n">All</span>
 <span class="p">}</span>
@@ -265,26 +329,26 @@
 
 <p>Remember to also change the <code>address</code> entry of all master daemons, because the spare <code>arbiter</code> will need the LAN IP if it takes the lead and need to dispatch the configuration :)</p>
 <p>Then you can copy the <code>courses-a</code> server configuration over the <code>courses-b</code> one. They must be the same.</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/*</span> <span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="o">:/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/*</span> <span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span>
 </pre></div>
 
 
 <p>Then restart <code>shinken</code> on both servers:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">start</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">start</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">start</span>
+<span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span>$ <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">start</span>
 </pre></div>
 
 
 <p>The <code>arbiter-master</code> will talk each second to the <code>arbiter-spare</code> to say it is still alive, and so the <code>spare</code> must keep calm :)</p>
 <p>If we look at the spare logs, all is clean :</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiterd</span><span class="p">.</span><span class="n">log</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span>$ <span class="nb">cat</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiterd</span><span class="p">.</span><span class="nb">log</span>
 </pre></div>
 
 
 <p>When we stop the <code>courses-a</code> daemons the <code>arbiter-spare</code> will take the configuration lead after <code>max_check_attempts*check_interval</code> seconds (from the <code>arbiter-master configuration</code> and will dispatch to the only available daemons, the <code>spare</code> ones.</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">stop</span>
-<span class="p">[</span><span class="n">wait</span> <span class="mi">3</span> <span class="n">min</span><span class="p">]</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">grep</span> <span class="err">&#39;</span><span class="n">Dispatch</span> <span class="n">OK</span><span class="err">&#39;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiterd</span><span class="p">.</span><span class="n">log</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">stop</span>
+<span class="p">[</span><span class="n">wait</span> 3 <span class="n">min</span><span class="p">]</span>
+<span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span>$ <span class="n">grep</span> <span class="s">&#39;Dispatch OK&#39;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">arbiterd</span><span class="p">.</span><span class="nb">log</span>
 </pre></div>
 
 
@@ -293,29 +357,29 @@
 <h2>Issue with the PENDING states</h2>
 <p>But one problem we got when we switch to the spare daemons are that all checks are restarting from the <code>PENDING</code> state, but we don't wantto loose all our previous states. If we are using a flat file retention module for the <code>schedulers</code> like the <code>pickle-retention-file-scheduler</code> one the courses-b server won't be able to read the courses-a flat file of course. We must use a distributed retention module :)</p>
 <p>Just look at what is available :</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">shinken</span> <span class="n">search</span> <span class="n">retention</span>
-<span class="n">pickle</span><span class="o">-</span><span class="n">retention</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">generic</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">arbiter</span><span class="p">,</span><span class="n">broker</span><span class="p">,</span><span class="n">retention</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">flat</span> <span class="n">file</span> <span class="p">(</span><span class="k">for</span> <span class="n">arbiter</span> <span class="o">&amp;</span> <span class="n">broker</span><span class="p">)</span>
-<span class="n">pickle</span><span class="o">-</span><span class="n">retention</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">scheduler</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">flat</span> <span class="n">file</span> <span class="p">(</span><span class="k">for</span> <span class="n">scheduler</span><span class="p">)</span>
-<span class="n">retention</span><span class="o">-</span><span class="n">memcache</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">memcache</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">memcache</span> <span class="n">server</span>
-<span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">nagios</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">mongodb</span> <span class="n">cluster</span>
-<span class="n">retention</span><span class="o">-</span><span class="n">nagios</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">nagios</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">nagios</span> <span class="n">flat</span> <span class="n">file</span><span class="p">.</span> <span class="n">Useful</span> <span class="k">for</span> <span class="n">migration</span> <span class="n">to</span> <span class="n">Shinken</span> <span class="n">from</span> <span class="n">Nagios</span>
-<span class="n">retention</span><span class="o">-</span><span class="n">redis</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">redis</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">redis</span> <span class="n">cluster</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">shinken</span> <span class="n">search</span> <span class="n">retention</span>
+<span class="n">pickle</span><span class="o">-</span><span class="n">retention</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">generic</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">arbiter</span><span class="p">,</span><span class="n">broker</span><span class="p">,</span><span class="n">retention</span><span class="p">]</span> <span class="p">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">flat</span> <span class="n">file</span> <span class="p">(</span><span class="k">for</span> <span class="n">arbiter</span> <span class="o">&amp;</span> <span class="n">broker</span><span class="p">)</span>
+<span class="n">pickle</span><span class="o">-</span><span class="n">retention</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">scheduler</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">]</span> <span class="p">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">flat</span> <span class="n">file</span> <span class="p">(</span><span class="k">for</span> <span class="n">scheduler</span><span class="p">)</span>
+<span class="n">retention</span><span class="o">-</span><span class="n">memcache</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">memcache</span><span class="p">]</span> <span class="p">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">memcache</span> <span class="n">server</span>
+<span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">nagios</span><span class="p">]</span> <span class="p">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">mongodb</span> <span class="n">cluster</span>
+<span class="n">retention</span><span class="o">-</span><span class="n">nagios</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">nagios</span><span class="p">]</span> <span class="p">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">nagios</span> <span class="n">flat</span> <span class="n">file</span><span class="p">.</span> <span class="n">Useful</span> <span class="k">for</span> <span class="n">migration</span> <span class="n">to</span> <span class="n">Shinken</span> <span class="n">from</span> <span class="n">Nagios</span>
+<span class="n">retention</span><span class="o">-</span><span class="n">redis</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">scheduler</span><span class="p">,</span><span class="n">retention</span><span class="p">,</span><span class="n">redis</span><span class="p">]</span> <span class="p">:</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">loading</span><span class="o">/</span><span class="n">saving</span> <span class="n">retention</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">redis</span> <span class="n">cluster</span>
 </pre></div>
 
 
 <p>The one that is interesting us is the retention-mongodb one. Let's install it:</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">shinken</span> <span class="n">install</span> <span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span>
 </pre></div>
 
 
 <p>But beware, we also need to install it on the <code>courses-b</code> server !</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span>$ <span class="n">shinken</span> <span class="n">install</span> <span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span>
 </pre></div>
 
 
 <p>This module will need some additionals python lib, on both servers of course :</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pymongo</span> <span class="n">python</span><span class="o">-</span><span class="n">gridfs</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="err">$</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pymongo</span> <span class="n">python</span><span class="o">-</span><span class="n">gridfs</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pymongo</span> <span class="n">python</span><span class="o">-</span><span class="n">gridfs</span>
+<span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">b</span>$ <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pymongo</span> <span class="n">python</span><span class="o">-</span><span class="n">gridfs</span>
 </pre></div>
 
 
@@ -323,11 +387,11 @@
 <p><img src='/images/course4/courses-4-retention.png'></p>
 <p>We will need a mongodb server. I'll install it on another server. You can easily setup it by folowing the <a href="http://docs.mongodb.org/manual/administration/install-on-linux/">documentation</a>. It will be on te <code>192.168.56.103</code> server for me.</p>
 <p>The module configuration is <code>/etc/shinken/modules/retention-mongodb.cfg</code>:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="nb">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">retention</span><span class="o">-</span><span class="n">mongodb</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">module</span> <span class="p">{</span>
     <span class="n">module_name</span>     <span class="n">MongodbRetention</span>
     <span class="n">module_type</span>     <span class="n">mongodb_retention</span>
-    <span class="n">uri</span>             <span class="n">mongodb</span><span class="o">:</span><span class="c1">//192.168.56.103/?safe=false</span>
+    <span class="n">uri</span>             <span class="n">mongodb</span><span class="p">:</span><span class="o">//</span>192<span class="p">.</span>168<span class="p">.</span>56<span class="p">.</span>103<span class="o">/</span>?<span class="n">safe</span><span class="p">=</span><span class="n">false</span>
     <span class="n">database</span>        <span class="n">shinken</span>
 <span class="p">}</span>
 </pre></div>
@@ -335,11 +399,11 @@
 
 <p>Note that you need to edit the uri with your server address :)</p>
 <p>Then we can just enable the module on <code>both</code> schedulers:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span>
 <span class="p">[..]</span>
 <span class="n">modules</span>    <span class="n">MongodbRetention</span>
 <span class="p">[...]</span>
-<span class="n">root</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
+<span class="n">root</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulers</span><span class="o">/</span><span class="n">scheduler</span><span class="o">-</span><span class="n">spare</span><span class="p">.</span><span class="n">cfg</span>
 <span class="p">[..]</span>
 <span class="n">modules</span>    <span class="n">MongodbRetention</span>
 <span class="p">[...]</span>
@@ -347,7 +411,7 @@
 
 
 <p>Then copy your configuration from <code>courses-a</code> to <code>courses-b</code> with the previous <code>scp</code> command.</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span><span class="err">$</span> <span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/*</span> <span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="o">:/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">courses</span><span class="o">-</span><span class="n">a</span>$ <span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/*</span> <span class="n">courses</span><span class="o">-</span><span class="n">b</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span>
 </pre></div>
 
 
@@ -363,11 +427,11 @@
 <a href='http://www.twitch.tv/naparuba'><img src="/theme/img/Twitch.png" /></a>
 <a href='https://github.com/naparuba'><img src="/theme/img/GitHub.png" /></a>
 </p>
-    <footer>
+    <div id="FooterArticle">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
         <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/online-course.html">online course</a> / <a href="/tag/high-availability.html">high availability</a> / <a href="/tag/raid.html">raid</a></p>
         <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
-    </footer>
+    </div>
 
 <hr/>
 
@@ -390,40 +454,219 @@
 
         </footer>
     </article>
-</section>                    </div>
+</section>
+    <div class="article_infos">
+        <p>Posted in: <a href="/category/talk.html">Talk</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/online-course.html">online course</a> / <a href="/tag/high-availability.html">high availability</a> / <a href="/tag/raid.html">raid</a></p>
+    </div>
 
-                    <footer id="site-footer">
-                        <p>
-                            <a href="" target="_blank">
-                                
-                            </a> Shinken framework team /
-                            <a href="/">Archives</a>
-                            / Powered by
-                            <a href="https://github.com/getpelican/pelican" target="_blank">
-                                Pelican
-                            </a>
-                        </p>
-                    </footer>
-                </div> <!-- header+content+footer span -->
+<!--article.locale_date-->            </div>
+            <span id="ScrollTop">
+              <img src="/theme/img/caret.png" alt="caret shinken">
+            </span>
+          </div> <!-- header+content+footer span -->
 
-            </div> <!-- row -->
-        </div> <!-- /container -->
+        </div> <!-- row -->
+      </div> <!-- /container -->
+      <!--<div class="col-md-1"></div>-->
+      <div class="col-md-2">
+        <div id="SocialIcons" class="row">
+          <a href="https://twitter.com/shinken_monitor"><img src="/theme/img/twitter.png"></a>
+          <a href="https://plus.google.com/u/0/+shinken/posts"><img src="/theme/img/google.png"></a>
+          <a href="https://github.com/naparuba/shinken/"><img src="/theme/img/github.png"></a>
+        </div>
+        <div id="Search" class="row">
+          <h2>Search</h2>
+          <script>
+            (function() {
+            var cx = '005394482386049038212:vzp97eqtbku';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+            })();
+          </script>
+          <gcse:search></gcse:search>
+        </div>
+        <div id="Archives" class="row">
+          <a href="/"><h2>Archives</h2></a>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-09-08T10:20:00">08 Sep 2014 : </div>
+            <a href="/online-course-6-lan-scalability/">
+              Online course 6: LAN scalability, adding pollers
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-08-07T00:00:00">07 Aug 2014 : </div>
+            <a href="/online-course-5-monitoring-plugins/">
+              Online course 5: Monitoring Plugins
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-04-16T10:20:00">16 Apr 2014 : </div>
+            <a href="/2-0-release/">
+              2.0 release
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-04-08T00:00:00">08 Apr 2014 : </div>
+            <a href="/20-rc-last-patch-before-release/">
+              2.0 RC: last patch to test :)
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-19T10:20:00">19 Mar 2014 : </div>
+            <a href="/online-course-4-high-availability/">
+              Online course 4: High Availability
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-11T10:20:00">11 Mar 2014 : </div>
+            <a href="/online-course-3-migration-to-20/">
+              Online course 3: 1.4 to 2.0 migration
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-07T10:20:00">07 Mar 2014 : </div>
+            <a href="/online-course-2-webui/">
+              Online course 2: installing WebUI
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-04T10:20:00">04 Mar 2014 : </div>
+            <a href="/online-course-1-installation/">
+              Online course 1: installing shinken 2.0
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-02-17T10:20:00">17 Feb 2014 : </div>
+            <a href="/2-0-and-the-project/">
+              The 2.0 RC version and the project
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-02-16T10:20:00">16 Feb 2014 : </div>
+            <a href="/byebye-wordpress/">
+              Byebye wordpress
+            </a>
+          </div>
+        
+        </div>
+        <hr class="clear">
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    
+    <footer id="site-footer">
+      <div class="row">
+        <div class="col-sm-4">
+          <img src="/theme/img/LogoFrameworkWhite.png" alt="Logo Shinken solutions" class="Logo">   
+        </div>
+        <ul class="col-sm-2 col-xs-6">
+          <li>
+            <a target="_blank" href="">Home</a>
+          </li> 
+          <li> 
+            <a target="_blank" href="http://shinken-monitoring.org/">Download</a>
+          </li>
+          <li>
+            <a target="_blank" href="https://shinken.readthedocs.org/en/latest/">Docs</a>
+          </li> 
+        </ul>   
+        <ul class="col-sm-2 col-xs-6">
+          <li>
+            <a target="_blank" href="mailto:naparuba@gmail.com">Contact Us</a>
+          </li>
+        </ul>                   
+        <div class="col-sm-4 col-xs-12">
+	  <!--                                <p>2014 © All rights reserved | SAS SHINKEN Solutions | RCS Bordeaux 794 549 543 |</p>-->
+        </div>
+      </div>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/theme/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+      <!--
+          <p>
+            <a href="" target="_blank">
+              
+            </a> Shinken framework team /
+            <a href="/">Archives</a>
+            / Powered by
+            <a href="https://github.com/getpelican/pelican" target="_blank">
+              Pelican
+            </a>
+          </p>
+	  -->
+    </footer>
+    
+    <script>
+      
+      $( document ).ready(function() {
 
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
-        <script>$('body').popover || document.write('<script src="/theme/js/vendor/bootstrap.min.js"><\/script>')</script>
 
-        <script src="/theme/js/vendor/jquery.colorbox-min.js"></script>
+      
+      $( "#Menu li a" ).click(function() {
+      $(this).next("ul").slideToggle("fast");   
+      });   
 
-        <script src="/theme/js/main.js"></script>
+      // Show Case : Commande la direction des hovers    
+      $(function(){
+      $(' #da-thumbs > li ').each( function() { $(this).hoverdir(); } );
+  });
 
-        <script>
-            var _gaq=[['_setAccount','UA-48477803-1'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-    </body>
+  $('#Lavalamp').lavalamp({
+  easing:"swing",
+  duration:300 
+  });
+
+  $('.lavalamp-object').css({
+  "border-bottom":" 3px solid #ff8400"
+  })
+
+  $( ".dropdown" ).click(function() {
+  $( "#Web_Map" ).slideToggle( "fast");
+  });
+
+
+  $( "#Lavalamp li" ).bind('mouseenter', function()  {
+  $(this).next(".HoverMenu").slideDown( "fast")
+  });
+
+  $( "#Lavalamp li" ).next(".HoverMenu").bind('mouseleave', function()  {
+  $(this).slideUp( "fast")
+  });
+
+
+  var HeightSlide = $("#Slide1").innerHeight();
+  $( ".Gradient" ).css("height",HeightSlide+"px");
+
+  $( window ).resize(function() {
+  var HeightSlide = $("#Slide1").innerHeight();
+  $( ".Gradient" ).css("height",HeightSlide+"px");    
+  });
+
+  });
+
+</script>
+<!--        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+
+
+<!--        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>-->
+<script src="/theme/js/vendor/jquery.colorbox-min.js"></script>
+<script>$('body').popover || document.write('<script src="/theme/js/vendor/bootstrap.min.js"><\/script>')</script>
+  <script src="/theme/js/vendor/jquery.colorbox-min.js"></script>
+  <script src="/theme/js/main.js"></script>
+
+  <!--
+      <script>
+        var _gaq=[['_setAccount','UA-48477803-1'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+      -->
+
+  
+</body>
 </html>

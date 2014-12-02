@@ -3,89 +3,153 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Online course 2: installing WebUI / Some monitoring guys</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Online course 2: installing WebUI / Some monitoring guys</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 
-        <link rel="shortcut icon" href="/theme/favicon.ico" />
-        <link rel="apple-touch-icon" href="/theme/apple-touch-icon-iphone.png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="/theme/apple-touch-icon-ipad.png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="/theme/apple-touch-icon-iphone4.png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="/theme/apple-touch-icon-ipad3.png" />
+    <link rel="shortcut icon" href="/theme/favicon16.png" />
+    <link rel="apple-touch-icon" href="/theme/favicon32.png.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/favicon48.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/favicon64.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/theme/favicon64.png" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,300italic,300' rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/theme/css/bootstrap-responsive.min.css">
-        <link rel="stylesheet" href="/theme/css/colorbox.css">
+    <!--        <link rel="stylesheet" href="/theme/css/bootstrap.min.css">-->
+    
+    <script>window.jQuery || document.write('<script src="/theme/js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+      <script src="/theme/js/vendor/modernizr-latest.js"></script>
+      <link rel="stylesheet" href="/theme/css/bootstrap.css">
+      <!--    <link rel="stylesheet" href="/theme/css/bootstrap-responsive.min.css">-->
+      <link rel="stylesheet" href="/theme/css/colorbox.css">
+      <link rel="stylesheet" href="/theme/css/main.css">
+      <!--        <script src="/theme/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
+      <script src="/theme/js/vendor/jquery.lavalamp.js"></script>
 
-        <link rel="stylesheet" href="/theme/css/main.css">
-
-        <script src="/theme/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+      <script src="/theme/js/vendor/respond.min.js"></script> 
+      
+  </head>
+  <body>
+    <div id="Web_Map">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinken-solutions.com" target="_blank"> 
+                <img alt="Logo Ninja Solutions Shinken Monitoring" class="Logo" src="/theme/img/ninjagrey.png">
+                <p class="Title_Map">shinken-solutions.com</p>
+                <p>Business-centric monitoring</p>
+              </a>    
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 ">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinken-monitoring.org" target="_blank">
+                <img alt="Logo Ninja Framework Shinken" class="Logo" src="/theme/img/ninjagreen.png">
+                <p class="Title_Map">shinken-monitoring.org</p>
+                <p>Shinken framework project</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinken.io" target="_blank">
+                <img alt="Logo Ninja Framework Shinken" class="Logo" src="/theme/img/ninjagreen.png">
+                <p class="Title_Map">shinken.io</p>
+                <p>Shinken packages platform</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinkenlab.io" target="_blank">
+                <img alt="Logo Ninja Framework Shinken" class="Logo" src="/theme/img/ninjagreen.png">
+                <p class="Title_Map">shinkenlab.io</p>
+                <p>Let's discuss about monitoring</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://shinkenlab.io">
+            <img alt="Logo Solutions Shinken" class="Logo" src="/theme/img/Logoframeworkblack.png">
+          </a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav" id="Lavalamp">
+            <li>
+              <a href="http://shinkenlab.io">Home</a>
+            </li>
+            <li>
+              <a href="http://www.shinken-monitoring.org/">Download</a>
+            </li>
+            <li>
+              <a href="https://shinken.readthedocs.org/en/latest/">Docs</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown" id="MainDropDown">
+              <img alt="Corners Shinken Solutions Dropdown" src="/theme/img/corners.png" id="CornerL">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <img alt="Logo Shinken" src="/theme/img/logomonogrammewhite.png" class="Dropdown_Logo">
+              </a>
+              <img alt="Corners Shinken Solutions Dropdown" src="/theme/img/corners.png"  id="CornerR">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="container col-md-8">
+        <div class="row">
+          <div class="span2" id='content'>
+          </div> <!-- logo+navigation span -->
+          <div class="span10">
+            <header id="site-header">
+              <h1>
+                <a href="">Some monitoring guys</a>
+                <small>
+                  <span class="divider">/</span> 
+                </small>
+              </h1>
+              <!--<p>
+                  
+                  </p>-->
+            </header>
 
-        <div class="container">
-            <div class="row">
+            <div class="content">
+<time datetime="2014-03-07T10:20:00"><div class="DateDay">07</div><span class="DateMounth"> Mar 2014 </span><span class="triangle"></span></time>
 
-                <div class="span2" id='content'>
-		  <nav>
-		  <ul>
-		    <li class="home">
-		        <a href="http://www.shinken-monitoring.org/">Shinken Home</a>
-			</li>
-		    <li class="download">
-		        <a href="http://www.shinken-monitoring.org/download/">Download</a>
-			</li>
-		    <li class="about">
-		        <a href="/about/">About</a>
-			</li>
-		    <li class="npm">
-		      <a href="http://shinken.io">Shinken.io</a>
-		    </li>
-		    <li class="docs">
-		        <a href="https://shinken.readthedocs.org/">Docs</a>
-			</li>
-		    <li class="blog current">
-		        <a href="http://shinkenlab.io">Blog</a>
-			</li>
-		    <li class="logos">
-		        <a href="http://www.shinken-monitoring.org/logos/">Logos</a>
-			</li>
-		  </ul>
-
-
-		    </nav>
-                </div> <!-- logo+navigation span -->
-
-
-                <div class="span10">
-                    <header id="site-header">
-                        <h1>
-                            <a href="">Some monitoring guys</a>
-                            <small>
-                                <span class="divider">/</span> 
-                            </small>
-                        </h1>
-                        <!--<p>
-                            
-                        </p>-->
-                    </header>
-
-                    <div class="content">
 <section>
     <article>
         <header>
             <h2><a href="/online-course-2-webui/" rel="bookmark">Online course 2: installing WebUI</a></h2>
-            <time datetime="2014-03-07T10:20:00">Mar 07, 2014</time>
-	    <span class='author'>, Gabès Jean</span>
-
+	    <span class='author'>Gabès Jean</span>
         </header>
-
+        
     <p>Hi,</p>
 <p>This is our second online course, and we now installing the default shinken ui: WebUI.</p>
 <p>You need a shinken 2.0 installation. For this just follow the <a href="/online-course-1-installation/">first course</a> :)</p>
@@ -96,20 +160,20 @@
 <p>The WebUI interface is a broker daemon module. This daemon role is to grab and expose the monitoring data to the outside world with modules. One of this module is the WebUI interface.</p>
 <h3>Install the WebUI</h3>
 <p>We will use the shinken cli command to grab and install the webui module from <a href="http://shinken.io/package/webui">shinken.io</a>. It's quite easy, and remember, launch it as the <code>shinken</code> user.</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="n">search</span> <span class="n">webui</span>
-<span class="n">auth</span><span class="o">-</span><span class="n">cfg</span><span class="o">-</span><span class="n">password</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">auth</span><span class="p">,</span><span class="n">authentification</span><span class="p">,</span><span class="n">webui</span><span class="p">]</span> <span class="o">:</span> <span class="n">Shinken</span> <span class="n">module</span> <span class="k">for</span> <span class="n">UI</span> <span class="n">authentification</span> <span class="n">from</span> <span class="n">simple</span> <span class="n">password</span> <span class="k">for</span> <span class="n">configuration</span> <span class="n">file</span>
-<span class="n">auth</span><span class="o">-</span><span class="n">htpasswd</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">auth</span><span class="p">,</span><span class="n">authentification</span><span class="p">]</span> <span class="o">:</span> <span class="n">Shinken</span> <span class="n">module</span> <span class="k">for</span> <span class="n">UI</span> <span class="n">authentification</span> <span class="n">from</span> <span class="n">Apache</span> <span class="n">passwd</span> <span class="n">files</span>
-<span class="n">mod</span><span class="o">-</span><span class="n">mongodb</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">arbiter</span><span class="p">,</span><span class="n">mongodb</span><span class="p">,</span><span class="n">mongo</span><span class="p">]</span> <span class="o">:</span> <span class="n">Module</span> <span class="n">used</span> <span class="k">for</span> <span class="n">all</span> <span class="n">mongodb</span> <span class="n">connections</span><span class="p">,</span> <span class="n">like</span> <span class="k">for</span> <span class="n">saving</span> <span class="n">UI</span> <span class="n">data</span><span class="p">,</span> <span class="n">or</span> <span class="n">loading</span> <span class="n">configuration</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">Arbiter</span>
-<span class="n">sqlitedb</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">broker</span><span class="p">,</span><span class="n">sqlite</span><span class="p">,</span><span class="n">webui</span><span class="p">]</span> <span class="o">:</span> <span class="n">Generic</span> <span class="n">module</span> <span class="k">for</span> <span class="n">others</span> <span class="n">to</span> <span class="n">export</span> <span class="n">data</span> <span class="n">into</span> <span class="n">a</span> <span class="n">Sqlite</span> <span class="n">database</span>
-<span class="n">ui</span><span class="o">-</span><span class="n">graphite</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">broker</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">graphite</span><span class="p">,</span><span class="n">graphs</span><span class="p">]</span> <span class="o">:</span> <span class="n">Enable</span> <span class="n">Graphite</span> <span class="n">graphs</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">WebUI</span>
-<span class="n">ui</span><span class="o">-</span><span class="n">pnp</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">broker</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">pnp4nagios</span><span class="p">,</span><span class="n">graphs</span><span class="p">]</span> <span class="o">:</span> <span class="n">Enable</span> <span class="n">PNP4Nagios</span> <span class="n">graphs</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">WebUI</span>
-<span class="n">webui</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">broker</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">interface</span><span class="p">]</span> <span class="o">:</span> <span class="n">Main</span> <span class="n">Web</span> <span class="n">interface</span> <span class="k">for</span> <span class="n">Shinken</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">shinken</span> <span class="n">search</span> <span class="n">webui</span>
+<span class="n">auth</span><span class="o">-</span><span class="n">cfg</span><span class="o">-</span><span class="n">password</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">auth</span><span class="p">,</span><span class="n">authentification</span><span class="p">,</span><span class="n">webui</span><span class="p">]</span> <span class="p">:</span> <span class="n">Shinken</span> <span class="n">module</span> <span class="k">for</span> <span class="n">UI</span> <span class="n">authentification</span> <span class="n">from</span> <span class="n">simple</span> <span class="n">password</span> <span class="k">for</span> <span class="n">configuration</span> <span class="n">file</span>
+<span class="n">auth</span><span class="o">-</span><span class="n">htpasswd</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">auth</span><span class="p">,</span><span class="n">authentification</span><span class="p">]</span> <span class="p">:</span> <span class="n">Shinken</span> <span class="n">module</span> <span class="k">for</span> <span class="n">UI</span> <span class="n">authentification</span> <span class="n">from</span> <span class="n">Apache</span> <span class="n">passwd</span> <span class="n">files</span>
+<span class="nb">mod</span><span class="o">-</span><span class="n">mongodb</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">arbiter</span><span class="p">,</span><span class="n">mongodb</span><span class="p">,</span><span class="n">mongo</span><span class="p">]</span> <span class="p">:</span> <span class="n">Module</span> <span class="n">used</span> <span class="k">for</span> <span class="n">all</span> <span class="n">mongodb</span> <span class="n">connections</span><span class="p">,</span> <span class="n">like</span> <span class="k">for</span> <span class="n">saving</span> <span class="n">UI</span> <span class="n">data</span><span class="p">,</span> <span class="n">or</span> <span class="n">loading</span> <span class="n">configuration</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">Arbiter</span>
+<span class="n">sqlitedb</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">broker</span><span class="p">,</span><span class="n">sqlite</span><span class="p">,</span><span class="n">webui</span><span class="p">]</span> <span class="p">:</span> <span class="n">Generic</span> <span class="n">module</span> <span class="k">for</span> <span class="n">others</span> <span class="n">to</span> <span class="n">export</span> <span class="n">data</span> <span class="n">into</span> <span class="n">a</span> <span class="n">Sqlite</span> <span class="n">database</span>
+<span class="n">ui</span><span class="o">-</span><span class="n">graphite</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">broker</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">graphite</span><span class="p">,</span><span class="n">graphs</span><span class="p">]</span> <span class="p">:</span> <span class="n">Enable</span> <span class="n">Graphite</span> <span class="n">graphs</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">WebUI</span>
+<span class="n">ui</span><span class="o">-</span><span class="n">pnp</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">broker</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">pnp4nagios</span><span class="p">,</span><span class="n">graphs</span><span class="p">]</span> <span class="p">:</span> <span class="n">Enable</span> <span class="n">PNP4Nagios</span> <span class="n">graphs</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">WebUI</span>
+<span class="n">webui</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">broker</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">interface</span><span class="p">]</span> <span class="p">:</span> <span class="n">Main</span> <span class="n">Web</span> <span class="n">interface</span> <span class="k">for</span> <span class="n">Shinken</span>
 </pre></div>
 
 
 <p>We got numerous modules related to the webui one. First we install this last one :)</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">webui</span>   
-<span class="n">Grabbing</span> <span class="o">:</span> <span class="n">webui</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">shinken</span> <span class="n">install</span> <span class="n">webui</span>   
+<span class="n">Grabbing</span> <span class="p">:</span> <span class="n">webui</span>
 <span class="n">OK</span> <span class="n">webui</span>
 </pre></div>
 
@@ -123,18 +187,18 @@
 <div class="highlight"><pre><span class="n">define</span> <span class="n">module</span> <span class="p">{</span>
   <span class="n">module_name</span>     <span class="n">webui</span>
   <span class="n">module_type</span>     <span class="n">webui</span>
-  <span class="n">host</span>            <span class="mf">0.0.0.0</span>
-  <span class="n">port</span>            <span class="mi">7767</span>
+  <span class="n">host</span>            0<span class="p">.</span>0<span class="p">.</span>0<span class="p">.</span>0
+  <span class="n">port</span>            7767
   <span class="n">auth_secret</span>     <span class="n">CHANGE_ME</span>
-  <span class="n">allow_html_output</span>   <span class="mi">1</span>
-  <span class="n">max_output_length</span>   <span class="mi">1024</span>
-  <span class="n">manage_acl</span>          <span class="mi">1</span>
-  <span class="n">play_sound</span>          <span class="mi">0</span>
+  <span class="n">allow_html_output</span>   1
+  <span class="n">max_output_length</span>   1024
+  <span class="n">manage_acl</span>          1
+  <span class="n">play_sound</span>          0
   <span class="n">login_text</span>          <span class="n">Welcome</span> <span class="n">on</span> <span class="n">Shinken</span> <span class="n">WebUI</span>
   <span class="n">modules</span>
-  <span class="err">#</span><span class="n">http_backend</span>        <span class="k">auto</span>
-  <span class="err">#</span><span class="n">remote_user_enable</span>      <span class="mi">1</span>
-  <span class="err">#</span><span class="n">remote_user_variable</span>
+  #<span class="n">http_backend</span>        <span class="n">auto</span>
+  #<span class="n">remote_user_enable</span>      1
+  #<span class="n">remote_user_variable</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -156,7 +220,7 @@
 <li><code>remote_user_enable</code> and <code>remote_user_variable</code> : if you set webui begind a reverse proxy that does the authentification</li>
 </ul>
 <p>Let's just give a try if we add this <code>WebUI</code> module to the broker daemon. All we need to do is to is to add it into the <code>modules</code> of the broker configuration :</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="nb">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">brokers</span><span class="o">/</span><span class="n">broker</span><span class="o">-</span><span class="n">master</span><span class="p">.</span><span class="n">cfg</span>
 <span class="p">[...]</span>
 <span class="n">modules</span>     <span class="n">webui</span>
 <span class="p">[...]</span>
@@ -164,19 +228,19 @@
 
 
 <p>We can restart shinken and connect to the WebUI that will be availalbe on the <code>7767</code> port.</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">restart</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">restart</span>
 </pre></div>
 
 
 <p>We try to identify with the <code>admin/admin</code> account from our contact defined at :</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">contacts</span><span class="o">/</span><span class="n">admin</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="nb">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">contacts</span><span class="o">/</span><span class="n">admin</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">contact</span><span class="p">{</span>
     <span class="n">use</span>             <span class="n">generic</span><span class="o">-</span><span class="n">contact</span>
     <span class="n">contact_name</span>    <span class="n">admin</span>
-    <span class="n">email</span>           <span class="n">shinken</span><span class="err">@</span><span class="n">localhost</span>
-    <span class="n">pager</span>           <span class="mo">0600000000</span>   <span class="p">;</span> <span class="n">contact</span> <span class="n">phone</span> <span class="n">number</span>
+    <span class="n">email</span>           <span class="n">shinken</span><span class="p">@</span><span class="n">localhost</span>
+    <span class="n">pager</span>           0600000000   <span class="p">;</span> <span class="n">contact</span> <span class="n">phone</span> <span class="n">number</span>
     <span class="n">password</span>        <span class="n">admin</span>
-    <span class="n">is_admin</span>        <span class="mi">1</span>
+    <span class="n">is_admin</span>        1
 <span class="p">}</span>
 </pre></div>
 
@@ -185,42 +249,40 @@
 <p><img src='/images/course2/course2-fail.png'></p>
 <h3>WebUI authentification</h3>
 <p>Why? It's because the WebUI authentification phase is managed by its auth modules, and we add none, so the webUI can't authentify us. Let's look at which auth modules are currently available:</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="n">search</span> <span class="n">webui</span> <span class="n">auth</span>
-<span class="n">auth</span><span class="o">-</span><span class="n">cfg</span><span class="o">-</span><span class="n">password</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">auth</span><span class="p">,</span><span class="n">authentification</span><span class="p">,</span><span class="n">webui</span><span class="p">]</span> <span class="o">:</span> <span class="n">Shinken</span> <span class="n">module</span> <span class="k">for</span> <span class="n">UI</span> <span class="n">authentification</span> <span class="n">from</span> <span class="n">simple</span> <span class="n">password</span> <span class="k">for</span> <span class="n">configuration</span> <span class="n">file</span>
-<span class="n">auth</span><span class="o">-</span><span class="n">htpasswd</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">auth</span><span class="p">,</span><span class="n">authentification</span><span class="p">]</span> <span class="o">:</span> <span class="n">Shinken</span> <span class="n">module</span> <span class="k">for</span> <span class="n">UI</span> <span class="n">authentification</span> <span class="n">from</span> <span class="n">Apache</span> <span class="n">passwd</span> <span class="n">files</span>
-<span class="n">auth</span><span class="o">-</span><span class="n">active</span><span class="o">-</span><span class="n">directory</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">auth</span><span class="p">,</span><span class="n">ldap</span><span class="p">]</span> <span class="o">:</span> <span class="n">Active</span> <span class="n">directory</span> <span class="n">auth</span> <span class="k">for</span> <span class="n">WebUI</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">shinken</span> <span class="n">search</span> <span class="n">webui</span> <span class="n">auth</span>
+<span class="n">auth</span><span class="o">-</span><span class="n">cfg</span><span class="o">-</span><span class="n">password</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">auth</span><span class="p">,</span><span class="n">authentification</span><span class="p">,</span><span class="n">webui</span><span class="p">]</span> <span class="p">:</span> <span class="n">Shinken</span> <span class="n">module</span> <span class="k">for</span> <span class="n">UI</span> <span class="n">authentification</span> <span class="n">from</span> <span class="n">simple</span> <span class="n">password</span> <span class="k">for</span> <span class="n">configuration</span> <span class="n">file</span>
+<span class="n">auth</span><span class="o">-</span><span class="n">htpasswd</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">auth</span><span class="p">,</span><span class="n">authentification</span><span class="p">]</span> <span class="p">:</span> <span class="n">Shinken</span> <span class="n">module</span> <span class="k">for</span> <span class="n">UI</span> <span class="n">authentification</span> <span class="n">from</span> <span class="n">Apache</span> <span class="n">passwd</span> <span class="n">files</span>
+<span class="n">auth</span><span class="o">-</span><span class="n">active</span><span class="o">-</span><span class="n">directory</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">module</span><span class="p">,</span><span class="n">webui</span><span class="p">,</span><span class="n">auth</span><span class="p">,</span><span class="n">ldap</span><span class="p">]</span> <span class="p">:</span> <span class="n">Active</span> <span class="n">directory</span> <span class="n">auth</span> <span class="k">for</span> <span class="n">WebUI</span>
 </pre></div>
 
 
 <p>One (<code>cfg-password</code>) is a simple auth by looking at the contact <code>password</code> value, another (<code>htpasswd</code>) is about checking the password in an apache htpawd file, and the last one (<code>active-directory</code>) is about checking the password with active directory (or openldap). We will take the first one for this course.</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">auth</span><span class="o">-</span><span class="n">cfg</span><span class="o">-</span><span class="n">password</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">shinken</span> <span class="n">install</span> <span class="n">auth</span><span class="o">-</span><span class="n">cfg</span><span class="o">-</span><span class="n">password</span>
 </pre></div>
 
 
 <p>There is nothing to configure on the module (<code>/etc/shinken/modules/auth_cfg_password.cfg</code>) but we need to declare it on the WebUI configuration :</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">grep</span> <span class="n">modules</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">webui</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">grep</span> <span class="n">modules</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">webui</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">modules</span>             <span class="n">auth</span><span class="o">-</span><span class="n">cfg</span><span class="o">-</span><span class="n">password</span>
 </pre></div>
 
 
 <p>Now we can restart shinken so this module wil be load by webui:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">restart</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">restart</span>
 </pre></div>
 
 
 <p>This time the connexion is OK :)</p>
 <p><img src='/images/course2/course2-connectok.png'></p>
 <p>In the All view you will get your <code>localhost</code> checks:</p>
-<p><img src='/images/course2/course2-all.png'> <br />
-</p>
+<p><img src='/images/course2/course2-all.png'>   </p>
 <p>You will got nothing in the <code>/impacts</code> view, and it's normal, because this view is done to show you the important apps information, but we currently didn't defined one.</p>
 <p>In the <code>/dashboard</code> we got a new error, with a BIG red screen:</p>
-<p><img src='/images/course2/course2-dashboard.png'> <br />
-</p>
+<p><img src='/images/course2/course2-dashboard.png'>   </p>
 <h3>User preference backend</h3>
 <p>The dasboard is specific to each user, and so WebUI must save your user preference (widgets and co). But this task should be managed by the modules (like if you want flat file save or in a distant database). You can choose to export all data into mongodb, but we will look at the simpliest one that save the data into a local <code>sqlite</code> file.</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">sqlitedb</span>
-<span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">sqlitedb</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">shinken</span> <span class="n">install</span> <span class="n">sqlitedb</span>
+<span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="nb">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">sqlitedb</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">module</span> <span class="p">{</span>
     <span class="n">module_name</span>     <span class="n">sqlitedb</span>
     <span class="n">module_type</span>     <span class="n">sqlitedb</span>
@@ -230,13 +292,13 @@
 
 
 <p>The default path should be ok, let's add this to the WebUI modules list:</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">grep</span> <span class="n">modules</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">webui</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">grep</span> <span class="n">modules</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">webui</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">modules</span>         <span class="n">auth</span><span class="o">-</span><span class="n">cfg</span><span class="o">-</span><span class="n">password</span><span class="p">,</span><span class="n">sqlitedb</span>
 </pre></div>
 
 
 <p>And restart shinken:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">restart</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">restart</span>
 </pre></div>
 
 
@@ -246,7 +308,7 @@
 <p><img src='/images/course2/course2-dasboardfilled.png'></p>
 <p>That's all about today, now you can add new hosts and saw them in your WebUI :)</p>
 <p>Note: if you don't modify modules you don't need to restart all the shinken daemons, you only need to restart the arbiter :</p>
-<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">arbiter</span> <span class="n">restart</span>
+<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span><span class="o">-</span><span class="n">arbiter</span> <span class="n">restart</span>
 </pre></div>
 
 
@@ -261,11 +323,11 @@
 <a href='http://www.twitch.tv/naparuba'><img src="/theme/img/Twitch.png" /></a>
 <a href='https://github.com/naparuba'><img src="/theme/img/GitHub.png" /></a>
 </p>
-    <footer>
+    <div id="FooterArticle">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
         <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/online-course.html">online course</a> / <a href="/tag/module.html">module</a> / <a href="/tag/webui.html">webui</a></p>
         <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
-    </footer>
+    </div>
 
 <hr/>
 
@@ -288,40 +350,219 @@
 
         </footer>
     </article>
-</section>                    </div>
+</section>
+    <div class="article_infos">
+        <p>Posted in: <a href="/category/talk.html">Talk</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/online-course.html">online course</a> / <a href="/tag/module.html">module</a> / <a href="/tag/webui.html">webui</a></p>
+    </div>
 
-                    <footer id="site-footer">
-                        <p>
-                            <a href="" target="_blank">
-                                
-                            </a> Shinken framework team /
-                            <a href="/">Archives</a>
-                            / Powered by
-                            <a href="https://github.com/getpelican/pelican" target="_blank">
-                                Pelican
-                            </a>
-                        </p>
-                    </footer>
-                </div> <!-- header+content+footer span -->
+<!--article.locale_date-->            </div>
+            <span id="ScrollTop">
+              <img src="/theme/img/caret.png" alt="caret shinken">
+            </span>
+          </div> <!-- header+content+footer span -->
 
-            </div> <!-- row -->
-        </div> <!-- /container -->
+        </div> <!-- row -->
+      </div> <!-- /container -->
+      <!--<div class="col-md-1"></div>-->
+      <div class="col-md-2">
+        <div id="SocialIcons" class="row">
+          <a href="https://twitter.com/shinken_monitor"><img src="/theme/img/twitter.png"></a>
+          <a href="https://plus.google.com/u/0/+shinken/posts"><img src="/theme/img/google.png"></a>
+          <a href="https://github.com/naparuba/shinken/"><img src="/theme/img/github.png"></a>
+        </div>
+        <div id="Search" class="row">
+          <h2>Search</h2>
+          <script>
+            (function() {
+            var cx = '005394482386049038212:vzp97eqtbku';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+            })();
+          </script>
+          <gcse:search></gcse:search>
+        </div>
+        <div id="Archives" class="row">
+          <a href="/"><h2>Archives</h2></a>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-09-08T10:20:00">08 Sep 2014 : </div>
+            <a href="/online-course-6-lan-scalability/">
+              Online course 6: LAN scalability, adding pollers
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-08-07T00:00:00">07 Aug 2014 : </div>
+            <a href="/online-course-5-monitoring-plugins/">
+              Online course 5: Monitoring Plugins
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-04-16T10:20:00">16 Apr 2014 : </div>
+            <a href="/2-0-release/">
+              2.0 release
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-04-08T00:00:00">08 Apr 2014 : </div>
+            <a href="/20-rc-last-patch-before-release/">
+              2.0 RC: last patch to test :)
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-19T10:20:00">19 Mar 2014 : </div>
+            <a href="/online-course-4-high-availability/">
+              Online course 4: High Availability
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-11T10:20:00">11 Mar 2014 : </div>
+            <a href="/online-course-3-migration-to-20/">
+              Online course 3: 1.4 to 2.0 migration
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-07T10:20:00">07 Mar 2014 : </div>
+            <a href="/online-course-2-webui/">
+              Online course 2: installing WebUI
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-04T10:20:00">04 Mar 2014 : </div>
+            <a href="/online-course-1-installation/">
+              Online course 1: installing shinken 2.0
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-02-17T10:20:00">17 Feb 2014 : </div>
+            <a href="/2-0-and-the-project/">
+              The 2.0 RC version and the project
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-02-16T10:20:00">16 Feb 2014 : </div>
+            <a href="/byebye-wordpress/">
+              Byebye wordpress
+            </a>
+          </div>
+        
+        </div>
+        <hr class="clear">
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    
+    <footer id="site-footer">
+      <div class="row">
+        <div class="col-sm-4">
+          <img src="/theme/img/LogoFrameworkWhite.png" alt="Logo Shinken solutions" class="Logo">   
+        </div>
+        <ul class="col-sm-2 col-xs-6">
+          <li>
+            <a target="_blank" href="">Home</a>
+          </li> 
+          <li> 
+            <a target="_blank" href="http://shinken-monitoring.org/">Download</a>
+          </li>
+          <li>
+            <a target="_blank" href="https://shinken.readthedocs.org/en/latest/">Docs</a>
+          </li> 
+        </ul>   
+        <ul class="col-sm-2 col-xs-6">
+          <li>
+            <a target="_blank" href="mailto:naparuba@gmail.com">Contact Us</a>
+          </li>
+        </ul>                   
+        <div class="col-sm-4 col-xs-12">
+	  <!--                                <p>2014 © All rights reserved | SAS SHINKEN Solutions | RCS Bordeaux 794 549 543 |</p>-->
+        </div>
+      </div>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/theme/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+      <!--
+          <p>
+            <a href="" target="_blank">
+              
+            </a> Shinken framework team /
+            <a href="/">Archives</a>
+            / Powered by
+            <a href="https://github.com/getpelican/pelican" target="_blank">
+              Pelican
+            </a>
+          </p>
+	  -->
+    </footer>
+    
+    <script>
+      
+      $( document ).ready(function() {
 
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
-        <script>$('body').popover || document.write('<script src="/theme/js/vendor/bootstrap.min.js"><\/script>')</script>
 
-        <script src="/theme/js/vendor/jquery.colorbox-min.js"></script>
+      
+      $( "#Menu li a" ).click(function() {
+      $(this).next("ul").slideToggle("fast");   
+      });   
 
-        <script src="/theme/js/main.js"></script>
+      // Show Case : Commande la direction des hovers    
+      $(function(){
+      $(' #da-thumbs > li ').each( function() { $(this).hoverdir(); } );
+  });
 
-        <script>
-            var _gaq=[['_setAccount','UA-48477803-1'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-    </body>
+  $('#Lavalamp').lavalamp({
+  easing:"swing",
+  duration:300 
+  });
+
+  $('.lavalamp-object').css({
+  "border-bottom":" 3px solid #ff8400"
+  })
+
+  $( ".dropdown" ).click(function() {
+  $( "#Web_Map" ).slideToggle( "fast");
+  });
+
+
+  $( "#Lavalamp li" ).bind('mouseenter', function()  {
+  $(this).next(".HoverMenu").slideDown( "fast")
+  });
+
+  $( "#Lavalamp li" ).next(".HoverMenu").bind('mouseleave', function()  {
+  $(this).slideUp( "fast")
+  });
+
+
+  var HeightSlide = $("#Slide1").innerHeight();
+  $( ".Gradient" ).css("height",HeightSlide+"px");
+
+  $( window ).resize(function() {
+  var HeightSlide = $("#Slide1").innerHeight();
+  $( ".Gradient" ).css("height",HeightSlide+"px");    
+  });
+
+  });
+
+</script>
+<!--        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+
+
+<!--        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>-->
+<script src="/theme/js/vendor/jquery.colorbox-min.js"></script>
+<script>$('body').popover || document.write('<script src="/theme/js/vendor/bootstrap.min.js"><\/script>')</script>
+  <script src="/theme/js/vendor/jquery.colorbox-min.js"></script>
+  <script src="/theme/js/main.js"></script>
+
+  <!--
+      <script>
+        var _gaq=[['_setAccount','UA-48477803-1'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+      -->
+
+  
+</body>
 </html>

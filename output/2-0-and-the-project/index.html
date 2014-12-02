@@ -3,92 +3,156 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>The 2.0 RC version and the project / Some monitoring guys</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>The 2.0 RC version and the project / Some monitoring guys</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 
-        <link rel="shortcut icon" href="/theme/favicon.ico" />
-        <link rel="apple-touch-icon" href="/theme/apple-touch-icon-iphone.png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="/theme/apple-touch-icon-ipad.png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="/theme/apple-touch-icon-iphone4.png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="/theme/apple-touch-icon-ipad3.png" />
+    <link rel="shortcut icon" href="/theme/favicon16.png" />
+    <link rel="apple-touch-icon" href="/theme/favicon32.png.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/favicon48.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/favicon64.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/theme/favicon64.png" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,300italic,300' rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/theme/css/bootstrap-responsive.min.css">
-        <link rel="stylesheet" href="/theme/css/colorbox.css">
+    <!--        <link rel="stylesheet" href="/theme/css/bootstrap.min.css">-->
+    
+    <script>window.jQuery || document.write('<script src="/theme/js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+      <script src="/theme/js/vendor/modernizr-latest.js"></script>
+      <link rel="stylesheet" href="/theme/css/bootstrap.css">
+      <!--    <link rel="stylesheet" href="/theme/css/bootstrap-responsive.min.css">-->
+      <link rel="stylesheet" href="/theme/css/colorbox.css">
+      <link rel="stylesheet" href="/theme/css/main.css">
+      <!--        <script src="/theme/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
+      <script src="/theme/js/vendor/jquery.lavalamp.js"></script>
 
-        <link rel="stylesheet" href="/theme/css/main.css">
-
-        <script src="/theme/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+      <script src="/theme/js/vendor/respond.min.js"></script> 
+      
+  </head>
+  <body>
+    <div id="Web_Map">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinken-solutions.com" target="_blank"> 
+                <img alt="Logo Ninja Solutions Shinken Monitoring" class="Logo" src="/theme/img/ninjagrey.png">
+                <p class="Title_Map">shinken-solutions.com</p>
+                <p>Business-centric monitoring</p>
+              </a>    
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 ">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinken-monitoring.org" target="_blank">
+                <img alt="Logo Ninja Framework Shinken" class="Logo" src="/theme/img/ninjagreen.png">
+                <p class="Title_Map">shinken-monitoring.org</p>
+                <p>Shinken framework project</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinken.io" target="_blank">
+                <img alt="Logo Ninja Framework Shinken" class="Logo" src="/theme/img/ninjagreen.png">
+                <p class="Title_Map">shinken.io</p>
+                <p>Shinken packages platform</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="Content">
+            <div class="Logo_Frame">
+              <a href="http://shinkenlab.io" target="_blank">
+                <img alt="Logo Ninja Framework Shinken" class="Logo" src="/theme/img/ninjagreen.png">
+                <p class="Title_Map">shinkenlab.io</p>
+                <p>Let's discuss about monitoring</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://shinkenlab.io">
+            <img alt="Logo Solutions Shinken" class="Logo" src="/theme/img/Logoframeworkblack.png">
+          </a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav" id="Lavalamp">
+            <li>
+              <a href="http://shinkenlab.io">Home</a>
+            </li>
+            <li>
+              <a href="http://www.shinken-monitoring.org/">Download</a>
+            </li>
+            <li>
+              <a href="https://shinken.readthedocs.org/en/latest/">Docs</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown" id="MainDropDown">
+              <img alt="Corners Shinken Solutions Dropdown" src="/theme/img/corners.png" id="CornerL">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <img alt="Logo Shinken" src="/theme/img/logomonogrammewhite.png" class="Dropdown_Logo">
+              </a>
+              <img alt="Corners Shinken Solutions Dropdown" src="/theme/img/corners.png"  id="CornerR">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="container col-md-8">
+        <div class="row">
+          <div class="span2" id='content'>
+          </div> <!-- logo+navigation span -->
+          <div class="span10">
+            <header id="site-header">
+              <h1>
+                <a href="">Some monitoring guys</a>
+                <small>
+                  <span class="divider">/</span> 
+                </small>
+              </h1>
+              <!--<p>
+                  
+                  </p>-->
+            </header>
 
-        <div class="container">
-            <div class="row">
+            <div class="content">
+<time datetime="2014-02-17T10:20:00"><div class="DateDay">17</div><span class="DateMounth"> Feb 2014 </span><span class="triangle"></span></time>
 
-                <div class="span2" id='content'>
-		  <nav>
-		  <ul>
-		    <li class="home">
-		        <a href="http://www.shinken-monitoring.org/">Shinken Home</a>
-			</li>
-		    <li class="download">
-		        <a href="http://www.shinken-monitoring.org/download/">Download</a>
-			</li>
-		    <li class="about">
-		        <a href="/about/">About</a>
-			</li>
-		    <li class="npm">
-		      <a href="http://shinken.io">Shinken.io</a>
-		    </li>
-		    <li class="docs">
-		        <a href="https://shinken.readthedocs.org/">Docs</a>
-			</li>
-		    <li class="blog current">
-		        <a href="http://shinkenlab.io">Blog</a>
-			</li>
-		    <li class="logos">
-		        <a href="http://www.shinken-monitoring.org/logos/">Logos</a>
-			</li>
-		  </ul>
-
-
-		    </nav>
-                </div> <!-- logo+navigation span -->
-
-
-                <div class="span10">
-                    <header id="site-header">
-                        <h1>
-                            <a href="">Some monitoring guys</a>
-                            <small>
-                                <span class="divider">/</span> 
-                            </small>
-                        </h1>
-                        <!--<p>
-                            
-                        </p>-->
-                    </header>
-
-                    <div class="content">
 <section>
     <article>
         <header>
             <h2><a href="/2-0-and-the-project/" rel="bookmark">The 2.0 RC version and the project</a></h2>
-            <time datetime="2014-02-17T10:20:00">Feb 17, 2014</time>
-	    <span class='author'>, Gabès Jean</span>
-
+	    <span class='author'>Gabès Jean</span>
         </header>
-
+        
     <p>Hi,</p>
 <p>The 2.0 release is currently in RC Phase. You can get a look at it by launching :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">shinken</span>
+<div class="highlight"><pre>$ <span class="n">pip</span> <span class="n">install</span> <span class="n">shinken</span>
 </pre></div>
 
 
@@ -102,7 +166,7 @@
 <h2>Focus on the 2.0 changes</h2>
 <h3>Switch to HTTP(S) for the daemons communications</h3>
 <p>One of the main change on this release is the drop the the pyro based communication to a more classic HTTP(S) one. Now, a simle curl command will enable you to check and query daemons :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">curl</span> <span class="n">http</span><span class="o">:</span><span class="c1">//localhost:7770/</span>
+<div class="highlight"><pre>$ <span class="n">curl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span>7770<span class="o">/</span>
 <span class="n">OK</span>
 </pre></div>
 
@@ -170,26 +234,26 @@
 <h3>The new <em>shinken</em> cli command</h3>
 <p>To make easy the modules/packs installation, we are adding the new "shinken" cli command. It is strongly linked with <a href="http://shinken.io">shinken.io</a> for the packages installation part of course.</p>
 <p>In order to use it, you will have to call the <code>--init</code> parameter so it will create the <code>~/shinken.ini</code> file with all the paths to the shinken directories:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="o">--</span><span class="n">init</span>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="o">--</span><span class="n">init</span>
 </pre></div>
 
 
 <p>Then you can start to search and install packages:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="n">search</span> <span class="n">linux</span>
-<span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="o">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
-<span class="n">linux</span><span class="o">-</span><span class="n">snmp</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">snmp</span><span class="p">]</span> <span class="o">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SNMP</span>
-<span class="n">linux</span><span class="o">-</span><span class="n">ssh</span> <span class="p">(</span><span class="n">dessaiimrane</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">ssh</span><span class="p">]</span> <span class="o">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SSH</span> <span class="n">without</span> <span class="n">any</span> <span class="n">script</span> <span class="n">on</span> <span class="n">distant</span> <span class="n">server</span>
-<span class="n">pack</span><span class="o">-</span><span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="o">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="n">search</span> <span class="n">linux</span>
+<span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="p">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
+<span class="n">linux</span><span class="o">-</span><span class="n">snmp</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">snmp</span><span class="p">]</span> <span class="p">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SNMP</span>
+<span class="n">linux</span><span class="o">-</span><span class="n">ssh</span> <span class="p">(</span><span class="n">dessaiimrane</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">ssh</span><span class="p">]</span> <span class="p">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SSH</span> <span class="n">without</span> <span class="n">any</span> <span class="n">script</span> <span class="n">on</span> <span class="n">distant</span> <span class="n">server</span>
+<span class="n">pack</span><span class="o">-</span><span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="p">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
 </pre></div>
 
 
 <p>Then you can install it, for example the linux-ssh pack that will use the new <a href="https://github.com/naparuba/check-linux-by-ssh">agentless ssh checks for linux</a> :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span>
 </pre></div>
 
 
 <p>You can also use the command to have a local access to the shinken documentation :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">shinken</span> <span class="n">doc</span><span class="o">-</span><span class="n">serve</span>
+<div class="highlight"><pre>$ <span class="n">shinken</span> <span class="n">doc</span><span class="o">-</span><span class="n">serve</span>
 </pre></div>
 
 
@@ -220,11 +284,11 @@
 <a href='http://www.twitch.tv/naparuba'><img src="/theme/img/Twitch.png" /></a>
 <a href='https://github.com/naparuba'><img src="/theme/img/GitHub.png" /></a>
 </p>
-    <footer>
+    <div id="FooterArticle">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
         <p>Tagged as: <a href="/tag/shinken.html">shinken</a></p>
         <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
-    </footer>
+    </div>
 
 <hr/>
 
@@ -247,40 +311,219 @@
 
         </footer>
     </article>
-</section>                    </div>
+</section>
+    <div class="article_infos">
+        <p>Posted in: <a href="/category/talk.html">Talk</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a></p>
+    </div>
 
-                    <footer id="site-footer">
-                        <p>
-                            <a href="" target="_blank">
-                                
-                            </a> Shinken framework team /
-                            <a href="/">Archives</a>
-                            / Powered by
-                            <a href="https://github.com/getpelican/pelican" target="_blank">
-                                Pelican
-                            </a>
-                        </p>
-                    </footer>
-                </div> <!-- header+content+footer span -->
+<!--article.locale_date-->            </div>
+            <span id="ScrollTop">
+              <img src="/theme/img/caret.png" alt="caret shinken">
+            </span>
+          </div> <!-- header+content+footer span -->
 
-            </div> <!-- row -->
-        </div> <!-- /container -->
+        </div> <!-- row -->
+      </div> <!-- /container -->
+      <!--<div class="col-md-1"></div>-->
+      <div class="col-md-2">
+        <div id="SocialIcons" class="row">
+          <a href="https://twitter.com/shinken_monitor"><img src="/theme/img/twitter.png"></a>
+          <a href="https://plus.google.com/u/0/+shinken/posts"><img src="/theme/img/google.png"></a>
+          <a href="https://github.com/naparuba/shinken/"><img src="/theme/img/github.png"></a>
+        </div>
+        <div id="Search" class="row">
+          <h2>Search</h2>
+          <script>
+            (function() {
+            var cx = '005394482386049038212:vzp97eqtbku';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+            })();
+          </script>
+          <gcse:search></gcse:search>
+        </div>
+        <div id="Archives" class="row">
+          <a href="/"><h2>Archives</h2></a>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-09-08T10:20:00">08 Sep 2014 : </div>
+            <a href="/online-course-6-lan-scalability/">
+              Online course 6: LAN scalability, adding pollers
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-08-07T00:00:00">07 Aug 2014 : </div>
+            <a href="/online-course-5-monitoring-plugins/">
+              Online course 5: Monitoring Plugins
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-04-16T10:20:00">16 Apr 2014 : </div>
+            <a href="/2-0-release/">
+              2.0 release
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-04-08T00:00:00">08 Apr 2014 : </div>
+            <a href="/20-rc-last-patch-before-release/">
+              2.0 RC: last patch to test :)
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-19T10:20:00">19 Mar 2014 : </div>
+            <a href="/online-course-4-high-availability/">
+              Online course 4: High Availability
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-11T10:20:00">11 Mar 2014 : </div>
+            <a href="/online-course-3-migration-to-20/">
+              Online course 3: 1.4 to 2.0 migration
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-07T10:20:00">07 Mar 2014 : </div>
+            <a href="/online-course-2-webui/">
+              Online course 2: installing WebUI
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-03-04T10:20:00">04 Mar 2014 : </div>
+            <a href="/online-course-1-installation/">
+              Online course 1: installing shinken 2.0
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-02-17T10:20:00">17 Feb 2014 : </div>
+            <a href="/2-0-and-the-project/">
+              The 2.0 RC version and the project
+            </a>
+          </div>
+          <div id="LignArticle">
+            <div id="Date" datetime="2014-02-16T10:20:00">16 Feb 2014 : </div>
+            <a href="/byebye-wordpress/">
+              Byebye wordpress
+            </a>
+          </div>
+        
+        </div>
+        <hr class="clear">
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    
+    <footer id="site-footer">
+      <div class="row">
+        <div class="col-sm-4">
+          <img src="/theme/img/LogoFrameworkWhite.png" alt="Logo Shinken solutions" class="Logo">   
+        </div>
+        <ul class="col-sm-2 col-xs-6">
+          <li>
+            <a target="_blank" href="">Home</a>
+          </li> 
+          <li> 
+            <a target="_blank" href="http://shinken-monitoring.org/">Download</a>
+          </li>
+          <li>
+            <a target="_blank" href="https://shinken.readthedocs.org/en/latest/">Docs</a>
+          </li> 
+        </ul>   
+        <ul class="col-sm-2 col-xs-6">
+          <li>
+            <a target="_blank" href="mailto:naparuba@gmail.com">Contact Us</a>
+          </li>
+        </ul>                   
+        <div class="col-sm-4 col-xs-12">
+	  <!--                                <p>2014 © All rights reserved | SAS SHINKEN Solutions | RCS Bordeaux 794 549 543 |</p>-->
+        </div>
+      </div>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/theme/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+      <!--
+          <p>
+            <a href="" target="_blank">
+              
+            </a> Shinken framework team /
+            <a href="/">Archives</a>
+            / Powered by
+            <a href="https://github.com/getpelican/pelican" target="_blank">
+              Pelican
+            </a>
+          </p>
+	  -->
+    </footer>
+    
+    <script>
+      
+      $( document ).ready(function() {
 
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
-        <script>$('body').popover || document.write('<script src="/theme/js/vendor/bootstrap.min.js"><\/script>')</script>
 
-        <script src="/theme/js/vendor/jquery.colorbox-min.js"></script>
+      
+      $( "#Menu li a" ).click(function() {
+      $(this).next("ul").slideToggle("fast");   
+      });   
 
-        <script src="/theme/js/main.js"></script>
+      // Show Case : Commande la direction des hovers    
+      $(function(){
+      $(' #da-thumbs > li ').each( function() { $(this).hoverdir(); } );
+  });
 
-        <script>
-            var _gaq=[['_setAccount','UA-48477803-1'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-    </body>
+  $('#Lavalamp').lavalamp({
+  easing:"swing",
+  duration:300 
+  });
+
+  $('.lavalamp-object').css({
+  "border-bottom":" 3px solid #ff8400"
+  })
+
+  $( ".dropdown" ).click(function() {
+  $( "#Web_Map" ).slideToggle( "fast");
+  });
+
+
+  $( "#Lavalamp li" ).bind('mouseenter', function()  {
+  $(this).next(".HoverMenu").slideDown( "fast")
+  });
+
+  $( "#Lavalamp li" ).next(".HoverMenu").bind('mouseleave', function()  {
+  $(this).slideUp( "fast")
+  });
+
+
+  var HeightSlide = $("#Slide1").innerHeight();
+  $( ".Gradient" ).css("height",HeightSlide+"px");
+
+  $( window ).resize(function() {
+  var HeightSlide = $("#Slide1").innerHeight();
+  $( ".Gradient" ).css("height",HeightSlide+"px");    
+  });
+
+  });
+
+</script>
+<!--        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+
+
+<!--        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>-->
+<script src="/theme/js/vendor/jquery.colorbox-min.js"></script>
+<script>$('body').popover || document.write('<script src="/theme/js/vendor/bootstrap.min.js"><\/script>')</script>
+  <script src="/theme/js/vendor/jquery.colorbox-min.js"></script>
+  <script src="/theme/js/main.js"></script>
+
+  <!--
+      <script>
+        var _gaq=[['_setAccount','UA-48477803-1'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+      -->
+
+  
+</body>
 </html>

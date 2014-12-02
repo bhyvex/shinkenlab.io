@@ -3,14 +3,17 @@
 {% block title %}{{tag.name}} / {{SITENAME}}{% endblock %}
 
 {% block content %}
+
     <section>
     {% for article in dates %}
-        <article>
-            <time datetime="{{article.date.isoformat()}}">{{article.date.year}}</time>:
+<time class="tag" datetime="{{article.date.isoformat()}}"><div class="DateDay">{{article.date.strftime("%d")}}</div><span class="DateMounth"> {{article.date.strftime("%b")}} {{article.date.strftime("%Y")}} </span><span class="triangle"></span></time>
+        <article class="tag">
             <a href="{{SITEURL}}/{{article.url}}">
                 {{article.title}}
             </a>
         </article>
+            <hr class="clear">
     {% endfor %}
     </section>
+            <hr class="clear">
 {% endblock %}
