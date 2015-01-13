@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>2.0 RC: last patch to test :) / Some monitoring guys</title>
+    <title>Some news and announcements for 2015 / Some monitoring guys</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -141,81 +141,63 @@
             </header>
 
             <div class="content">
-<time datetime="2014-04-08T00:00:00"><div class="DateDay">08</div><span class="DateMounth"> Apr 2014 </span><span class="triangle"></span></time>
+<time datetime="2015-01-13T10:20:00"><div class="DateDay">13</div><span class="DateMounth"> Jan 2015 </span><span class="triangle"></span></time>
 
 <section>
     <article>
         <header>
-            <h2><a href="/20-rc-last-patch-before-release/" rel="bookmark">2.0 RC: last patch to test :)</a></h2>
+            <h2><a href="/news-and-announcements-2015/" rel="bookmark">Some news and announcements for 2015</a></h2>
 	    <span class='author'>Gabès Jean</span>
         </header>
         
-    <p>Hi,</p>
-<p>We got a patch about the last bug we did have on the RC version on debian 7, it's time to test this new RC version so we can release the 2.0 :D</p>
-<p>In the last RC dwe did have a bug on the <code>reactionner</code> daemon on the <code>debian 7</code> systems (maybe on others but we saw them on the debian 7 one). This bug was related to a low level bug on the python <a href="https://docs.python.org/2/library/multiprocessing.html">multiprocessing lib</a> (that is used to manage worker process communication). If you saw such thing on your logs:</p>
-<div class="highlight"><pre><span class="nx">Traceback</span> <span class="p">(</span><span class="nx">most</span> <span class="nx">recent</span> <span class="nb">call</span> <span class="nb">last</span><span class="p">):</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/bin/shinken-reactionner&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">97</span><span class="p">,</span> <span class="k">in</span> <span class="o">&lt;</span><span class="nx">module</span><span class="o">&gt;</span>
-  <span class="nx">daemon.main</span><span class="p">()</span>
-  <span class="nx">ebug</span> <span class="p">:</span>   <span class="nx">HTTP</span><span class="p">:</span> <span class="nx">calling</span> <span class="nb">lock</span> <span class="nb">for</span> <span class="nx">get_broks</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/local/lib/python2.7/dist-packages/shinken/satellite.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">991</span><span class="p">,</span> <span class="k">in</span> <span class="nx">main</span>
-  <span class="bp">self.</span><span class="nx">do_mainloop</span><span class="p">()</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/local/lib/python2.7/dist-packages/shinken/daemon.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">261</span><span class="p">,</span> <span class="k">in</span> <span class="nx">do_mainloop</span>
-  <span class="bp">self.</span><span class="nx">do_loop_turn</span><span class="p">()</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/local/lib/python2.7/dist-packages/shinken/satellite.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">783</span><span class="p">,</span> <span class="k">in</span> <span class="nx">do_loop_turn</span>
-  <span class="bp">self.</span><span class="nx">adjust_worker_number_by_load</span><span class="p">()</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/local/lib/python2.7/dist-packages/shinken/satellite.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">544</span><span class="p">,</span> <span class="k">in</span> <span class="nx">adjust_worker_number_by_load</span>
-  <span class="bp">self.</span><span class="nx">create_and_launch_worker</span><span class="p">(</span><span class="n">module_name</span><span class="o">=</span><span class="nx">mod</span><span class="p">)</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/local/lib/python2.7/dist-packages/shinken/satellite.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">403</span><span class="p">,</span> <span class="k">in</span> <span class="nx">create_and_launch_worker</span>
-  <span class="n">q</span> <span class="o">=</span> <span class="bp">self.</span><span class="nx">manager.Queue</span><span class="p">()</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">670</span><span class="p">,</span> <span class="k">in</span> <span class="nx">temp</span>
-  <span class="n">authkey</span><span class="o">=</span><span class="bp">self.</span><span class="nx">_authkey</span><span class="p">,</span> <span class="n">exposed</span><span class="o">=</span><span class="nb">exp</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">927</span><span class="p">,</span> <span class="k">in</span> <span class="nx">AutoProxy</span>
-  <span class="n">incref</span><span class="o">=</span><span class="nx">incref</span><span class="p">)</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">733</span><span class="p">,</span> <span class="k">in</span> <span class="nx">__init__</span>
-  <span class="bp">self.</span><span class="nx">_incref</span><span class="p">()</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">783</span><span class="p">,</span> <span class="k">in</span> <span class="nx">_incref</span>
-  <span class="nx">dispatch</span><span class="p">(</span><span class="nx">conn</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;incref&#39;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self.</span><span class="nx">_id</span><span class="p">,))</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">105</span><span class="p">,</span> <span class="k">in</span> <span class="nx">dispatch</span>
-  <span class="nx">raise</span> <span class="nx">convert_to_error</span><span class="p">(</span><span class="nx">kind</span><span class="p">,</span> <span class="nb">result</span><span class="p">)</span>
-  <span class="nx">multiprocessing.managers.RemoteError</span><span class="p">:</span> 
-  <span class="o">---------------------------------------------------------------------------</span>
-  <span class="nx">Traceback</span> <span class="p">(</span><span class="nx">most</span> <span class="nx">recent</span> <span class="nb">call</span> <span class="nb">last</span><span class="p">):</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">207</span><span class="p">,</span> <span class="k">in</span> <span class="nx">handle_request</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="nx">func</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="o">*</span><span class="nx">args</span><span class="p">,</span> <span class="o">**</span><span class="nx">kwds</span><span class="p">)</span>
-    <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">428</span><span class="p">,</span> <span class="k">in</span> <span class="nx">incref</span>
-    <span class="bp">self.</span><span class="nx">id_to_refcount</span><span class="err">[</span><span class="nx">ident</span><span class="cp">]</span> += 1
-      KeyError: &#39;d506c8&#39;
-  ---------------------------------------------------------------------------
-</pre></div>
-
-
-<p>Then you got the <code>reactionner</code> bug. What is quite strange is that :</p>
+    <p>Hi :)</p>
+<p>We did tag the 2.2RC1 some weeks ago.</p>
+<p>Thanks to some testers we did find some few bugs in it (mainly about configuration regression and notification problems). I just find that one of my customer configuration is valid on the 2.0.3 version but no more on the master one, so I'm looking why. But I think we are on the verge to a solid 2.2 release this week (maybe the 15 or 16)</p>
+<p>We already did talk about the Changelog in the RC1 email, but I'll post it again in the 2.2 release post :)</p>
+<h3>New release cycle</h3>
+<p>We did talk about the current release cycle with Savoir Faire Linux guys (SebSolon, Titilambert &amp; gst). It's related to the <a href="https://github.com/naparuba/shinken/issues/1394">github ticket</a></p>
+<p>The main idea is that currently we are drifting to much and so we are switching to a fixed date release cycle. A 3 months based one. It will be a 3 phases cycle:</p>
 <ul>
-<li>it only hapen on the <code>reactionner</code> daemon, but <code>poller</code> and <code>reactionner</code> got the exact same code</li>
-<li>it's on the lower level of the <code>multiprocessing lib</code> (goot luck to catch this....)</li>
+<li>~few weeks: re-factoring and such enhancements</li>
+<li>one month: features</li>
+<li>one month: freezing. No more feature (only in branch) and a 2 weeks RC phases (2 rc, only by weeks)</li>
 </ul>
-<p>The main difference between the reactionner and the poller daemons is that the reactionner have less activity than the poller. If it have very low activity, the worker process can kill themselve to get back some few Mb of memory to the system (was the <code>Harakiri</code> entries on the 1.4 logs).</p>
-<p>In the <a href="https://github.com/naparuba/shinken/commit/d001d1f6fa7e5dcdb2cbb5590c9e341c49ee95e4">patch I propose this morning</a> I did two changes:</p>
+<p>We did open the roadmap for the 2.4 version, with what we will add into it. It's this <a href="https://github.com/naparuba/shinken/issues/1451">ticket</a></p>
+<p>Feel free to add the point you want to code/enhance in it, it's really open :)</p>
+<p>For my part, my next big feature will be hot host definition. It's linked to another project of mine (<a href="https://github.com/naparuba/kunai">kunai</a>) but I'll talk about it a bit later in this email.</p>
+<h3>Our own repositories (debian/redhat/centos) &amp; docker images</h3>
+<p>Some of the members of the team are working on distribution packages (debian &amp; redhat like). But distribution inclusion is really a problem because it's really slow and in fact will be a real problem with the 3 months cycle. So we are working on our own repositories like other projects (mongodb for example). It will be far easier to manage, and the packages will be closer to the upstream version (yes distro, I'm talking about your stupid rules on the init.d scripts...)</p>
+<p>Titilambert is already working on the debian package and Hvad got a great RPM :)</p>
+<p>David Guenault is also working on docker images. I think it can be a really great way to setup shinken in the future :)</p>
+<h3>Forum migration</h3>
+<p>We currently have issues on the forum due to spam. We are both fighting it every day with Andreas. He propose a new forum platform (vbulletin) and we did try a migration some months ago, that fail because vbulletin and nginx are not happy together in our tries. So we are redoing the migration one more time but with a more simpler architecture.</p>
+<p>So if you saw change in the forum the next days/weeks, it will be normal ^^</p>
+<h3>New websites</h3>
+<p>I did hire a designer some months ago and you can see the result of her work on our websites :)</p>
+<p>She did a really great job, and now the websites have a common identity:</p>
 <ul>
-<li>I remove the harakiri phase. The master daemon was launching new workers just after the previous one was killing itself, so it's was quite useless</li>
-<li>I switch the communication layer for the inter-process. It was based on <code>unix socket</code> (named pipe on the <code>/tmp</code> with numerous <code>pymp-</code> directories). I switch to a localhost tcp communicaton instead (random high port, so you don't need to touch your iptables rules ;) )</li>
+<li><a href="http://shinken-monitoring.org">shinken-monitoring.org</a> : project main web site, about linking to the documentation, forum and co</li>
+<li><a href="http://shinkenlab.io">shinkenlab.io</a>: news &amp; tutorial/courses</li>
+<li><a href="http://shinken.io">shinken.io</a>: exchane platform for pack&amp;modules, and the new kernel.shinken.io shinken daemon monitoring tool ^^</li>
+<li><a href="http://shinken-solutions.com">shinken-solutions.com</a>: commercial part, about Enterprise edition &amp; the professionnnal support offer on the framework version</li>
 </ul>
-<p>I think this will solve this case (no more call on this part of the code, and even if it does, this won't lead to the same bug). So please give a test. The bug did happen something like once a day, so if in 3 days we got no more crash like this, we will be OK for 2.0 release! :D</p>
-<p>So please test it, I'l publish a <code>RC3</code> version on pypi (for the pip intall). All you will need to do is to launch:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">wget</span> <span class="n">https</span><span class="o">:</span><span class="c1">//pypi.python.org/packages/source/S/Shinken/Shinken-2.0-RC3.tar.gz</span>
-<span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">tar</span> <span class="n">vfxz</span> <span class="n">Shinken</span><span class="o">-</span><span class="mf">2.0</span><span class="o">-</span><span class="n">RC3</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">Shinken</span><span class="o">-</span><span class="mf">2.0</span><span class="o">-</span><span class="n">RC3</span>
-<span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">python</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span>
-</pre></div>
-
-
-<p>And check your version with :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">shinken</span> <span class="o">--</span><span class="n">version</span>
-<span class="n">shinken</span> <span class="mf">2.0</span><span class="o">-</span><span class="n">RC3</span>
-</pre></div>
-
-
-<p>Good test :D</p>
-<p><img src='/images/20-prerelase-patch/need-you.jpg'></p>
+<p>More of them are available in my github repository, so if you think about an enhancement or a typo, just send me a pull request :)</p>
+<h3>Professional support offer</h3>
+<p>I'm happy to announce that aside the Enterprise edition, my company (Shinken Solutions) is launching a professional support offer for the shinken framework version ^^</p>
+<p>We (Shinken Solutions) are focusing on high end support. We have partners that are the best to know how the shinken framework is installed and configured, and so they provide the first levels of support. This combo can provide the best to be sure your Shinken will be running for years :)</p>
+<p>For example if you are in the Canada you can ask to <a href="https://www.savoirfairelinux.com/">Savoir Faire Linux</a> (where SebSolon, Titilambert &amp; Gst are working) for this support :)</p>
+<p>Other partners should be announced soon on other countries. You can follow the shinken-solutions &amp; shinkenlab websites for such news ^^</p>
+<h3>New side project about service discovery: Kunai</h3>
+<p>Like some of you already know, I did work on a side project for a customer the last months. It's a service discovery tool named Kunai. I did start to work on it in may, but I open the repository the last month at <a href="https://github.com/naparuba/kunai">https://github.com/naparuba/kunai</a></p>
+<p>It's in MIT licence, and it's main focus is to manage very elastic environments. You can see it as a tool like <a href="https://github.com/coreos/etcd">etcd</a>) but in a totally distributed mode (no central server :) ).</p>
+<p>Even if it's main focus is service discovery (<strong>not</strong> network discovery, it do not scan the network ^^), it's already a great distributed agent (local scheduling, ngios checks, <strong>batteries included</strong> checks like for linux system, apache, mongodb or docker, automatic conf+plugins synchronization between nodes, etc etc). For the monitoring capabilities it's at the same level as Sensu, but without need to have a central node :)</p>
+<p>I already wrote an article about it in Linuxmag (france), and I'm looking for a reviewer of an English version, and traductors for other languages :) Just ping me if you are interested :)</p>
+<p>This project do not require Shinken to work, and Shinken won't need Kunai to work too. But I think using both can be a really great combo for the next versions (you boot a node in kunai and it will be automatically populated with local checks and will be inserted in shinken).</p>
+<p>if you want to give a try to it, just drop me a mail and I'll send you the documentation I'm currently writing for it :)</p>
+<p>Kunai will have its own site &amp; documentation, but I think most of you will find it a good replacement for nrpe or such agent :)</p>
+<h3>Conclusion</h3>
+<p>That's a quite big email (and I wrote it twice thanks to gmail...). I think it can be better if I stick so a weekly email that talk about what we did and to get more feedbacks too ;)</p>
+<p>So please give a test to the master version during this week, and expect the 2.2 for the end of the week (⌐■_■)</p>
 
 
 
@@ -227,7 +209,7 @@
 </p>
     <div id="FooterArticle">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/20.html">2.0</a> / <a href="/tag/release.html">release</a> / <a href="/tag/patch.html">patch</a></p>
+        <p>Tagged as: <a href="/tag/shinken-kunai.html">shinken kunai</a></p>
         <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
     </div>
 
@@ -255,7 +237,7 @@
 </section>
     <div class="article_infos">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/20.html">2.0</a> / <a href="/tag/release.html">release</a> / <a href="/tag/patch.html">patch</a></p>
+        <p>Tagged as: <a href="/tag/shinken-kunai.html">shinken kunai</a></p>
     </div>
 
 <!--article.locale_date-->            </div>

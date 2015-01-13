@@ -168,10 +168,10 @@ The software does not need to know specifically why I did not gather data. But t
 <p>So, what is this specific language plugins are using?</p>
 <div class="highlight"><pre><span class="o">|</span> <span class="n">Return</span> <span class="n">Code</span> <span class="o">|</span>   <span class="n">State</span>   <span class="o">|</span> <span class="n">Meaning</span>                                               <span class="o">|</span>
 <span class="o">|</span> <span class="o">------------|-----------|</span> <span class="o">------------------------------------------------------|</span>
-<span class="o">|</span> 0           <span class="o">|</span> <span class="n">OK</span>        <span class="o">|</span> <span class="n">This</span> <span class="n">is</span> <span class="n">the</span> <span class="n">expected</span> <span class="n">state</span><span class="p">.</span> <span class="n">Everything</span> <span class="n">looks</span> <span class="n">fine</span>     <span class="o">|</span>
-<span class="o">|</span> 1           <span class="o">|</span> <span class="n">WARNING</span>   <span class="o">|</span> <span class="n">Something</span> <span class="n">is</span> <span class="n">not</span> <span class="n">correct</span><span class="p">,</span> <span class="n">but</span> <span class="n">it</span><span class="o">&#39;</span><span class="n">s</span> <span class="n">not</span> <span class="n">very</span> <span class="n">important</span> <span class="o">|</span>
-<span class="o">|</span> 2           <span class="o">|</span> <span class="n">CRITICAL</span>  <span class="o">|</span> <span class="n">There</span> <span class="n">is</span> <span class="n">a</span> <span class="n">problem</span> <span class="n">and</span> <span class="n">this</span> <span class="n">is</span> <span class="n">serious</span><span class="p">.</span>               <span class="o">|</span>
-<span class="o">|</span> 3           <span class="o">|</span> <span class="n">UNKNOWN</span>   <span class="o">|</span> <span class="n">The</span> <span class="n">plugin</span> <span class="n">is</span> <span class="n">unable</span> <span class="n">to</span> <span class="n">tell</span> <span class="n">you</span> <span class="n">what</span><span class="o">&#39;</span><span class="n">s</span> <span class="n">going</span> <span class="n">on</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="mi">0</span>           <span class="o">|</span> <span class="n">OK</span>        <span class="o">|</span> <span class="n">This</span> <span class="n">is</span> <span class="n">the</span> <span class="n">expected</span> <span class="n">state</span><span class="p">.</span> <span class="n">Everything</span> <span class="n">looks</span> <span class="n">fine</span>     <span class="o">|</span>
+<span class="o">|</span> <span class="mi">1</span>           <span class="o">|</span> <span class="n">WARNING</span>   <span class="o">|</span> <span class="n">Something</span> <span class="n">is</span> <span class="n">not</span> <span class="n">correct</span><span class="p">,</span> <span class="n">but</span> <span class="n">it</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">not</span> <span class="n">very</span> <span class="n">important</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">2</span>           <span class="o">|</span> <span class="n">CRITICAL</span>  <span class="o">|</span> <span class="n">There</span> <span class="n">is</span> <span class="n">a</span> <span class="n">problem</span> <span class="n">and</span> <span class="n">this</span> <span class="n">is</span> <span class="n">serious</span><span class="p">.</span>               <span class="o">|</span>
+<span class="o">|</span> <span class="mi">3</span>           <span class="o">|</span> <span class="n">UNKNOWN</span>   <span class="o">|</span> <span class="n">The</span> <span class="n">plugin</span> <span class="n">is</span> <span class="n">unable</span> <span class="n">to</span> <span class="n">tell</span> <span class="n">you</span> <span class="n">what</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">going</span> <span class="n">on</span>      <span class="o">|</span>
 </pre></div>
 
 
@@ -180,7 +180,7 @@ The software does not need to know specifically why I did not gather data. But t
 <p>But what if you also want to return some metrics? How output the data so that Shinken will understand it ?</p>
 <p>Well, that a part of the Api, you also have a standard defined for the output. </p>
 <p>Basically an ouput looks like this :</p>
-<div class="highlight"><pre> <span class="p">[</span><span class="n">STATUS</span><span class="p">]</span> <span class="p">:</span> <span class="n">Output</span> <span class="n">fisrt</span> <span class="n">part</span> <span class="o">|</span> <span class="s">&#39;label&#39;</span><span class="p">=</span><span class="n">value</span><span class="p">[</span><span class="n">UOM</span><span class="p">];[</span><span class="n">warn</span><span class="p">];[</span><span class="n">crit</span><span class="p">];[</span><span class="n">min</span><span class="p">];[</span><span class="n">max</span><span class="p">]</span>
+<div class="highlight"><pre> <span class="p">[</span><span class="n">STATUS</span><span class="p">]</span> <span class="o">:</span> <span class="n">Output</span> <span class="n">fisrt</span> <span class="n">part</span> <span class="o">|</span> <span class="err">&#39;</span><span class="n">label</span><span class="err">&#39;</span><span class="o">=</span><span class="n">value</span><span class="p">[</span><span class="n">UOM</span><span class="p">];[</span><span class="n">warn</span><span class="p">];[</span><span class="n">crit</span><span class="p">];[</span><span class="n">min</span><span class="p">];[</span><span class="n">max</span><span class="p">]</span>
 </pre></div>
 
 
@@ -247,9 +247,7 @@ The software does not need to know specifically why I did not gather data. But t
 29
 30
 31
-32
-33
-34</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+32</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
 
 <span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -260,10 +258,8 @@ The software does not need to know specifically why I did not gather data. But t
 <span class="n">CRITICAL</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="mi">3</span>
 
-
 <span class="c"># Should be options</span>
 <span class="n">url</span><span class="o">=</span><span class="s">&quot;http://www.google.com&quot;</span>
-
 
 <span class="k">try</span><span class="p">:</span>
     <span class="n">output</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -368,6 +364,12 @@ The software does not need to know specifically why I did not gather data. But t
         </div>
         <div id="Archives" class="row">
           <a href="/"><h2>Archives</h2></a>
+          <div id="LignArticle">
+            <div id="Date" datetime="2015-01-13T10:20:00">13 Jan 2015 : </div>
+            <a href="/news-and-announcements-2015/">
+              Some news and announcements for 2015
+            </a>
+          </div>
           <div id="LignArticle">
             <div id="Date" datetime="2014-09-08T10:20:00">08 Sep 2014 : </div>
             <a href="/online-course-6-lan-scalability/">

@@ -158,9 +158,9 @@
 
 <p>(You can also have a <a href="http://www.youtube.com/watch?v=3LxKCoX6D6s">FR version of the video</a>)</p>
 <p>Your shinken daemons will need a user/group to run. Its name is quite obvious, it's just <code>shinken</code>, and as a simple user.</p>
-<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="n">adduser</span> <span class="n">shinken</span>
-<span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="n">id</span> <span class="n">shinken</span>
-<span class="n">uid</span><span class="p">=</span>1000<span class="p">(</span><span class="n">shinken</span><span class="p">)</span> <span class="n">gid</span><span class="p">=</span>1000<span class="p">(</span><span class="n">shinken</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">adduser</span> <span class="n">shinken</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">id</span> <span class="n">shinken</span>
+<span class="n">uid</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">shinken</span><span class="p">)</span> <span class="n">gid</span><span class="o">=</span><span class="mi">1000</span><span class="p">(</span><span class="n">shinken</span><span class="p">)</span>
 </pre></div>
 
 
@@ -170,20 +170,20 @@
 <li><code>python-setuptools</code> and <code>python-pip</code>: installation tool for python lib</li>
 </ul>
 <p>Just launch:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pycurl</span> <span class="n">python</span><span class="o">-</span><span class="n">setuptools</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pycurl</span> <span class="n">python</span><span class="o">-</span><span class="n">setuptools</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span>
 </pre></div>
 
 
 <p>And for Centos6:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">centos</span># <span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">mirror</span><span class="o">-</span><span class="n">fpt</span><span class="o">-</span><span class="n">telecom</span><span class="p">.</span><span class="n">fpt</span><span class="p">.</span><span class="n">net</span><span class="o">/</span><span class="n">fedora</span><span class="o">/</span><span class="n">epel</span><span class="o">/</span>6<span class="o">/</span><span class="n">i386</span><span class="o">/</span><span class="n">epel</span><span class="o">-</span><span class="n">release</span><span class="o">-</span>6<span class="o">-</span>8<span class="p">.</span><span class="n">noarch</span><span class="p">.</span><span class="n">rpm</span> <span class="o">&amp;&amp;</span> <span class="n">rpm</span> <span class="o">-</span><span class="n">Uvh</span> <span class="n">epel</span><span class="o">*</span><span class="n">rpm</span>
-<span class="n">root</span><span class="p">@</span><span class="n">centos</span># <span class="n">yum</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pycurl</span> <span class="n">python</span><span class="o">-</span><span class="n">setuptools</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span>
-<span class="n">root</span><span class="p">@</span><span class="n">centos</span># <span class="n">echo</span> <span class="s">&#39;alias pip=&quot;/usr/bin/pip-python&quot;&#39;</span> <span class="o">&gt;&gt;</span> $<span class="n">HOME</span><span class="o">/</span><span class="p">.</span><span class="n">bashrc</span>
-<span class="n">root</span><span class="p">@</span><span class="n">centos</span># <span class="p">.</span> $<span class="n">HOME</span><span class="o">/</span><span class="p">.</span><span class="n">bashrc</span>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">centos</span><span class="err">#</span> <span class="n">wget</span> <span class="n">http</span><span class="o">:</span><span class="c1">//mirror-fpt-telecom.fpt.net/fedora/epel/6/i386/epel-release-6-8.noarch.rpm &amp;&amp; rpm -Uvh epel*rpm</span>
+<span class="n">root</span><span class="err">@</span><span class="n">centos</span><span class="err">#</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pycurl</span> <span class="n">python</span><span class="o">-</span><span class="n">setuptools</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span>
+<span class="n">root</span><span class="err">@</span><span class="n">centos</span><span class="err">#</span> <span class="n">echo</span> <span class="err">&#39;</span><span class="n">alias</span> <span class="n">pip</span><span class="o">=</span><span class="s">&quot;/usr/bin/pip-python&quot;</span><span class="err">&#39;</span> <span class="o">&gt;&gt;</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/</span><span class="p">.</span><span class="n">bashrc</span>
+<span class="n">root</span><span class="err">@</span><span class="n">centos</span><span class="err">#</span> <span class="p">.</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/</span><span class="p">.</span><span class="n">bashrc</span>
 </pre></div>
 
 
 <p>As our dependencies are ok, we can now get and install our shinken daemons:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="n">pip</span> <span class="n">install</span> <span class="n">shinken</span>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">shinken</span>
 <span class="p">[...]</span>
 <span class="n">Shinken</span> <span class="n">setup</span> <span class="n">done</span>
 </pre></div>
@@ -197,50 +197,50 @@
 <li><code>/var/log/shinken</code>: the logs (what did you expect? :) )</li>
 </ul>
 <p>In order to start your new daemons, you just need to use the init.d script:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">start</span>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">start</span>
 </pre></div>
 
 
 <p>Your can look at your daemons by checking your shinken user, and even query a daemon:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="n">ps</span> <span class="o">-</span><span class="n">fu</span> <span class="n">shinken</span>
-<span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="n">curl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span>7770<span class="o">/</span>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">ps</span> <span class="o">-</span><span class="n">fu</span> <span class="n">shinken</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">curl</span> <span class="n">http</span><span class="o">:</span><span class="c1">//localhost:7770/</span>
 <span class="n">OK</span>
 </pre></div>
 
 
 <p>We can look at the only host that is checkd by default: the localhost :) Like all hosts, it's configuration is in a file in <code>/etc/shinken/hosts/</code>:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="nb">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">hosts</span><span class="o">/</span><span class="n">localhost</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">hosts</span><span class="o">/</span><span class="n">localhost</span><span class="p">.</span><span class="n">cfg</span>
 </pre></div>
 
 
 <p>By default this host is a dummy one, with no real checks (<code>generic-host</code> is a default <code>template</code> that give default values for an host). We want some basic linux monitoring (disks, load, memory, I/O and stuff like that). That what monitoring <code>packs</code> are done for. </p>
 <p>Lof of them are available on the <a href="http://shinken.io">shinken.io</a> website. Let's look what is available for our linux host, by using the <code>shinken</code> command that allow to query the <code>shinken.io</code> site. </p>
 <p>From now we will switch to the user shinken so the packages installations will be done by this user, and so there won't be problem for it to use them :)</p>
-<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="n">su</span> <span class="o">-</span> <span class="n">shinken</span>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">su</span> <span class="o">-</span> <span class="n">shinken</span>
 </pre></div>
 
 
 <p>The shinken cli command need to be initialized, in order to generate the <code>~/.shinken.ini</code> file with all the paths to the shinken directories:</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">shinken</span> <span class="o">--</span><span class="n">init</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="o">--</span><span class="n">init</span>
 </pre></div>
 
 
 <p>Then you can start to search for linux pack:</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">shinken</span> <span class="n">search</span> <span class="n">linux</span>
-<span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="p">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
-<span class="n">linux</span><span class="o">-</span><span class="n">snmp</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">snmp</span><span class="p">]</span> <span class="p">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SNMP</span>
-<span class="n">linux</span><span class="o">-</span><span class="n">ssh</span> <span class="p">(</span><span class="n">dessaiimrane</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">ssh</span><span class="p">]</span> <span class="p">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SSH</span> <span class="n">without</span> <span class="n">any</span> <span class="n">script</span> <span class="n">on</span> <span class="n">distant</span> <span class="n">server</span>
-<span class="n">pack</span><span class="o">-</span><span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="p">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="n">search</span> <span class="n">linux</span>
+<span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="o">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
+<span class="n">linux</span><span class="o">-</span><span class="n">snmp</span> <span class="p">(</span><span class="n">naparuba</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">snmp</span><span class="p">]</span> <span class="o">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SNMP</span>
+<span class="n">linux</span><span class="o">-</span><span class="n">ssh</span> <span class="p">(</span><span class="n">dessaiimrane</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">ssh</span><span class="p">]</span> <span class="o">:</span> <span class="n">Linux</span> <span class="n">checks</span> <span class="n">based</span> <span class="n">on</span> <span class="n">SSH</span> <span class="n">without</span> <span class="n">any</span> <span class="n">script</span> <span class="n">on</span> <span class="n">distant</span> <span class="n">server</span>
+<span class="n">pack</span><span class="o">-</span><span class="n">glances</span> <span class="p">(</span><span class="n">david</span><span class="o">-</span><span class="n">guenault</span><span class="p">)</span> <span class="p">[</span><span class="n">pack</span><span class="p">,</span><span class="n">system</span><span class="p">,</span><span class="n">linux</span><span class="p">,</span><span class="n">glances</span><span class="p">]</span> <span class="o">:</span> <span class="n">Standard</span> <span class="n">check</span> <span class="n">through</span> <span class="n">checkglances</span><span class="p">.</span><span class="n">py</span> <span class="n">and</span> <span class="n">glances</span> <span class="n">server</span>
 </pre></div>
 
 
 <p>We got some options for monitor our linux. I'm a big fan of agentless monitoring, so I'm choosing the <code>linux-ssh</code> one that allow us to check a linux with just a ssh key on it. We just need to install it:</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">shinken</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span>
 </pre></div>
 
 
 <p>This package came with included plugins and put them into <code>/var/lib/shinken/libexec</code>, but currently not all are like this.</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">ls</span> <span class="o">-</span><span class="n">la</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">libexec</span><span class="o">/*</span><span class="n">py</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">ls</span> <span class="o">-</span><span class="n">la</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">libexec</span><span class="o">/*</span><span class="n">py</span>
 <span class="n">check_net_stats_by_ssh</span><span class="p">.</span><span class="n">py</span>
 <span class="n">check_nfs_stats_by_ssh</span><span class="p">.</span><span class="n">py</span>
 <span class="p">[...]</span>
@@ -248,32 +248,32 @@
 
 
 <p>Theses plugins need the <code>python-paramiko</code> lib for the ssh connexion, so we must install it:</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span># <span class="n">su</span> <span class="o">-</span>
-<span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">paramiko</span>
-<span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="n">exit</span>
-<span class="n">shinken</span><span class="p">@</span><span class="n">debian</span>#
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">su</span> <span class="o">-</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">paramiko</span>
+<span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">exit</span>
+<span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span>
 </pre></div>
 
 
 <p>As theses plugins are launching commands by <code>ssh</code> we need to login to the distant server of course :)
 The good way to manage this is to authentify with a ssh key. One important note here: the shinken daemon run under the <code>shinken</code> user, so it must the the key of this user.</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span>$ <span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span>
 </pre></div>
 
 
 <p>And we must deploy this key on the monitored host too, with the <code>shinken</code> user (by default, you can change it on the hosts configurations):</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span>$ <span class="n">ssh</span><span class="o">-</span><span class="n">copy</span><span class="o">-</span><span class="n">id</span> <span class="o">-</span><span class="nb">i</span> <span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span> <span class="n">shinken</span><span class="p">@</span><span class="n">localhost</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">ssh</span><span class="o">-</span><span class="n">copy</span><span class="o">-</span><span class="n">id</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span> <span class="n">shinken</span><span class="err">@</span><span class="n">localhost</span>
 </pre></div>
 
 
 <p>Let's give a try at this plugin to see if all is OK:</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span>$ <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">check_load_average_by_ssh</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">H</span> <span class="n">localhost</span> <span class="o">-</span><span class="nb">i</span> <span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span>
-<span class="n">Ok</span><span class="p">:</span> <span class="n">load</span> <span class="n">average</span> <span class="n">is</span> <span class="n">good</span> 0<span class="p">.</span>00<span class="p">,</span>0<span class="p">.</span>00<span class="p">,</span>0<span class="p">.</span>00 <span class="o">|</span>  <span class="n">load1</span><span class="p">=</span>0<span class="p">.</span>00<span class="p">;</span>1<span class="p">.</span>00<span class="p">;</span>2<span class="p">.</span>00<span class="p">;;</span> <span class="n">load5</span><span class="p">=</span>0<span class="p">.</span>00<span class="p">;</span>1<span class="p">.</span>00<span class="p">;</span>2<span class="p">.</span>00<span class="p">;;</span> <span class="n">load15</span><span class="p">=</span>0<span class="p">.</span>00<span class="p">;</span>1<span class="p">.</span>00<span class="p">;</span>2<span class="p">.</span>00<span class="p">;;</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">check_load_average_by_ssh</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">H</span> <span class="n">localhost</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span>
+<span class="nl">Ok:</span> <span class="n">load</span> <span class="n">average</span> <span class="n">is</span> <span class="n">good</span> <span class="mf">0.00</span><span class="p">,</span><span class="mf">0.00</span><span class="p">,</span><span class="mf">0.00</span> <span class="o">|</span>  <span class="n">load1</span><span class="o">=</span><span class="mf">0.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">2.00</span><span class="p">;;</span> <span class="n">load5</span><span class="o">=</span><span class="mf">0.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">2.00</span><span class="p">;;</span> <span class="n">load15</span><span class="o">=</span><span class="mf">0.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">2.00</span><span class="p">;;</span>
 </pre></div>
 
 
 <p>We can now add the linux-ssh tag to the localhost definition:</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span>$ <span class="nb">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">hosts</span><span class="o">/</span><span class="n">localhost</span><span class="p">.</span><span class="n">cfg</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">hosts</span><span class="o">/</span><span class="n">localhost</span><span class="p">.</span><span class="n">cfg</span>
 <span class="n">define</span> <span class="n">host</span><span class="p">{</span>
     <span class="n">use</span>                     <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span><span class="p">,</span><span class="n">generic</span><span class="o">-</span><span class="n">host</span>
     <span class="n">contact_groups</span>          <span class="n">admins</span>
@@ -284,13 +284,13 @@ The good way to manage this is to authentify with a ssh key. One important note 
 
 
 <p>Great :) Now you can restart shinken and tail your shinken logs to wait for some alerts:</p>
-<div class="highlight"><pre><span class="n">root</span><span class="p">@</span><span class="n">debian</span># <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">restart</span>
-<span class="n">shinken</span><span class="p">@</span><span class="n">debian</span>$ <span class="n">tail</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulerd</span><span class="p">.</span><span class="nb">log</span>
+<div class="highlight"><pre><span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">shinken</span> <span class="n">restart</span>
+<span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">tail</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">shinken</span><span class="o">/</span><span class="n">schedulerd</span><span class="p">.</span><span class="n">log</span>
 </pre></div>
 
 
 <p>To go further you will maybe need the shinken documentation. You can look at it online on <a href="https://shinken.readthedocs.org/">readthedocs</a> but you can also got it locally on your shinken server (like on an offline network). All you need to do is:</p>
-<div class="highlight"><pre><span class="n">shinken</span><span class="p">@</span><span class="n">debian</span>$ <span class="n">shinken</span> <span class="n">doc</span><span class="o">-</span><span class="n">serve</span>
+<div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">$</span> <span class="n">shinken</span> <span class="n">doc</span><span class="o">-</span><span class="n">serve</span>
 </pre></div>
 
 
@@ -371,6 +371,12 @@ The good way to manage this is to authentify with a ssh key. One important note 
         </div>
         <div id="Archives" class="row">
           <a href="/"><h2>Archives</h2></a>
+          <div id="LignArticle">
+            <div id="Date" datetime="2015-01-13T10:20:00">13 Jan 2015 : </div>
+            <a href="/news-and-announcements-2015/">
+              Some news and announcements for 2015
+            </a>
+          </div>
           <div id="LignArticle">
             <div id="Date" datetime="2014-09-08T10:20:00">08 Sep 2014 : </div>
             <a href="/online-course-6-lan-scalability/">
