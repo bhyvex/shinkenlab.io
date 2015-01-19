@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>2.0 RC: last patch to test :) / Some monitoring guys</title>
+    <title>2.2 release / Some monitoring guys</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -141,81 +141,118 @@
             </header>
 
             <div class="content">
-<time datetime="2014-04-08T00:00:00"><div class="DateDay">08</div><span class="DateMounth"> Apr 2014 </span><span class="triangle"></span></time>
+<time datetime="2015-01-19T10:20:00"><div class="DateDay">19</div><span class="DateMounth"> Jan 2015 </span><span class="triangle"></span></time>
 
 <section>
     <article>
         <header>
-            <h2><a href="/20-rc-last-patch-before-release/" rel="bookmark">2.0 RC: last patch to test :)</a></h2>
+            <h2><a href="/release-2-2/" rel="bookmark">2.2 release</a></h2>
 	    <span class='author'>Gabès Jean</span>
         </header>
         
-    <p>Hi,</p>
-<p>We got a patch about the last bug we did have on the RC version on debian 7, it's time to test this new RC version so we can release the 2.0 :D</p>
-<p>In the last RC dwe did have a bug on the <code>reactionner</code> daemon on the <code>debian 7</code> systems (maybe on others but we saw them on the debian 7 one). This bug was related to a low level bug on the python <a href="https://docs.python.org/2/library/multiprocessing.html">multiprocessing lib</a> (that is used to manage worker process communication). If you saw such thing on your logs:</p>
-<div class="highlight"><pre><span class="nx">Traceback</span> <span class="p">(</span><span class="nx">most</span> <span class="nx">recent</span> <span class="nb">call</span> <span class="nb">last</span><span class="p">):</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/bin/shinken-reactionner&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">97</span><span class="p">,</span> <span class="k">in</span> <span class="o">&lt;</span><span class="nx">module</span><span class="o">&gt;</span>
-  <span class="nx">daemon.main</span><span class="p">()</span>
-  <span class="nx">ebug</span> <span class="p">:</span>   <span class="nx">HTTP</span><span class="p">:</span> <span class="nx">calling</span> <span class="nb">lock</span> <span class="nb">for</span> <span class="nx">get_broks</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/local/lib/python2.7/dist-packages/shinken/satellite.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">991</span><span class="p">,</span> <span class="k">in</span> <span class="nx">main</span>
-  <span class="bp">self.</span><span class="nx">do_mainloop</span><span class="p">()</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/local/lib/python2.7/dist-packages/shinken/daemon.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">261</span><span class="p">,</span> <span class="k">in</span> <span class="nx">do_mainloop</span>
-  <span class="bp">self.</span><span class="nx">do_loop_turn</span><span class="p">()</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/local/lib/python2.7/dist-packages/shinken/satellite.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">783</span><span class="p">,</span> <span class="k">in</span> <span class="nx">do_loop_turn</span>
-  <span class="bp">self.</span><span class="nx">adjust_worker_number_by_load</span><span class="p">()</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/local/lib/python2.7/dist-packages/shinken/satellite.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">544</span><span class="p">,</span> <span class="k">in</span> <span class="nx">adjust_worker_number_by_load</span>
-  <span class="bp">self.</span><span class="nx">create_and_launch_worker</span><span class="p">(</span><span class="n">module_name</span><span class="o">=</span><span class="nx">mod</span><span class="p">)</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/local/lib/python2.7/dist-packages/shinken/satellite.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">403</span><span class="p">,</span> <span class="k">in</span> <span class="nx">create_and_launch_worker</span>
-  <span class="n">q</span> <span class="o">=</span> <span class="bp">self.</span><span class="nx">manager.Queue</span><span class="p">()</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">670</span><span class="p">,</span> <span class="k">in</span> <span class="nx">temp</span>
-  <span class="n">authkey</span><span class="o">=</span><span class="bp">self.</span><span class="nx">_authkey</span><span class="p">,</span> <span class="n">exposed</span><span class="o">=</span><span class="nb">exp</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">927</span><span class="p">,</span> <span class="k">in</span> <span class="nx">AutoProxy</span>
-  <span class="n">incref</span><span class="o">=</span><span class="nx">incref</span><span class="p">)</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">733</span><span class="p">,</span> <span class="k">in</span> <span class="nx">__init__</span>
-  <span class="bp">self.</span><span class="nx">_incref</span><span class="p">()</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">783</span><span class="p">,</span> <span class="k">in</span> <span class="nx">_incref</span>
-  <span class="nx">dispatch</span><span class="p">(</span><span class="nx">conn</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;incref&#39;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self.</span><span class="nx">_id</span><span class="p">,))</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">105</span><span class="p">,</span> <span class="k">in</span> <span class="nx">dispatch</span>
-  <span class="nx">raise</span> <span class="nx">convert_to_error</span><span class="p">(</span><span class="nx">kind</span><span class="p">,</span> <span class="nb">result</span><span class="p">)</span>
-  <span class="nx">multiprocessing.managers.RemoteError</span><span class="p">:</span> 
-  <span class="o">---------------------------------------------------------------------------</span>
-  <span class="nx">Traceback</span> <span class="p">(</span><span class="nx">most</span> <span class="nx">recent</span> <span class="nb">call</span> <span class="nb">last</span><span class="p">):</span>
-  <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">207</span><span class="p">,</span> <span class="k">in</span> <span class="nx">handle_request</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="nx">func</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="o">*</span><span class="nx">args</span><span class="p">,</span> <span class="o">**</span><span class="nx">kwds</span><span class="p">)</span>
-    <span class="nb">File</span> <span class="s2">&quot;/usr/lib/python2.7/multiprocessing/managers.py&quot;</span><span class="p">,</span> <span class="nb">line</span> <span class="mi">428</span><span class="p">,</span> <span class="k">in</span> <span class="nx">incref</span>
-    <span class="bp">self.</span><span class="nx">id_to_refcount</span><span class="err">[</span><span class="nx">ident</span><span class="cp">]</span> += 1
-      KeyError: &#39;d506c8&#39;
-  ---------------------------------------------------------------------------
+    <p>Hi :)</p>
+<p>After some weeks of tests of the <a href="/news-and-announcements-2015">RC1 version</a>, it's time to release the 2.2 ^^</p>
+<p>Thanks to everyone that help us to get this version out, by coding or reporting bugs :)</p>
+<p>As always, you can have a look at the full <a href="https://github.com/naparuba/shinken/blob/master/Changelog">changelog</a> but I'll try to explain youthe main new features you can expect in this version :)</p>
+<h3>Snapshots</h3>
+<p>The main new feature of this version are the <strong>snapshots</strong>. </p>
+<p>Snapshots are quite simple in fact. I did have lot of case at work where my boss asked me "why there was such a big load at 3AM, this did crash XXX batch". And the problem is that I did have the load average and other performances values, but no other analysis clues.</p>
+<p>What did I need on this time? Just a dumb "ps aux" launched at 3AM during the load average warning/critical phase. And that's <strong>spanshots</strong> are about: they allow you to launch some commands based on some criteria like "go into warning state" and with large ouput (like a full ps output). This output will be exported to the broker that will be able to save it somewhere (file, mongo, ...). Then it's quite easy for an UI to go query it and display it aside your logs when you try to find what did ask so much load :)</p>
+<p>A snapshot will ask for a classic command:</p>
+<div class="highlight"><pre><span class="n">define</span> <span class="n">command</span> <span class="p">{</span>
+  <span class="n">command_name</span>    <span class="n">dump_processes</span>
+  <span class="n">command_line</span>    <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">ssh</span> <span class="o">-</span><span class="n">H</span> <span class="err">$</span><span class="n">HOSTADDRESS</span><span class="err">$</span> <span class="s">&quot;ps ax -o user,vsz,rss,pcpu,command&quot;</span>
+<span class="p">}</span>
 </pre></div>
 
 
-<p>Then you got the <code>reactionner</code> bug. What is quite strange is that :</p>
+<p>Then you can call it from a service definition, here a load average one :</p>
+<div class="highlight"><pre><span class="n">define</span> <span class="n">service</span><span class="p">{</span>
+   <span class="n">service_description</span>    <span class="n">Load</span> <span class="n">Average</span>
+   <span class="n">use</span>                    <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span><span class="o">-</span><span class="n">service</span>
+   <span class="k">register</span>               <span class="mi">0</span>
+   <span class="n">host_name</span>              <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span>
+   <span class="n">check_command</span>          <span class="n">check_ssh_linux_load_average</span>
+
+   <span class="n">snapshot_command</span>    <span class="n">dump_processes</span>
+   <span class="n">snapshot_enabled</span>    <span class="mi">1</span>
+   <span class="n">snapshot_criteria</span>   <span class="n">c</span>
+   <span class="n">snapshot_period</span>     <span class="n">night</span>
+   <span class="n">snapshot_interval</span>   <span class="mi">15</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The parameters are quite simple:</p>
 <ul>
-<li>it only hapen on the <code>reactionner</code> daemon, but <code>poller</code> and <code>reactionner</code> got the exact same code</li>
-<li>it's on the lower level of the <code>multiprocessing lib</code> (goot luck to catch this....)</li>
+<li>snapshot_command: what to launch. Beware: it will be lauched by a reactionner daemon.</li>
+<li>snapshot_enabled: 0 by default. Must have a command and be 1 to launch the snapshot</li>
+<li>snapshot_criteria: on which element state to launch the command (w=warning, c=critical, etc etc)</li>
+<li>snapshot_period: only launch during this period. Mainly the night when admins are not here :)</li>
+<li>snapshot_interval: do not hummer the host with such commands, so only launch every 15min the snapshot :)</li>
 </ul>
-<p>The main difference between the reactionner and the poller daemons is that the reactionner have less activity than the poller. If it have very low activity, the worker process can kill themselve to get back some few Mb of memory to the system (was the <code>Harakiri</code> entries on the 1.4 logs).</p>
-<p>In the <a href="https://github.com/naparuba/shinken/commit/d001d1f6fa7e5dcdb2cbb5590c9e341c49ee95e4">patch I propose this morning</a> I did two changes:</p>
+<p>The scheduler will scheduler the snapshot, that will be launched by the reactionner daemon. then the information is grok by the broker nad it can send it to a module. I wrote a module to manage this, feel free to write your own if you don't like mongodb :)</p>
+<div class="highlight"><pre>  <span class="n">shinken</span> <span class="n">install</span> <span class="n">snapshot</span><span class="o">-</span><span class="n">mongodb</span>
+</pre></div>
+
+
+<p>Enable this module as usual:</p>
+<div class="highlight"><pre><span class="n">define</span> <span class="n">module</span> <span class="p">{</span>
+   <span class="n">module_name</span>     <span class="n">snapshot</span><span class="o">-</span><span class="n">mongodb</span>
+   <span class="n">module_type</span>     <span class="n">snapshot_mongodb</span>
+   <span class="n">uri</span>             <span class="n">mongodb</span><span class="o">:</span><span class="c1">//localhost/?safe=false</span>
+   <span class="n">database</span>        <span class="n">shinken</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>And in your brokers objects:</p>
+<div class="highlight"><pre><span class="n">define</span> <span class="n">broker</span> <span class="p">{</span>
+   <span class="n">broker_name</span>     <span class="n">broker</span><span class="o">-</span><span class="n">master</span>
+   <span class="p">[...]</span>
+   <span class="n">modules</span>  <span class="n">webui</span><span class="p">,</span> <span class="n">snapshot</span><span class="o">-</span><span class="n">mongodb</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>It's now up to the UIs or your reporting tools to use these historical data and show them to your users :)</p>
+<h3>Exporting internal performance data</h3>
+<p>On key point about Shinken is its speed. But how to see it and monitor it? In the previous version (2.0) there was a first attempt with an HTTP API to get some data about performances. But now it will even easier as the daemons can automatically export theses data to metrology tools :)</p>
+<h4>To statsd</h4>
+<p>The first metrology tool to be manage is <a href="https://github.com/etsy/statsd/">statsd</a>. It's really easy to setup one. When it's up, all you have to do is to enable it on your shnken.cfg file:</p>
+<div class="highlight"><pre><span class="n">statsd_host</span><span class="o">=</span><span class="n">my</span><span class="o">-</span><span class="n">statsd</span><span class="o">-</span><span class="n">server</span>
+<span class="n">statsd_port</span><span class="o">=</span><span class="mi">8125</span>
+<span class="n">statsd_prefix</span><span class="o">=</span><span class="n">shinken</span>
+<span class="n">statsd_enabled</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+
+
+<p>You only need to set it on your shinken.cfg file (so the arbtier daemon). It will be automatically send to all the others daemons :)</p>
+<h4>To kernel.shinken.io</h4>
+<p>If you don't want to start a statsd daemon, you can use the <a href="http://kernel.shinken.io">kernel.shinken.io</a> service. It's totally free and it can accept metrology data from your daemon and it will show you the last 7 days metrics of your daemons. It's currently in Beta phase and should be in stable phase quite soon :)</p>
+<p>To enable it, it's very easy. All you need is to have a <a href="http://shinken.io">shinken.io</a> account and look at your <a href="http://shinken.io/~">profile</a> page for your <strong>api_key</strong> and your <strong>secret</strong>. Then add them to the shinken.cfg file, like for statsd:</p>
+<div class="highlight"><pre><span class="n">api_key</span><span class="o">=</span><span class="n">ABCDEFGHIJ</span>
+<span class="n">secret</span><span class="o">=</span><span class="n">KLMOPQRST</span>
+</pre></div>
+
+
+<p>If you need a proxy, just add it too:</p>
+<div class="highlight"><pre><span class="n">http_proxy</span><span class="o">=</span><span class="n">http</span><span class="o">:</span><span class="c1">//monproxy:3128</span>
+</pre></div>
+
+
+<p>No password, or hsotname, or contact name will be send to this API. Only metrics. And of course the data are crypted before being send ;)</p>
+<h3>About old webui and livestatus versions</h3>
+<p>If you are using webui or livestatus module, please update the module too when you are upgrading the shinken framework. I'm updating the shinken.io versions, but to be sure you may need to take the version directly from github for theses two modules:</p>
 <ul>
-<li>I remove the harakiri phase. The master daemon was launching new workers just after the previous one was killing itself, so it's was quite useless</li>
-<li>I switch the communication layer for the inter-process. It was based on <code>unix socket</code> (named pipe on the <code>/tmp</code> with numerous <code>pymp-</code> directories). I switch to a localhost tcp communicaton instead (random high port, so you don't need to touch your iptables rules ;) )</li>
+<li>https://github.com/shinken-monitoring/mod-livestatus</li>
+<li>https://github.com/shinken-monitoring/mod-webui</li>
 </ul>
-<p>I think this will solve this case (no more call on this part of the code, and even if it does, this won't lead to the same bug). So please give a test. The bug did happen something like once a day, so if in 3 days we got no more crash like this, we will be OK for 2.0 release! :D</p>
-<p>So please test it, I'l publish a <code>RC3</code> version on pypi (for the pip intall). All you will need to do is to launch:</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">wget</span> <span class="n">https</span><span class="o">:</span><span class="c1">//pypi.python.org/packages/source/S/Shinken/Shinken-2.0-RC3.tar.gz</span>
-<span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">tar</span> <span class="n">vfxz</span> <span class="n">Shinken</span><span class="o">-</span><span class="mf">2.0</span><span class="o">-</span><span class="n">RC3</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">Shinken</span><span class="o">-</span><span class="mf">2.0</span><span class="o">-</span><span class="n">RC3</span>
-<span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">python</span> <span class="n">setup</span><span class="p">.</span><span class="n">py</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span>
-</pre></div>
-
-
-<p>And check your version with :</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">root</span><span class="err">@</span><span class="n">debian</span><span class="o">:</span> <span class="n">shinken</span> <span class="o">--</span><span class="n">version</span>
-<span class="n">shinken</span> <span class="mf">2.0</span><span class="o">-</span><span class="n">RC3</span>
-</pre></div>
-
-
-<p>Good test :D</p>
-<p><img src='/images/20-prerelase-patch/need-you.jpg'></p>
+<p>We did try to not break compatibility with the old moduels version, but for theses two ones it was not possible without droping some bug fixes. So we did break compatibility with previous module versions.</p>
+<h3>What next?</h3>
+<p>I already present the new release cycle on my <a href="news-and-announcements-2015">last post</a>. We will focus on the IT elastic parts, like for my part the addition of hosts without restarting the arbiter daemon ^^</p>
+<p>I'll send more regulary news about this, and also about my new side project about service discovery named <a href="https://github.com/naparuba/kunai">kunai</a> because it will be a perfect match with the hot host insersion feature :)</p>
+<p>See you soon and have a good monitoring :)</p>
 
 
 
@@ -227,7 +264,7 @@
 </p>
     <div id="FooterArticle">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/20.html">2.0</a> / <a href="/tag/release.html">release</a> / <a href="/tag/patch.html">patch</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a></p>
         <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
     </div>
 
@@ -255,7 +292,7 @@
 </section>
     <div class="article_infos">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/20.html">2.0</a> / <a href="/tag/release.html">release</a> / <a href="/tag/patch.html">patch</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a></p>
     </div>
 
 <!--article.locale_date-->            </div>
