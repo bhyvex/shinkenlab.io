@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>2.2 release / Some monitoring guys</title>
+    <title>kernel.shinken.io / Some monitoring guys</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -141,130 +141,55 @@
             </header>
 
             <div class="content">
-<time datetime="2015-01-19T10:20:00"><div class="DateDay">19</div><span class="DateMounth"> Jan 2015 </span><span class="triangle"></span></time>
+<time datetime="2015-02-12T10:20:00"><div class="DateDay">12</div><span class="DateMounth"> Feb 2015 </span><span class="triangle"></span></time>
 
 <section>
     <article>
         <header>
-            <h2><a href="/release-2-2/" rel="bookmark">2.2 release</a></h2>
-	    <span class='author'>Gabès Jean</span>
+            <h2><a href="/kernel-shinken-io/" rel="bookmark">kernel.shinken.io</a></h2>
+	    <span class='author'>Joaquim Roy</span>
         </header>
         
-    <p>Hi :)</p>
-<p>After some weeks of tests of the <a href="/news-and-announcements-2015">RC1 version</a>, it's time to release the 2.2 ^^</p>
-<p>Thanks to everyone that help us to get this version out, by coding or reporting bugs :)</p>
-<p>As always, you can have a look at the full <a href="https://github.com/naparuba/shinken/blob/master/Changelog">changelog</a> but I'll try to explain youthe main new features you can expect in this version :)</p>
-<h3>Snapshots</h3>
-<p>The main new feature of this version are the <strong>snapshots</strong>. </p>
-<p>Snapshots are quite simple in fact. I did have lot of case at work where my boss asked me "why there was such a big load at 3AM, this did crash XXX batch". And the problem is that I did have the load average and other performances values, but no other analysis clues.</p>
-<p>What did I need on this time? Just a dumb "ps aux" launched at 3AM during the load average warning/critical phase. And that's <strong>spanshots</strong> are about: they allow you to launch some commands based on some criteria like "go into warning state" and with large ouput (like a full ps output). This output will be exported to the broker that will be able to save it somewhere (file, mongo, ...). Then it's quite easy for an UI to go query it and display it aside your logs when you try to find what did ask so much load :)</p>
-<p>A snapshot will ask for a classic command:</p>
-<div class="highlight"><pre><span class="n">define</span> <span class="n">command</span> <span class="p">{</span>
-  <span class="n">command_name</span>    <span class="n">dump_processes</span>
-  <span class="n">command_line</span>    <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">ssh</span> <span class="o">-</span><span class="n">H</span> <span class="err">$</span><span class="n">HOSTADDRESS</span><span class="err">$</span> <span class="s">&quot;ps ax -o user,vsz,rss,pcpu,command&quot;</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>Then you can call it from a service definition, here a load average one :</p>
-<div class="highlight"><pre><span class="n">define</span> <span class="n">service</span><span class="p">{</span>
-   <span class="n">service_description</span>    <span class="n">Load</span> <span class="n">Average</span>
-   <span class="n">use</span>                    <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span><span class="o">-</span><span class="n">service</span>
-   <span class="k">register</span>               <span class="mi">0</span>
-   <span class="n">host_name</span>              <span class="n">linux</span><span class="o">-</span><span class="n">ssh</span>
-   <span class="n">check_command</span>          <span class="n">check_ssh_linux_load_average</span>
-
-   <span class="n">snapshot_command</span>    <span class="n">dump_processes</span>
-   <span class="n">snapshot_enabled</span>    <span class="mi">1</span>
-   <span class="n">snapshot_criteria</span>   <span class="n">c</span>
-   <span class="n">snapshot_period</span>     <span class="n">night</span>
-   <span class="n">snapshot_interval</span>   <span class="mi">15</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>The parameters are quite simple:</p>
-<ul>
-<li>snapshot_command: what to launch. Beware: it will be lauched by a reactionner daemon.</li>
-<li>snapshot_enabled: 0 by default. Must have a command and be 1 to launch the snapshot</li>
-<li>snapshot_criteria: on which element state to launch the command (w=warning, c=critical, etc etc)</li>
-<li>snapshot_period: only launch during this period. Mainly the night when admins are not here :)</li>
-<li>snapshot_interval: do not hummer the host with such commands, so only launch every 15min the snapshot :)</li>
-</ul>
-<p>The scheduler will scheduler the snapshot, that will be launched by the reactionner daemon. then the information is grok by the broker nad it can send it to a module. I wrote a module to manage this, feel free to write your own if you don't like mongodb :)</p>
-<div class="highlight"><pre>  <span class="n">shinken</span> <span class="n">install</span> <span class="n">snapshot</span><span class="o">-</span><span class="n">mongodb</span>
-</pre></div>
-
-
-<p>Enable this module as usual:</p>
-<div class="highlight"><pre><span class="n">define</span> <span class="n">module</span> <span class="p">{</span>
-   <span class="n">module_name</span>     <span class="n">snapshot</span><span class="o">-</span><span class="n">mongodb</span>
-   <span class="n">module_type</span>     <span class="n">snapshot_mongodb</span>
-   <span class="n">uri</span>             <span class="n">mongodb</span><span class="o">:</span><span class="c1">//localhost/?safe=false</span>
-   <span class="n">database</span>        <span class="n">shinken</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>And in your brokers objects:</p>
-<div class="highlight"><pre><span class="n">define</span> <span class="n">broker</span> <span class="p">{</span>
-   <span class="n">broker_name</span>     <span class="n">broker</span><span class="o">-</span><span class="n">master</span>
-   <span class="p">[...]</span>
-   <span class="n">modules</span>  <span class="n">webui</span><span class="p">,</span> <span class="n">snapshot</span><span class="o">-</span><span class="n">mongodb</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>It's now up to the UIs or your reporting tools to use these historical data and show them to your users :)</p>
-<h3>Exporting internal performance data</h3>
-<p>On key point about Shinken is its speed. But how to see it and monitor it? In the previous version (2.0) there was a first attempt with an HTTP API to get some data about performances. But now it will even easier as the daemons can automatically export theses data to metrology tools :)</p>
-<h4>To statsd</h4>
-<p>The first metrology tool to be manage is <a href="https://github.com/etsy/statsd/">statsd</a>. It's really easy to setup one. When it's up, all you have to do is to enable it on your shnken.cfg file:</p>
-<div class="highlight"><pre><span class="n">statsd_host</span><span class="o">=</span><span class="n">my</span><span class="o">-</span><span class="n">statsd</span><span class="o">-</span><span class="n">server</span>
-<span class="n">statsd_port</span><span class="o">=</span><span class="mi">8125</span>
-<span class="n">statsd_prefix</span><span class="o">=</span><span class="n">shinken</span>
-<span class="n">statsd_enabled</span><span class="o">=</span><span class="mi">1</span>
-</pre></div>
-
-
-<p>You only need to set it on your shinken.cfg file (so the arbtier daemon). It will be automatically send to all the others daemons :)</p>
-<h4>To kernel.shinken.io</h4>
-<p>If you don't want to start a statsd daemon, you can use the <a href="http://kernel.shinken.io">kernel.shinken.io</a> service. It's totally free and it can accept metrology data from your daemon and it will show you the last 7 days metrics of your daemons. It's currently in Beta phase and should be in stable phase quite soon :)</p>
-<p>To enable it, it's very easy. All you need is to have a <a href="http://shinken.io">shinken.io</a> account and look at your <a href="http://shinken.io/~">profile</a> page for your <strong>api_key</strong> and your <strong>secret</strong>. Then add them to the shinken.cfg file, like for statsd:</p>
+    <p>Greetings,</p>
+<p>Jean did announce in the <a href="/release-2-2/">2.2 announce</a> that since this version the shinken framework is now able to send its inner metrology data to the outside, and especially the <a href="http://kernel.shinken.io">kernel.shinken.io</a> platform. The account for kernel is the <a href="http://shinken.io">shinken.io</a> one.</p>
+<p>Like said in the announce post, configure your Shinken framework so it start to send data is very easy. All you need is to look at your <a href="http://shinken.io">shinken.io</a> account and look at your <a href="http://shinken.io/~">profile</a> page for your <strong>api_key</strong> and your <strong>secret</strong>. Then add them to the shinken.cfg file:</p>
 <div class="highlight"><pre><span class="n">api_key</span><span class="o">=</span><span class="n">ABCDEFGHIJ</span>
 <span class="n">secret</span><span class="o">=</span><span class="n">KLMOPQRST</span>
 </pre></div>
 
 
 <p>If you need a proxy, just add it too:</p>
-<div class="highlight"><pre><span class="n">http_proxy</span><span class="o">=</span><span class="n">http</span><span class="o">:</span><span class="c1">//monproxy:3128</span>
+<div class="highlight"><pre><span class="n">http_proxy</span><span class="o">=</span><span class="n">http</span><span class="o">:</span><span class="c1">//myproxy:3128</span>
 </pre></div>
 
 
-<p>No password, or hsotname, or contact name will be send to this API. Only metrics. And of course the data are crypted before being send ;)</p>
-<h3>About old webui and livestatus versions</h3>
-<p>If you are using webui or livestatus module, please update the module too when you are upgrading the shinken framework. I'm updating the shinken.io versions, but to be sure you may need to take the version directly from github for theses two modules:</p>
-<ul>
-<li>https://github.com/shinken-monitoring/mod-livestatus</li>
-<li>https://github.com/shinken-monitoring/mod-webui</li>
-</ul>
-<p>We did try to not break compatibility with the old moduels version, but for theses two ones it was not possible without droping some bug fixes. So we did break compatibility with previous module versions.</p>
-<h3>What next?</h3>
-<p>I already present the new release cycle on my <a href="news-and-announcements-2015">last post</a>. We will focus on the IT elastic parts, like for my part the addition of hosts without restarting the arbiter daemon ^^</p>
-<p>I'll send more regulary news about this, and also about my new side project about service discovery named <a href="https://github.com/naparuba/kunai">kunai</a> because it will be a perfect match with the hot host insersion feature :)</p>
-<p>See you soon and have a good monitoring :)</p>
+<p>Like we already said, no password, or hostname, or contact name will be send to this API. Only metrics. And of course the data are crypted before being send ;)</p>
+<h2>What does it looks like?</h2>
+<p>When you go to <a href="http://kernel.shinken.io">kernel.shinken.io</a> you will have the login prompt. Just put your shinken.io login :)
+<center><img src='/images/kernelio/login.png'></center></p>
+<p>Then you will see the <strong>hive</strong>. Where you will have all your daemons. Here is a simple shinken framework vanilla, mono server installation.</p>
+<p><center><img src='/images/kernelio/hive.png'></center></p>
+<p>When you click on a daemon, like here the arbiter, you will see its last data, for the daemon and its modules.</p>
+<p><center><img src='/images/kernelio/arbiter.png'></center></p>
+<p>And more important, on the daemon metrics tab, you will have an access to all the daemon metrics. We are currently workong on making all theses data the more clear with the more help to understand them ^^</p>
+<p><center><img src='/images/kernelio/graph.png'></center></p>
+<p>For each metric you will have the data for the last hour. We are working at also show the last day data. For each metric you will have the average value, but also the min and max value (computed by the shinken framework).</p>
+<h2>Why propose this?</h2>
+<p>At Shinken Solutions we can see every day on our customers IT that the framework is really powerful and can manage a lot of checks. We know at what to look at to see and check this. We want to share this and made it easy for everyone to look at its monitoring framework.</p>
+<p>We build it also to propose to our support customers proactive alerts about their shinken installation. So it's easier for us to spot at server crash or configuration misfit for our customers. But if everyone can use it for their own setup, it's even better :D</p>
+<h2>Will it will stay free?</h2>
+<p>We want this current usage to be free for all framework users. Some advanced features in the future will be reserved to our <a href="http://www.shinken-solutions.com">framework support customers</a>, because they will consume far more space and computation on our servers (like "what is the most cpu intensive check plugin on my pollers?"). But the free usage of kernel will still be enahanced in the next months.</p>
+<p>So ready to check your shinken? Let's <a href="http://kernel.shinken.io">look at what is inside your powerful framework now</a> :D</p>
 
 
 
-<p style='border: 2px solid rgba(0,39,59,.2);border-radius: 4px;'><img style='width: 48px;'  data-role="user-avatar" data-user="94550631" src="//a.disquscdn.com/uploads/users/9455/631/avatar92.jpg?1392209481"><a href='#'> jean gabès </a>
-<a href='mailto:j.gabes@shinken-solutions.com'><img src="/theme/img/Mail.png" /></a>
-<a href='https://twitter.com/naparuba'><img src="/theme/img/Twitter.png" /></a>
-<a href='http://www.twitch.tv/naparuba'><img src="/theme/img/Twitch.png" /></a>
-<a href='https://github.com/naparuba'><img src="/theme/img/GitHub.png" /></a>
+<p style='border: 2px solid rgba(0,39,59,.2);border-radius: 4px;'><img style='width: 48px;'  data-role="user-avatar" data-user="94550631" src="/theme/img/joaquim.png"><a href='#'> joaquim roy </a>
+<a href='mailto:j.roy@shinken-solutions.com'><img src="/theme/img/Mail.png" /></a>
+<a href='https://github.com/shinken-solutions'><img src="/theme/img/GitHub.png" /></a>
 </p>
     <div id="FooterArticle">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/kernelshinkenio.html">kernel.shinken.io</a> / <a href="/tag/support.html">support</a></p>
         <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
     </div>
 
@@ -292,7 +217,7 @@
 </section>
     <div class="article_infos">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/kernelshinkenio.html">kernel.shinken.io</a> / <a href="/tag/support.html">support</a></p>
     </div>
 
 <!--article.locale_date-->            </div>
