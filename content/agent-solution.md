@@ -58,7 +58,7 @@ There are 3 main parts:
 The key in separated collectors and checks is that you don't have to keep the same interval betweek collect and checks.
 
 ### Configuration managment
-Of course the local configuration did make NRPE-like solution nightmare to maintain. That's why I propose to use the solution that I already propose in [Shinken Enterprise](http://shinken-solutions.com): do not manage the configuration in a definition way, but in a rule base one. For example:
+Of course the local configuration did make NRPE-like solution nightmare to maintain. That's why I propose to use the solution that I already propose in [Shinken Enterprise](http://shinken-solutions.com): do not manage the configuration in a definition way, but in a rule-based one. For example:
 
    * is redis installed on your system? => you are a redis server
    * is it a windows running? => activate windows collectors and checks
