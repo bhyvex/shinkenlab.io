@@ -53,9 +53,9 @@ There are 3 main parts:
 
    * The detector detects the server and the applications running on it
    * The collectors grab data from both the system and the applications
-   * The analyser launchs checks that look if all is well on both your system and your applications
+   * The analyser launchs checks that look if all is going well on both your system and your applications
 
-The key in separate collctors and checks is that you don't have to keep the same interval betweek collect and checks.
+The key in separated collectors and checks is that you don't have to keep the same interval betweek collect and checks.
 
 ### Configuration managment
 Of course the local configuration did made NRPE-like solution nightmare to maintain. That's why I propose to use the solution that I already propose in [Shinken Enterprise](http://shinken-solutions.com): do not manage the configuration in a definition way, but in a rule base one. For example:
