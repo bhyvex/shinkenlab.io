@@ -28,7 +28,7 @@ This consumption is limiting us to the classic 5 minutes monitoring interval bet
 ### Need for more elasticity
 The second problem is more recent. With all the Cloud based usage (I link together EC2, Openstack and Docker in this group) the elasticity became more critical than huge performances. You want your new EC2 node to be monitored as soon as it's ready, not 1 hour after. Because maybe its livespan is less than this! 
 
-Some frameworks like [kubernetes](http://kubernetes.io/) can help, but such tools are quite complex and we should be able to provide more simple solutions to common cases.
+Some frameworks like [kubernetes](http://kubernetes.io/) can help, but such tools are quite complex and we should be able to provide simpler solutions to common cases.
 
 # My solution
 

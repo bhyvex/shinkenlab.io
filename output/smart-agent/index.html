@@ -161,7 +161,7 @@
 <p>This consumption is limiting us to the classic 5 minutes monitoring interval between checks. Some folks monitor some cluster each 10s, but only for a limited scope.</p>
 <h3>Need for more elasticity</h3>
 <p>The second problem is more recent. With all the Cloud based usage (I link together EC2, Openstack and Docker in this group) the elasticity became more critical than huge performances. You want your new EC2 node to be monitored as soon as it's ready, not 1 hour after. Because maybe its livespan is less than this! </p>
-<p>Some frameworks like <a href="http://kubernetes.io/">kubernetes</a> can help, but such tools are quite complex and we should be able to provide more simple solutions to common cases.</p>
+<p>Some frameworks like <a href="http://kubernetes.io/">kubernetes</a> can help, but such tools are quite complex and we should be able to provide simpler solutions to common cases.</p>
 <h1>My solution</h1>
 <h3>Smart agent</h3>
 <p>During years, agentless monitoring was king. Because polling was acceptable from a CPU point of view, and elasticity was an exception, not the rule. Managing agents was a nightmare because they did only follow central server questions and did not try to be smart (believe me, NRPE is NOT smart at all).</p>
