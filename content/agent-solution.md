@@ -78,6 +78,8 @@ In the end the solution is quite great: when you add the agent on your servers, 
 
 # Feed backs welcomed :)
 
+You can't solve all your monitoring with agent, like you can't solve all with just polling. You must use both to have a complete and scalable solution.
+
 This is currently a work in progress, I'm proposing such ideas. I'm very interested about your comments about all of this (づ｡◕‿‿◕｡)づ 
 
 
