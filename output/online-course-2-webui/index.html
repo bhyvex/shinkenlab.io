@@ -275,10 +275,12 @@
 <p>This time the connexion is OK :)</p>
 <p><img src='/images/course2/course2-connectok.png'></p>
 <p>In the All view you will get your <code>localhost</code> checks:</p>
-<p><img src='/images/course2/course2-all.png'>   </p>
+<p><img src='/images/course2/course2-all.png'> <br />
+</p>
 <p>You will got nothing in the <code>/impacts</code> view, and it's normal, because this view is done to show you the important apps information, but we currently didn't defined one.</p>
 <p>In the <code>/dashboard</code> we got a new error, with a BIG red screen:</p>
-<p><img src='/images/course2/course2-dashboard.png'>   </p>
+<p><img src='/images/course2/course2-dashboard.png'> <br />
+</p>
 <h3>User preference backend</h3>
 <p>The dasboard is specific to each user, and so WebUI must save your user preference (widgets and co). But this task should be managed by the modules (like if you want flat file save or in a distant database). You can choose to export all data into mongodb, but we will look at the simpliest one that save the data into a local <code>sqlite</code> file.</p>
 <div class="highlight"><pre><span class="n">shinken</span><span class="err">@</span><span class="n">debian</span><span class="err">#</span> <span class="n">shinken</span> <span class="n">install</span> <span class="n">sqlitedb</span>
@@ -389,6 +391,12 @@
         </div>
         <div id="Archives" class="row">
           <a href="/"><h2>Archives</h2></a>
+          <div id="LignArticle">
+            <div id="Date" datetime="2015-02-20T10:20:00">20 Feb 2015 : </div>
+            <a href="/smart-agent/">
+              Smart agent solution
+            </a>
+          </div>
           <div id="LignArticle">
             <div id="Date" datetime="2015-02-12T10:20:00">12 Feb 2015 : </div>
             <a href="/kernel-shinken-io/">
