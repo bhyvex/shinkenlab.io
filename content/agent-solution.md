@@ -65,20 +65,20 @@ Of course the local configuration did make NRPE-like solution nightmare to maint
    * is you public ip in the EC2-East range? => warn the good administrators
    * ...
 
-With such a way, all agents will have the same rules, but will behave localy like they should.
+With such a way, all agents will have the same rules, but will behave locally like they should.
 
 
 In the end the solution is quite great: when you add the agent on your servers, you don't need to manage your configuration anymore!
 
 <center><img src='/images/smartagent/global.png'></center>
 
-   * You are launching a new server? It will be declare in few seconds into shinken with the good tags (windows,iis for example)
+   * You are launching a new server? It will be declared in few seconds into shinken with the proper tags (windows, iis for example)
    * You will reduce a lot the number of pollers in your setups or increase a lot your networking mononitoring interval.
    * "Out of the box" monitoring with the good detector and collectors rules :)
 
-# Feed backs welcomed :)
+# Feedbacks welcomed :)
 
-You can't solve all your monitoring with agent, like you can't solve all with just polling. You must use both to have a complete and scalable solution.
+You can't solve all your monitoring with agent, like you can't solve it all with only polling. You must use both to have a complete and scalable solution.
 
 This is currently a work in progress, I'm proposing such ideas. I'm very interested about your comments about all of this (づ｡◕‿‿◕｡)づ 
 
