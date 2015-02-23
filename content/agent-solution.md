@@ -35,7 +35,7 @@ Some frameworks like [kubernetes](http://kubernetes.io/) can help, but such tool
 ### Smart agent
 During years, agentless monitoring was king. Because polling was acceptable from a CPU point of view, and elasticity was an exception, not the rule. Managing agents was a nightmare because they did only follow central server questions and did not try to be smart (believe me, NRPE is NOT smart at all).
 
-But if you have a smart agent, that not just launch a check when ask, but instead try to detect the server "tags" where it is installed, where it can collect both system and applications properties and metrics (think about public ip and mysql load for example), and checks that are using such data. Then such a agent can be a great asset for your monitoring platform.
+But if you have a smart agent, that doesn't only launch a check when asked, but instead try to detect the server "tags" where it is installed, where it can collect both system and applications properties and metrics (think about public ip and mysql load for example), and checks that are using such data. Then such a agent can be a great asset for your monitoring platform.
 
 ### No more plugins problems
 The agent can schedule its own checks, and will forward to shinken only the state changes. With such a low brandwith system, you can launch far more checks than now, and launching every checks at 10s interval will be possible.
