@@ -1,4 +1,4 @@
-Title: 2.3 release
+Title: 2.4 release
 Date: 2015-05-04 10:20
 Category: Talk
 Tags: shinken
