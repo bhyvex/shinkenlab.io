@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Governance / Some monitoring guys</title>
+    <title>2.3 release / Some monitoring guys</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -141,21 +141,23 @@
             </header>
 
             <div class="content">
-<time datetime="2015-02-11T10:20:00"><div class="DateDay">11</div><span class="DateMounth"> Feb 2015 </span><span class="triangle"></span></time>
+<time datetime="2015-05-04T10:20:00"><div class="DateDay">04</div><span class="DateMounth"> May 2015 </span><span class="triangle"></span></time>
 
 <section>
     <article>
         <header>
-            <h2><a href="/governance/" rel="bookmark">Governance</a></h2>
+            <h2><a href="/release-2-4/" rel="bookmark">2.3 release</a></h2>
 	    <span class='author'>Gabès Jean</span>
         </header>
         
     <p>Hi :)</p>
-<p>Just a small post to let you know that now we have a vision and governance text now. This give us a clear and common view on where we are going and how code and contribution can be evaluated :)</p>
-<p>I hope this will allow us to know on what to focus, what can be accepted in the project, and what can't be without hurting the whole project.</p>
-<p>If I must reduce the governance into a single line, it will be that I'll always keep both the project but also the code accessible for its main users, the admins. It is what base the project and why is can answer to its users, so I'll keep it that way :)</p>
-<p>You can have a look at the <a href="https://github.com/naparuba/shinken/blob/master/Governance.md">vision and governance</a> file here :)</p>
-<p>I'll also set the same governance on the kunai project ^^</p>
+<p>After more than 320 commits and 4 release candidate versions, it's time to release the <a href="https://github.com/naparuba/shinken/archive/2.4.tar.gz">2.4 version</a> ^^</p>
+<p>Thanks to everyone that participate to this release, by sending us patchs or report bugs :)</p>
+<p>As always, you can have a look at the full <a href="https://github.com/naparuba/shinken/blob/master/Changelog">changelog</a>. This version was the first with the new <a href="/news-and-announcements-2015/">3 months release cycle</a> and we did it in ... 4 months ^^ </p>
+<p>We did drifted because the RC phase was very long. This version was really focus about technical debt reduction and bug hunting. That's why the new feature list is reduced (even if advanved users will like the service_includes new property for the hosts :) ).</p>
+<p>We did try to reduce the compatibility breaks, but some modules are known to ask an update before run in 2.4 version (<a href="https://github.com/shinken-monitoring/mod-ip-tag">ip-tag</a>, <a href="https://github.com/shinken-monitoring/mod-livestatus">livestatus</a> and <a href="https://github.com/shinken-monitoring/mod-webui">webui</a> are known to be in this case). So give a test with the modules you are using currently before update your production :) If modules are launched, it will be ok, it's mainly the mdoule bot method and some internal objects that did changed.</p>
+<p>The next release cycles will be focus on large environnement performance (50K+ services) boosting, and especially the boot time and the livestatus modules (that you are using if you have <a href="http://www.thruk.org/">Thruk</a> or <a href="https://mathias-kettner.de/checkmk_multisite.html">MK/Livestatus</a> UIs :) ).</p>
+<p>See you soon and have a good monitoring :)</p>
 
 
 
@@ -166,8 +168,8 @@
 <a href='https://github.com/naparuba'><img src="/theme/img/GitHub.png" /></a>
 </p>
     <div id="FooterArticle">
-        <p>Posted in: <a href="/category/project.html">Project</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/governance.html">governance</a></p>
+        <p>Posted in: <a href="/category/talk.html">Talk</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a></p>
         <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
     </div>
 
@@ -194,8 +196,8 @@
     </article>
 </section>
     <div class="article_infos">
-        <p>Posted in: <a href="/category/project.html">Project</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/governance.html">governance</a></p>
+        <p>Posted in: <a href="/category/talk.html">Talk</a></p>
+        <p>Tagged as: <a href="/tag/shinken.html">shinken</a></p>
     </div>
 
 <!--article.locale_date-->            </div>
