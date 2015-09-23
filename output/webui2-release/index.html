@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>PEP8 compatibility / Some monitoring guys</title>
+    <title>WebUI 2 release / Some monitoring guys</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -141,34 +141,67 @@
             </header>
 
             <div class="content">
-<time datetime="2015-01-30T10:20:00"><div class="DateDay">30</div><span class="DateMounth"> Jan 2015 </span><span class="triangle"></span></time>
+<time datetime="2015-09-22T10:20:00"><div class="DateDay">22</div><span class="DateMounth"> Sep 2015 </span><span class="triangle"></span></time>
 
 <section>
     <article>
         <header>
-            <h2><a href="/pep8-compliant/" rel="bookmark">PEP8 compatibility</a></h2>
-	    <span class='author'>Gabès Jean</span>
+            <h2><a href="/webui2-release/" rel="bookmark">WebUI 2 release</a></h2>
+	    <span class='author'>Frédéric MOHIER</span>
         </header>
         
-    <p>Hi :)</p>
-<p>Just a small post about recent code enhancements. We are currently in refactoring mode, so we don't work on feature but mainly on code quality and such cleans :)</p>
-<p>SebSolon and others folks from SavoirFaireLinux did a pep8/pizza night on the Shinken code base, and thanks <a href="https://github.com/naparuba/shinken/pull/1476">to them</a> the Shinken code is now fully pep8 compliant :)</p>
-<p><center><img src='/images/2015-01-30/pep8.jpg'></center></p>
-<p>Now the pep8 compatibility is now integrated into the <a href="https://github.com/naparuba/shinken/blob/master/.travis.yml#L19">automated tests</a> and so please take care about it when you send a pull request :)</p>
-<p>This refactoring phase should be close soon, and then we will get back to feature coding ^^</p>
-<p>From my part I did enhance a LOT my new <a href="https://github.com/naparuba/kunai">service discovery tool kunai</a> during this period, and I'll post a first release note on the blog in the next week I think :)</p>
+    <p>Hi everybody,</p>
+<p>After several months of hard work with Guillaume <a href="https://github.com/maethor">@maethor</a>, I am happy to announce the release of a completely new version of the Shinken Web UI.</p>
+<p>This hard work started almost one year ago with the BS3 branch I opened on the project. At that moment, I wanted to have a nice UI to consult key data managed by the Shinken framework, from different Web browsers.</p>
+<p>After several months of sleeping, Guillaume and I reactivated this project. Today we have achieved an almost completely redesigned version.</p>
+<p>This new WebUI version features:</p>
+<ul>
+<li>
+<p>full Bootstrap 3 Web User Interface
+   <ul>
+   <li>modern and responsive UI compatible with all Web browsers and mobile devices</li>
+   </ul></p>
+</li>
+<li>
+<p>real time Shinken data consulting 
+    <ul><li>user is able to see almost all Shinken framework managed data</li></ul></p>
+</li>
+<li>
+<p>out of the box operational User Interface
+   <ul>
+   <li>the new WebUI embeds all the main needed modules, significantly simplifying configuration</li>
+   <li>no need to 'shinken install' many modules before starting</li>
+   </ul></p>
+</li>
+<li>
+<p>powerful Shinken resources filtering
+   <ul><li>hosts, services may be problems, impacts ... filtering is an help for the user !</li></ul></p>
+</li>
+<li>
+<p>new Shinken modules strongly enriching Web UI features
+   <ul><li>mongo-logs, storing all shinken logs and hosts availability in MongoDB allowing to do basic SLA with Shinken</li></ul></p>
+</li>
+<li>
+<p>multi user with restricted "client" accounts
+   <ul><li>a huge work has been done on the security to allow access to "client" accounts which are allowed to see only a subset of the hosts and services</li></ul></p>
+</li>
+</ul>
+<p>Many other features are available in this new interface. You are very welcome to deploy and test it...</p>
+<p>Last but not least, we opened a Wiki in the project repository to make documentation available for every user. The one link that you should use today is: <a href="https://github.com/shinken-monitoring/mod-webui/wiki/Installation">https://github.com/shinken-monitoring/mod-webui/wiki/Installation</a>.</p>
+<p>In the next weeks, we will extand the Wiki to focus on the new killer features of the new Web UI; such as filtering problems, system logs, hosts availability, ...</p>
+<p>Back to this object: 'shinken install webui2' is your best friend ...</p>
+<p>Best regards</p>
+<p>Fred</p>
 
 
 
-<p style='border: 2px solid rgba(0,39,59,.2);border-radius: 4px;'><img style='width: 48px;'  data-role="user-avatar" data-user="94550631" src="//a.disquscdn.com/uploads/users/9455/631/avatar92.jpg?1392209481"><a href='#'> jean gabès </a>
-<a href='mailto:j.gabes@shinken-solutions.com'><img src="/theme/img/Mail.png" /></a>
-<a href='https://twitter.com/naparuba'><img src="/theme/img/Twitter.png" /></a>
-<a href='http://www.twitch.tv/naparuba'><img src="/theme/img/Twitch.png" /></a>
-<a href='https://github.com/naparuba'><img src="/theme/img/GitHub.png" /></a>
+<p style='border: 2px solid rgba(0,39,59,.2);border-radius: 4px;'><img style='width: 48px;'  data-role="user-avatar" data-user="94550631" src="https://avatars0.githubusercontent.com/u/2932687?v=3&s=460"><a href='#'> Frédéric MOHIER </a>
+<a href='mailto:frederic.mohier@gmail.com'><img src="/theme/img/Mail.png" /></a>
+<a href='https://github.com/mohierf'><img src="/theme/img/GitHub.png" /></a>
 </p>
     <div id="FooterArticle">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a></p>
+        <p>Tagged as: <a href="/tag/webui.html">webui</a> / <a href="/tag/release.html">release</a></p>
         <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
     </div>
 
@@ -196,7 +229,7 @@
 </section>
     <div class="article_infos">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a></p>
+        <p>Tagged as: <a href="/tag/webui.html">webui</a> / <a href="/tag/release.html">release</a></p>
     </div>
 
 <!--article.locale_date-->            </div>
