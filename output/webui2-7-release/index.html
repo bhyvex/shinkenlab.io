@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>About tests / Some monitoring guys</title>
+    <title>WebUI 2.7 is out / Some monitoring guys</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -141,52 +141,84 @@
             </header>
 
             <div class="content">
-<time datetime="2015-05-06T10:20:00"><div class="DateDay">06</div><span class="DateMounth"> May 2015 </span><span class="triangle"></span></time>
+<time datetime="2017-10-23T10:20:00"><div class="DateDay">23</div><span class="DateMounth"> Oct 2017 </span><span class="triangle"></span></time>
 
 <section>
     <article>
         <header>
-            <h2><a href="/about-tests/" rel="bookmark">About tests</a></h2>
-	    <span class='author'>Jean Gabès</span>
+            <h2><a href="/webui2-7-release/" rel="bookmark">WebUI 2.7 is out</a></h2>
+	    <span class='author'>Guillaume Subiron</span>
         </header>
         
-    <p>Hi :)</p>
-<p>I'm starting a blog post serie about various stats. Let's start with one topic that remove lot of stress in the release: tests :D</p>
-<h2>Tests: a long history</h2>
-<p>Tests are not very fun, but they are so useful that no-one should avoid them</p>
-<p>When Shinken code base was less than 5K lines (late 2009), we did not have any tests, it was a hobby project without even a name, and I did launch the daemon to look if all was OK.</p>
-<p>But at this time <a href="https://github.com/lausser">Gerhard</a> did find a regression on the state logic, and it was the automatic test startup :)</p>
-<p>So if you start a project, remember that after some few Kilo lines (or even before), you will need tests cases, and it's always harder to add them after coding, so maybe it's better to add them from the begining ;)</p>
-<p>I take a little time to thanks again Gerhard for this, because without the test framework, the project should have been full of bugs and not as powerful :)</p>
-<h2>Evolution</h2>
-<p>But how the number of tests is evolving when the project gets bigger and bigger? Do they increase as the same rythme than the code size? Let's look at this :)</p>
-<p>I did look at all our previous release since 2010 and count code line, and test lines ones. </p>
-<p>(Note: I did remove the modules code/test line count in the pre-2.0 versions)</p>
-<p><center><img src='/images/about-tests/ratio.png'></center></p>
-<p>There are some period in the project:</p>
+    <p>Hi everybody,</p>
+<p>After lot of work the new WebUI version is out: 2.7.</p>
+<h2>Major improvements</h2>
+<p>Besides a lot of UI improvements, the goal of this version is to allow the user to stay as much as possible in the "Problems" view (/all).</p>
+<p><center><img src='/images/webui-2-7/all_problems.png'>
+<i>Problems view</i>
+</center></p>
+<p>The accordions have been debugged and they are displaying a lot of useful information to avoid going into the detailed hosts/services views.</p>
+<p><center><img src='/images/webui-2-7/graphs.png'>
+<i>Graphs</i>
+</center></p>
+<p>This version is also making a new place to comments, in the element's accordions. It should be easy to have a glance at the history of a service, and to add a new comment when necessary. It is actually opening the way to a more collaborative Shinken WebUI (something you usually find in tickets trackers or in Trello).</p>
+<p><center><img src='/images/webui-2-7/comment.png'>
+<i>Comments</i></p>
+<p></center></p>
+<p><center><img src='/images/webui-2-7/host-history.png'>
+<i>Element history</i></p>
+<p></center></p>
+<h2>Enhancements</h2>
+<p>Some parts did get improved too:</p>
 <ul>
-<li>between 0.1 and 0.5: the tests did increase a lot compared to the code size. 0.6 did saw a refactoring pass</li>
-<li>between 0.8 and 1.0: it's a "go production stabilization" pass, so lot of new tests to be sure we have everything under control for the production world ^^</li>
-<li>since the 1.2      : we are still increasing the code base and test, but at the same rythm</li>
+<li>Improve and cleanup sidebar</li>
+<li>Lot of improvements and cleanup in problems view accordions</li>
+<li>Cleanup style of accordions</li>
+<li>Display comments in accordions</li>
+<li>Display notes in accordions</li>
+<li>Allow to add comments in accordions</li>
+<li>Debug impacts in accordions</li>
+<li>Add HTML anchors on accordions</li>
+<li>Hide checkboxes and check_all and problems page (replaced by link hidden behind Business impact, and ctrl+click or maj+click on items)</li>
+<li>Move actions in topbar</li>
+<li>Lot of code cleanup in forms and actions</li>
+<li>Infinite scrolling in element history</li>
+<li>Navbar fixed on top of screen</li>
+<li>When searching for hostgroups and hosttags, search returns hosts and associated services</li>
+<li>Replace downtime icon, improve get_fa_icon_state, and add column in problems view with ack and downtime icons</li>
+<li>Better log management</li>
+<li>Cleanup eltdetail information tab</li>
 </ul>
-<p>The tests code did saw some refactoring phase so they are still maintenable. Thanks a lot to <a href="https://github.com/gst">Gregory Stark</a> &amp; <a href="https://github.com/Seb-Solon">Seb</a> for the last refactoring, that allow to easily provide a test framework for the modules too :)</p>
-<p>So in the end, it's quite classic, with more and more tests until everyone is used to add tests with the new features or when we find bugs. We did allow some test-less features in the past, but since the 2.0 PRs should be provided with tests (look at <a href="https://shinken.readthedocs.org/en/latest/15_development/hackingcode.html#development-rules">dev rules</a> for more about it).</p>
-<p>Now tests are by default. And thanks to them we can refactor or add new features without fearing regressions :)</p>
-<p>Our 60% ratio seems to be a great, and allow us to reach a great stability.</p>
-<p>And you, what is the test ratio of your favorite project? Are the higer value the better? Feel free to share your experience in the comments :)</p>
-<p>(next article: about ok/critical service state ratio in the real world ^^)</p>
+<h2>Features</h2>
+<p>Other features are available:</p>
+<ul>
+<li>Allow to add and list comments in item accordion (problems view)</li>
+<li>New is:SOFT, is:HARD and is:FLAPPING filters</li>
+<li>Quick "Schedule a downtime" with preset durations</li>
+<li>Experimental, may not work at all : New alerts statistics module allowing to see most frequent alerts on last 30 days (depends on mod-mongo-logs)</li>
+</ul>
+<h2>Bugs</h2>
+<p>Aside enhancements there are some fixed bugs:</p>
+<ul>
+<li><a href="https://github.com/shinken-monitoring/mod-webui/issues/591">591</a> Fix Sound Toggle bug (Thanks @ornoone)</li>
+<li><a href="https://github.com/shinken-monitoring/mod-webui/issues/592">592</a> Fix Sound icon (Thanks @ornoone)</li>
+<li><a href="https://github.com/shinken-monitoring/mod-webui/issues/593">593</a> Fix Tooltip breaking tables columns (Thanks @ornoone)</li>
+<li>Fix tooltip bug on dashboard</li>
+<li>Manage Nagios Process avatar</li>
+<li>Debug ACK and Downtime modals</li>
+<li>Fix crash when searching for 'bp:'</li>
+</ul>
+<p>Good update :)</p>
+<p>Best regards</p>
 
 
 
-<p style='border: 2px solid rgba(0,39,59,.2);border-radius: 4px;'><img style='width: 48px;'  data-role="user-avatar" data-user="94550631" src="//a.disquscdn.com/uploads/users/9455/631/avatar92.jpg?1392209481"><a href='#'> jean gabès </a>
-<a href='mailto:j.gabes@shinken-solutions.com'><img src="/theme/img/Mail.png" /></a>
-<a href='https://twitter.com/naparuba'><img src="/theme/img/Twitter.png" /></a>
-<a href='http://www.twitch.tv/naparuba'><img src="/theme/img/Twitch.png" /></a>
-<a href='https://github.com/naparuba'><img src="/theme/img/GitHub.png" /></a>
+<p style='border: 2px solid rgba(0,39,59,.2);border-radius: 4px;'><img style='width: 48px;'  data-role="user-avatar" data-user="94550631" src="https://avatars0.githubusercontent.com/u/2410576?s=88&v=4"><a href='#'> Guillaume Subiron </a>
+<a href='https://github.com/maethor'><img src="/theme/img/GitHub.png" /></a>
 </p>
     <div id="FooterArticle">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/tests.html">tests</a> / <a href="/tag/project.html">project</a></p>
+        <p>Tagged as: <a href="/tag/webui.html">webui</a> / <a href="/tag/release.html">release</a></p>
         <p>Wanna tell me what you think? <a href="/">Get in touch.</a></p>
     </div>
 
@@ -214,7 +246,7 @@
 </section>
     <div class="article_infos">
         <p>Posted in: <a href="/category/talk.html">Talk</a></p>
-        <p>Tagged as: <a href="/tag/shinken.html">shinken</a> / <a href="/tag/tests.html">tests</a> / <a href="/tag/project.html">project</a></p>
+        <p>Tagged as: <a href="/tag/webui.html">webui</a> / <a href="/tag/release.html">release</a></p>
     </div>
 
 <!--article.locale_date-->            </div>
